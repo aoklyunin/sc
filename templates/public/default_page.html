@@ -1,0 +1,67 @@
+{% extends 'base_new.html' %}
+{% load humanize %}
+
+
+{% load staticfiles %}
+
+{% load static %}
+
+{% block style_block %}
+
+body {
+    height: 100%;
+    margin:0px;
+    background: url({%static 'img/fon.png'%}) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+{%endblock %}
+
+
+
+{% block content %}
+
+
+  <div class="row " style="width:100%" >
+
+            <div class="col-2 paddedPageMenu" style="position:relative;top:1.5em; left: 0.2em;">
+               {%block menu %}
+                <div class="menuPageCaption"><a class="pageMenuLink active" href="/user/{{ profile.user.username }}/creative/">Креатив</a></div><br><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/video/">Видео</a></div><br>
+                <div class="pageMenuItemSelected"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/design/"> Дизайн</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/conception/">Концепция</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/story/">Сюжет</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/music/">Музыка</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/invention/">Изобретения</a></div><br>
+                {%endblock%}
+            </div>
+
+
+     <div class="col-7 offset-1">
+       <div class="container" style="position:absolute;left:0;top:0;z-index:0;opacity:1;">
+
+    {%block page_content %}
+
+    {% endblock %}
+       </div>
+     </div>
+  </div>
+
+
+{% endblock %}
+
+
+{% block footer_script %}
+<script>
+$(document).ready(function(){
+  $( ".ytframe" ).each(function( index ) {
+     $( this ).height( $( this ).width()*9/16 );
+  });
+});
+
+ </script>
+
+{%endblock %}
+
+

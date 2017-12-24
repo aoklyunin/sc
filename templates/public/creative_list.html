@@ -1,0 +1,144 @@
+{% extends 'public/default_page.html' %}
+{% load humanize %}
+
+
+{% load staticfiles %}
+
+{% load static %}
+
+   {%block menu %}
+                <div class="menuPageCaption"><a class="pageMenuLink active" href="/user/{{ profile.user.username }}/creative/">Креатив</a></div><br><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/video/">Видео</a></div><br>
+                <div class="pageMenuItemSelected"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/design/"> Дизайн</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/conception/">Концепция</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/story/">Сюжет</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/music/">Музыка</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/invention/">Изобретения</a></div><br>
+
+    {%endblock%}
+
+
+
+      {%block page_content %}
+
+        <div class="row bebasYellowText" height="100px" style="padding-top:40px;padding-bottom:60px;">
+          <div  class="offset-1 col-2">
+            <a href="/submit/">
+            <img src="{% static 'img/plus.png' %}" style="position:relative; top:-15px;" width="40px" height="40px">
+              </a>
+          </div>
+          <div align="right" class="offset-1 col-8" style="font-size:50;">
+
+            Алиса Зверева
+          </div>
+
+        </div>
+        {% for submission in submissions %}
+           <div class="row" style="padding-bottom:60px;">
+                <div class="col-10 offset-1 ">
+                    <div class="row" >
+                        <div class="col-9">
+                          <a class="thread-title bebasWhiteText" href="{{ submission.comments_url }}">{{ submission.title }}</a>
+                        </div>
+                      <div class="col-3 bebasWhiteText" style="font-size:30" align="right" >
+                         {{ submission.timestamp|date:"d M" }}
+                      </div>
+                    </div>
+                      <div class="info-container">
+
+                    <br>
+
+                    {% if submission.link_type == 2 %}
+                      <iframe class = "ytframe" width="100%" height="100"
+                              src="{{ submission.url }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+                    {% endif %}
+                  {% if submission.link_type == 1 %}
+                           <img src="{{ submission.url }}" width="100%" >
+                      {% endif %}
+                        {% if submission.link_type == 3 %}
+                        <iframe width="100%" height="180" scrolling="no" frameborder="no" src="{{ submission.url }}"></iframe>
+                        {% endif %}
+
+                        {% if submission.link_type == 0 %}
+                         <div class="row">
+                            <div class="col-12"   style="background: rgba(59, 96,  110,0.2); position:relative; " >
+                            <div style="opacity:1;color:#ffffff;line-height: 1.6em; font-size:15;text-align:justify;">
+                              <b>{{ submission.text_html|safe }}</b>
+                            </div>
+                              <br>
+                              <div style="text-align:right;">
+                                <a href="{{ submission.url }}" class="bebasYellowText" style="opacity:1;line-height: 1.6em; font-size:18;">
+                                    Ссылка
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        {% endif %}
+                        {% if submission.link_type == -1 %}
+                           <div class="row">
+                            <div class="col-12"   style="background: rgba(59, 96,  110,0.2);" >
+                            <div style="opacity:1;color:#ffffff;line-height: 1.6em; font-size:15;text-align:justify;">
+                             <b>{{ submission.text_html|safe }}</b>
+                            </div>
+                            </div>
+                          </div>
+                        {% endif %}
+                  </div>
+                  <div class="row" style="padding-top:30px;">
+                    <div class="col-6" align="left">
+                       <a href="{{ submission.comments_url }}" class="bebasYellowText" style="font-size:20px; position:relative; top:-20px;">{{ submission.comment_count }} comments</a></li>
+                    </div>
+                    <div class="col-6" align="right">
+                      <div class="vote"
+                         data-what-type="submission"
+                         data-what-id="{{ submission.id }}">
+                        {% with vote_value=submission_votes|get_item:submission.id %}
+                            <div><i class="fa fa-chevron-up {% if  vote_value == 1 %} upvoted {% endif %}"
+                                    title="upvote" onclick="vote(this)"></i>
+                            </div>
+                            <div class="score" title="score">{{ submission.score }}</div>
+                            <div><i class="fa fa-chevron-down{% if  vote_value == -1 %} downvoted {% endif %}"
+                                    title="downvote"
+                                    onclick="vote(this)"></i></div>
+                        {% endwith %}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6" align="left" style="padding:0">
+                       <img style="opacity:0.5" src="{% static 'img/delimeter.png' %}"  width="20px" height="20px">
+
+
+                    </div>
+                    <div class="col-6" align="right" style="padding:0">
+                      <img style="opacity:0.5" src="{% static 'img/delimeterR.png' %}" width="20px" height="20px">
+                    </div>
+                  </div>
+                </div>
+           </div>
+        {% endfor %}
+        <div class="row" style="padding-bottom:30px;">
+          <div class="col-2 offset-4">
+                <a style="color:#ffffff" href="{% if submissions.has_previous %}?page={{ submissions.previous_page_number }} {%else%} # {%endif%}"><i class="fa fa-chevron-left"></i>Вперёд</a>
+            </div>
+          <div class="col-2">
+                <a style="color:#ffffff"  href="{% if submissions.has_next %}?page={{ submissions.next_page_number }} {%else%} # {%endif%}">Назад <i class="fa fa-chevron-right"></i>  </a>
+            </div>
+        </div>
+      </div>
+{% endblock %}
+
+
+{% block footer_script %}
+<script>
+$(document).ready(function(){
+  $( ".ytframe" ).each(function( index ) {
+     $( this ).height( $( this ).width()*9/16 );
+  });
+});
+
+ </script>
+
+{%endblock %}
+
+

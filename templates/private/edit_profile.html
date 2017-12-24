@@ -1,0 +1,196 @@
+{% extends 'base_new.html' %}
+
+{% block content %}
+<br><br>
+<div class="row" style="width:100%;"><div class="col-10 offset-1">
+    <form class="form-horizontal" action="/profile/edit/" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Редактирование профиля</legend>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="first_name" class="col-lg-2 control-label">Имя</label>
+
+                        <div class="col-lg-10">
+                            {{ form.first_name }}
+                            {% for error in form.first_name.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="last_name" class="col-lg-2 control-label">Фамилия</label>
+
+                        <div class="col-lg-10">
+                            {{ form.last_name }}
+                            {% for error in form.last_name.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+                  <div class="col-4">
+          <label for="email" class="col-lg-2 control-label">Email</label>
+
+                        <div class="col-lg-10">
+                            {{ form.email }}
+                            {% for error in form.email.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+            </div>   </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+
+
+                        <label for="instagram" class="control-label">Instagram</label>
+
+                        <div class="input-group col-lg-10">
+                            {{ form.instagram }}
+                            {% for error in form.instagram.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        <label for="twitter" class="control-label">Twitter</label>
+
+                        <div class="input-group col-lg-10">
+                            {{ form.twitter }}
+                            {% for error in form.twitter.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+
+                      <label for="fb" class="control-label">FaceBook</label>
+
+                        <div class="input-group col-lg-10">
+                            {{ form.fb }}
+                            {% for error in form.fb.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+
+                      <label for="vk" class="control-label">VK</label>
+
+                        <div class="input-group col-lg-10">
+                            {{ form.vk }}
+                            {% for error in form.vk.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+
+                      <label for="telegram" class="control-label">Telegram</label>
+
+                        <div class="input-group col-lg-10">
+                            {{ form.telegram }}
+                            {% for error in form.telegram.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+
+                       <label for="youtube" class="control-label">YouTube</label>
+
+                        <div class="input-group col-lg-10">
+                            {{ form.youtube }}
+                            {% for error in form.youtube.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+
+
+                    </div>
+                  <div>
+                    </div>
+  </div>
+
+                    <div class="col-6">
+                      <div class="row">
+                  <div class="form-group">
+                <label for="about_me" class="col-lg-2 control-label">About me</label>
+
+                <div class="col-lg-10">
+                    {{ form.about_text }}
+                    {% for error in form.about_text.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                    <span class="help-block">Up to 500 characters of about me text that will be displayed on your proifle page.</span>
+                </div>
+
+            </div>
+                        </div>
+
+                      <div class="row">
+                         <label for="homepage" class="col-lg-2 control-label">Мой сайт</label>
+
+                        <div class="col-lg-10">
+                            {{ form.homepage }}
+                            {% for error in form.homepage.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                      </div>
+        <div class="row">
+
+                        <div class="col-12">
+                    <div class="form-group">
+
+                            <div class="checkbox " style="valign:bottom;">
+                                <label>
+                                    {{ form.display_picture }} Показывать граватар
+                                </label>
+                            </div>
+
+
+                    </div>
+                </div>
+                      </div>
+ <div class="row">
+
+                        <div class="col-12">
+                    <div class="form-group">
+
+                            <div class="col-lg-10">
+                            {{ form.date }}
+                            {% for error in form.date.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+
+
+                    </div>
+                </div>
+                      </div>
+
+<div class="row">
+
+                <div class="col-12" align="center">
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <a class="btn btn-primary" href="/user/{{ user.username }}">View your profile</a>
+                  </div>
+              </div>
+            </div>
+                    </div>
+
+            </div>
+
+        </fieldset>
+    </form>
+</div></div>
+{% endblock %}
+
+{% block footer_script %}
+
+    <script type="text/javascript">
+            $(function () {
+                $('#datepicker').datetimepicker();
+            });
+        </script>
+{%endblock %}
+

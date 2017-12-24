@@ -1,0 +1,70 @@
+{% extends 'base_new.html' %}
+{% load staticfiles %}
+{% load static %}
+
+
+{% block style_block%}
+div.centered {
+    position: absolute;
+    width: 100%;
+    height:100%;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 2;
+}
+
+.panel{
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+{% endblock %}
+
+
+
+
+{% block content %}
+   <!-- container -->
+<div class="container centered">
+
+            <div class="panel panel-default" valign="center" >
+                <div align="center" class="panel-body">
+
+      <form class="form-signin" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+
+        <h2 class="form-signin-heading">Вход</h2>
+        <label for="inputUsername" class="sr-only">Логин</label>
+        <input type="text" name="username" id="inputUsername" class="form-control has-error" placeholder="Логин"
+               required autofocus>
+        <label for="inputPassword" class="sr-only">Пароль</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
+        {% if login_error %}
+            <p class="text-danger">{{ login_error }}</p>
+        {% endif %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+
+      </form>
+                </div>
+</div>    <!-- /container -->
+</div>
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}
+
+{% block footer_script %}
+
+<script>
+  $('.carousel').carousel({interval:4000, wrap: false});
+
+</script>
+{%endblock %}

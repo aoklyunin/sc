@@ -1,0 +1,303 @@
+.nav {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url("../img/portrait_menu.png") 100% 100% no-repeat;
+  top:0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  transform: scale(0);
+  background-size:cover;
+  min-height: 100%;
+}
+
+ .signinLink{
+      top: 0.3em;
+      left: -1.35em;
+      font-size: 80;
+    }
+
+    .profileLink{
+      top: 0.3em;
+      left: -1.35em;
+      font-size: 73;
+    }
+
+    .creativeLink{
+      font-size: 57;
+      left: -1.45em;
+      top: 0.3em;
+    }
+    .challengeLink{
+      font-size: 57;
+      top: -3.0em;
+      left: -1.44em;
+    }
+
+    .shameLink{
+      font-size: 67;
+      color: #646414;
+      top: -2.0em;
+      left: -1.75em;
+    }
+
+     .creativeDesignLink{
+      font-size: 16;
+      top: -0.65em;
+       left: -2.5em;
+    }
+      .creativeConceptionLink{
+      font-size: 16;
+       left: 0.65em;
+       top: -2.9em;
+    }
+
+      .creativeStoryLink{
+      font-size: 16;
+       left: 4.87em;
+       top: -5.15em;
+    }
+
+      .creativeInventionLink{
+      font-size: 1;
+       left: -2.7em;
+       top: -7.2em;
+    }
+
+      .creativeMusicLink{
+       font-size: 14;
+        left: 2.35em;
+       top: -5.82em;
+    }
+
+      .creativeVideoLink{
+      font-size: 14;
+      left: 5.65em;
+       top: -7.55em;
+    }
+
+.makeChallengeLink{
+      left: -3.81em;
+      top: -10em;
+    }
+
+    .makeChallengeLink1{
+     font-size: 47;
+    }
+
+ .makeChallengeLink2{
+      font-size: 60;
+      top:20em;
+    }
+
+
+.takeChallengeLink{
+      left:6.13em;
+      top: -14.7em;
+    }
+
+    .takeChallengeLink1{
+     font-size: 47;
+    }
+
+ .takeChallengeLink2{
+      font-size: 60;
+      top:20em;
+    }
+
+
+
+
+@media screen and (min-width: 768px) {
+   .signinLink{
+      top: 0.3em;
+      left: -1.35em;
+      font-size: 150;
+    }
+
+    .profileLink{
+      top: 0.3em;
+      left: -1.35em;
+      font-size: 96;
+    }
+
+    .creativeLink{
+      font-size: 108;
+      left: -1.45em;
+      top: 0.3em;
+    }
+    .challengeLink{
+      font-size: 107;
+      top: -1.3em;
+      left: -1.44em;
+    }
+
+    .shameLink{
+      font-size: 67;
+      color: #646414;
+      top: -2.0em;
+      left: -1.75em;
+    }
+
+     .creativeDesignLink{
+      font-size: 30;
+       left: -2.5em;
+        top: 0.0em;
+    }
+      .creativeConceptionLink{
+      font-size: 30;
+       left: 0.65em;
+       top: -1.65em;
+    }
+
+      .creativeStoryLink{
+      font-size: 30;
+       left: 4.87em;
+       top: -3.3em;
+    }
+
+      .creativeInventionLink{
+      font-size: 28;
+       left: -2.6em;
+       top: -4.1em;
+    }
+
+      .creativeMusicLink{
+       font-size: 28;
+        left: 2.35em;
+       top: -5.82em;
+    }
+
+      .creativeVideoLink{
+      font-size: 28;
+      left: 5.65em;
+       top: -7.55em;
+    }
+
+.makeChallengeLink{
+      left: -3.81em;
+      top: -10em;
+    }
+
+    .makeChallengeLink1{
+     font-size: 47;
+    }
+
+ .makeChallengeLink2{
+      font-size: 60;
+      top:20em;
+    }
+
+
+.takeChallengeLink{
+      left:6.13em;
+      top: -14.7em;
+    }
+
+    .takeChallengeLink1{
+     font-size: 47;
+    }
+
+ .takeChallengeLink2{
+      font-size: 60;
+      top:20em;
+    }
+
+}
+
+@media screen and (max-width: 330px) {
+   .signinLink{
+      top: 0.3em;
+      left: -0.35em;
+      font-size: 80;
+    }
+
+    .profileLink{
+      top: 0.3em;
+      left: -0.35em;
+      font-size: 73;
+    }
+
+    .creativeLink{
+      font-size: 57;
+      left: -0.05em;
+      top: 0.1em;
+    }
+    .challengeLink{
+      font-size: 57;
+      top: -3.2em;
+      left: -0.1em;
+    }
+
+    .shameLink{
+      font-size: 36;
+      color: #646414;
+      top: -7.0em;
+      left: 0.4em;
+    }
+
+     .creativeDesignLink{
+      font-size: 16;
+       left: 2.5em;
+      top: -0.7em;
+    }
+      .creativeConceptionLink{
+      font-size: 16;
+       left: 5.5em;
+       top: -2.9em;
+    }
+
+      .creativeStoryLink{
+      font-size: 16;
+       left: 9.5em;
+       top: -5.15em;
+    }
+
+      .creativeInventionLink{
+      font-size: 13;
+       left: 3.3em;
+       top: -7.85em;
+    }
+
+      .creativeMusicLink{
+       font-size: 13;
+        left:8.7em;
+       top: -10.4em;
+    }
+
+      .creativeVideoLink{
+      font-size: 13;
+      left: 12.5em;
+       top: -12.9em;
+    }
+
+.makeChallengeLink{
+      left: 2.5em;
+      top: -12.8em;
+    }
+
+    .makeChallengeLink1{
+     font-size: 20;
+    }
+
+ .makeChallengeLink2{
+      font-size: 24;
+      top:10em;
+    }
+
+
+.takeChallengeLink{
+      left:8.7em;
+      top: -17.5em;
+    }
+
+    .takeChallengeLink1{
+     font-size: 20;
+    }
+
+ .takeChallengeLink2{
+      font-size: 24;
+      top:10em;
+    }
+}
+

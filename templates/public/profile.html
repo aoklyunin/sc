@@ -1,0 +1,99 @@
+{% extends 'base_new.html' %}
+
+{% load staticfiles %}
+{% load humanize %}
+
+{% load static %}
+
+{% block style-block %}
+
+
+
+{% endblock %}
+
+{% block content %}
+    <div class="container full-width full-height withFonFullSize" >
+      <div class="row ">
+        <div class="offset-2 col-8 captionTextRight" >
+          <a class="pagemenuLink active profileNameLink">
+            {% if profile.first_name %}{{ profile.first_name }}{% endif %}
+            {% if profile.last_name %}{{ profile.last_name }} {% endif %}
+          </a>
+        </div>
+      </div>
+
+        <div class="row " >
+            <div class="col-2 paddedPageMenu">
+                <div class="menuPageCaption"><a class="pageMenuLink active" href="/user/{{ profile.user.username }}/creative/">Креатив</a></div><br><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/video/">Видео</a></div><br>
+                <div class="pageMenuItemSelected"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/design/"> Дизайн</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/conception/">Концепция</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/story/">Сюжет</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/music/">Музыка</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/invention/">Изобретения</a></div><br>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-6 avatarProfileBig">
+                      <figure>
+                                {% if profile.display_picture %}
+                                    <img src="http://www.gravatar.com/avatar/{{ profile.gravatar_hash }}?s=250&d=mm"
+                                         alt="" class="img-circle img-responsive">
+                                {% else %}
+                                    <img src="http://www.gravatar.com/avatar/?s=250&d=mm"
+                                         alt="" class="img-circle img-responsive">
+                                {% endif %}
+                          </figure>
+                      </div>
+                    <div class="col-6 profileRightSocialMenu">
+                      <div class="row socialLinks">
+                        <div class="col-1 offset-6" ><a href="{{profile.instagram}}" ><img width="40px" height="50px" src="{%static 'img/insta1.png' %}"></a></div>
+                          <div class="col-1"><a href="{{profile.twitter}}"><img width="40px" height="50px" src="{%static 'img/fb1.png' %}"></a></div>
+                          <div class="col-1"><a href="{{profile.fb}}"><img width="40px" height="50px" src="{%static 'img/vk1.png' %}"></a></div>
+                          <div class="col-1" ><a href="{{profile.vk}}"><img width="40px" height="50px" src="{%static 'img/teleg1.png' %}"></a></div>
+                          <div class="col-1"><a href="{{profile.telegram}}"><img width="40px" height="50px" src="{%static 'img/mail1.png' %}"></a></div>
+                          <div class="col-1"><a href="{{profile.youtube}}"><img width="40px" height="50px" src="{%static 'img/yt1.png' %}"></a></div>
+                      </div><br>
+                      <div class="profileRightMenuText">
+                        <div class="bebasWhiteText"> {{date}}</div><br>
+                        <div class="bebasYellowText"> Карма </div>
+                      </div>
+                      <div class="karmaProfile">
+                          <img width="120px" height="110px" src="{%static 'img/karma.png'%}"><br>
+                          <div class="portfolioKarma bebasText" style="color:#{{portfolio_karma_color}};">{{portfolio_karma_val}}</div><br>
+                          <div class="creativeKarma bebasText" style="color:#{{creative_karma_color}};">{{creative_karma_val}}</div>
+                      </div>
+
+                    </div>
+                </div>
+
+				    </div>
+        </div>
+           {% if profile.about_html %}
+      <div class="row">
+        <div class="offset-4 col-5 bebasWhiteText"   style="background: rgba(59, 96,  110,0.2); position:relative; top: -4em; text-align:center;" >
+          <div style="opacity:1;line-height: 1.6em; font-size:40">
+               {{ profile.about_html|safe }}
+            </div>
+        </div>
+      </div>
+           {% endif %}
+  </div>
+
+{% endblock %}
+
+{% block footer_script %}
+<script>
+ $('a.profileNameLink').click(function (e) {
+    if ( $(this).text() != "Редактировать"){
+      e.preventDefault();
+    }
+    $(this).text("Редактировать");
+    $(this).attr('href', '/profile/edit/');
+});
+  </script>
+
+{%endblock %}
+
+
+

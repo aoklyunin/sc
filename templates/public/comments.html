@@ -1,0 +1,98 @@
+{% extends 'public/default_page.html' %}
+{% load humanize %}
+
+ {%block menu %}
+                <div class="menuPageCaption"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/creative/">Креатив</a></div><br><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/video/">Видео</a></div><br>
+                <div class="pageMenuItemSelected"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/design/"> Дизайн</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/conception/">Концепция</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/story/">Сюжет</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/music/">Музыка</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/invention/">Изобретения</a></div><br>
+  {%endblock%}
+
+{%block page_content %}
+<div class="row" style="padding-top:80px;">
+  <div class="col-12">
+    <div class="row" >
+                        <div class="col-6">
+                          <a class="thread-title bebasWhiteText" href="{{ submission.comments_url }}">{{ submission.title }}</a>
+                        </div>
+                        <div class="col-6 bebasWhiteText" style="font-size:30" align="right" >
+                          {{ submission.timestamp|date:"d M" }}
+                        </div>
+    </div>
+    <div class="row" style="padding-top:15px;">
+                      {% if submission.link_type == 2 %}
+                        <iframe class = "ytframe" width="100%" height="100"
+                              src="{{ submission.url }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+                      {% endif %}
+                      {% if submission.link_type == 1 %}
+                           <img src="{{ submission.url }}" width="100%" >
+                      {% endif %}
+                      {% if submission.link_type == 3 %}
+                        <iframe width="100%" height="180" scrolling="no" frameborder="no" src="{{ submission.url }}"></iframe>
+                      {% endif %}
+    </div>
+    <div class="row" style="padding-top:15px;" >
+                            <div class="col-11"   style="background: rgba(59, 96,  110,0.2); position:relative; " >
+                            <div style="opacity:1;color:#ffffff;line-height: 1.6em; font-size:15;text-align:justify;">
+                              <b>{{ submission.text_html|safe }}</b>
+                            </div>
+                              {% ifnotequal submission.link_type -1 %}
+                              <br>
+
+                              <div style="text-align:left;">
+                                <a href="{{ submission.url }}" class="bebasYellowText" style="opacity:1;line-height: 1.6em; font-size:18;">
+                                    Ссылка
+                                </a>
+                              </div>
+                              {% endifnotequal %}
+                            </div>
+                    <div class="col-1" align="right">
+                      <div class="vote" style="position:relative; top:20px"
+                         data-what-type="submission"
+                         data-what-id="{{ submission.id }}">
+                        {% with vote_value=submission.id %}
+                            <div><i class="fa fa-chevron-up {% if  vote_value == 1 %} upvoted {% endif %}"
+                                    title="upvote" onclick="vote(this)"></i>
+                            </div>
+                            <div class="score" title="score">{{ submission.score }}</div>
+                            <div><i class="fa fa-chevron-down{% if  vote_value == -1 %} downvoted {% endif %}"
+                                    title="downvote"
+                                    onclick="vote(this)"></i></div>
+                        {% endwith %}
+                      </div>
+                    </div>
+    </div>
+    <div class="row"  style="padding-top:50px; "  >
+      <div class="col-6 offset-3">
+      <h1 align="center" class="bebasYellowText"> Комментарии</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10 offset-1">
+          <form id="commentForm" class="form-horizontal"
+              action="/post/comment/"
+              data-parent-type="submission"
+              data-parent-id="{{ submission.id }}">
+            <fieldset>
+              <div class="row">
+                   <div class="col-10">
+                        <textarea class="form-control" rows="3" id="commentContent"></textarea>
+                        <span id="postResponse" class="text-success" style="display: none"></span>
+                    </div>
+                    <div class="col-2" style="position: relative; top:20px;">
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </div>
+              </div>
+            </fieldset>
+          </form>
+      </div>
+    </div>
+       {% include '__items/comment.html' %}
+
+  </div>
+</div>
+
+{% endblock %}

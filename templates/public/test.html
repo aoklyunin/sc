@@ -1,0 +1,40 @@
+{% extends 'base_new.html' %}
+
+{% load staticfiles %}
+{% load static %}
+
+
+
+{% block link_block %}
+<link rel="stylesheet" href="{% static 'css/mainPage.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<div class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="carousel-item active">
+        </div>
+        <div class="carousel-item">
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block error_messages %}
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+{% block footer_script %}
+
+<script>
+  $('.carousel').carousel({interval:500, wrap: false});
+
+</script>
+{%endblock %}

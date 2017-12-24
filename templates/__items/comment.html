@@ -1,0 +1,56 @@
+{% load humanize %}
+{% load mptt_tags %}
+
+{% recursetree comments %}
+    <div class="media" style="padding-top:20px;">
+        <div class="media-left col-1">
+            <div class="vote comment-votes"
+                 data-what-type="comment"
+                 data-what-id="{{ node.id }}">
+                {% with vote_value=comment_votes|get_item:node.id %}
+                    <div><i class="fa fa-chevron-up {% if vote_value == 1 %} upvoted {% endif %}"
+                            title="upvote" onclick="vote(this)"></i>
+                    </div>
+                    <div class='score'> {{ node.score }}</div>
+                    <div><i class="fa fa-chevron-down {% if vote_value == -1 %} downvoted {% endif %}"
+                            title="downvote"
+                            onclick="vote(this)"></i></div>
+                {% endwith %}
+            </div>
+        </div>
+        <div class="media-body col-11"
+             >
+          <div class="row" >
+            <div class="col-1" align="left">
+                 {% if profile.display_picture %}
+                <img src="http://www.gravatar.com/avatar/{{ profile.gravatar_hash }}?s=55&d=mm"
+                                         alt="" class="img-circle img-responsive">
+             {% else %}
+                <img src="http://www.gravatar.com/avatar/?s=55&d=mm"
+                                         alt="" class="img-circle img-responsive">
+            {% endif %}
+            </div>
+            <div class="col-11" style="padding-left:30px;" data-parent-id="{{ node.id }}"
+             data-parent-type="comment">
+            <h5 class="media-heading"  style="color:#ffffff;"><a href="/user/{{ node.author_name }}" class="bebasYellowText">{{ node.author_name }}</a>
+                  {{ node.timestamp|date:"H:i d/m/y" }}</h5>
+            <div style="color:#ffffff; background: rgba(59, 96,  110,0.3);" width="100%">{{ node.html_comment|safe }}</div>
+            <div class="reply-container" style="opacity:1;">
+                <ul class="buttons">
+                    <li><a href="javascript:void(0)" name="replyButton"
+                    style="color: #0176d3;">Ответить</a></li>
+                </ul>
+            </div>
+            </div>
+          </div>
+
+
+        <div class="col-12">
+            {% if not node.is_leaf_node %}
+                {{ children }}
+            {% endif %}
+          </div>
+    </div>
+
+        </div>
+{% endrecursetree %}

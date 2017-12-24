@@ -1,0 +1,106 @@
+<!-- Таблица стилей CSS -->
+{% load staticfiles %}
+{% load static %}
+
+<html>
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+   <title>{% block title %}Social Creative{% endblock %}</title>
+  <link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  {#  <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">#}
+  <link rel="stylesheet" href="{% static 'css/sc.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css">
+   {% block link_block %}
+
+  {% endblock %}
+  <link rel="stylesheet" href="{% static 'css/menuPage.css' %}">
+  <link rel="stylesheet" media="all and (orientation:portrait)" href="{% static 'css/portraitMenuPage.css'%}">
+  <link rel="stylesheet" media="all and (orientation:landscape)" href="{% static 'css/landscapeMenuPage.css'%}">
+  <style>
+
+    {% block style_block %}
+
+
+    {%endblock %}
+    <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
+  {% block script %}
+
+{%endblock %}
+
+  </style>
+
+</head>
+<body>
+
+<input id="toggle" type="checkbox"/>
+
+<label for="toggle" class="hamburger">
+  <div class="top-bun"></div>
+  <div class="meat"></div>
+  <div class="bottom-bun"></div>
+</label>
+
+<div class="nav">
+  <div class="nav-wrapper">
+    <nav  style="background: rgba(200, 200,  200, {% if flgMainPage %} 0 {%else%} 0.9 {%endif%});">
+    <div class="container menu_container">
+      <div class="row">
+        <div class="col-12" >
+              {% if user.is_authenticated %}
+          <a align="left" class="nav-link creativeLink " href="\creative\">Креатив</a>
+
+          <a align="left" class="nav-link profileLink " href="\user\{{user.username}}\">Профиль</a>
+
+                  {% else %}
+                  <a align="left" class="nav-link signinLink " href="\signin\">Войти</a>
+                  {% endif %}
+
+                  <a class="nav-link makeChallengeLink menuLink" href="\challenge\make\">
+
+
+
+        </div>
+      </div>
+
+        <a align="left" class="nav-link challengeLink" href="\challenge\">Вызовы</a><br>
+        <a class="nav-link shameLink" href="\shame\">СтенаПозора</a><br>
+    </div>
+    </nav>
+  </div>
+</div>
+
+
+{% block content %}
+
+{% endblock %}
+
+{% block error_messages %}
+    {% if messages %}
+
+            {% for message in messages %}
+            <div class="alert alert-danger" role="alert">   {{ message }}
+            </div>
+            {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/sc.js' %} "></script>
+
+  {% block footer_script %}
+
+{%endblock %}
+
+</body>
+</html>
