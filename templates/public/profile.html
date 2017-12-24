@@ -15,8 +15,16 @@
     <div class="container full-width full-height withFonFullSize" >
       <div class="row ">
         <div class="offset-2 col-8 captionTextRight" >
+          <a href="/profile/edit/">
+            <img src="{% static '\img\editProfile.png'%}" width="40px" height="40px">
+          </a>
           <a class="pagemenuLink active profileNameLink">
-            {% if profile.first_name %}{{ profile.first_name }}{% endif %}
+
+            {% if profile.first_name %}{{ profile.first_name }}
+
+            {%else %}
+                {{profile.user.username }}
+            {% endif %}
             {% if profile.last_name %}{{ profile.last_name }} {% endif %}
           </a>
         </div>

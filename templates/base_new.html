@@ -52,13 +52,12 @@
     <div class="container menu_container">
       <div class="row">
         <div class="col-12" >
-              {% if user.is_authenticated %}
+
           <a align="left" class="nav-link creativeLink " href="\creative\">Креатив</a>
-
+ {% if user.is_authenticated %}
           <a align="left" class="nav-link profileLink " href="\user\{{user.username}}\">Профиль</a>
-
                   {% else %}
-                  <a align="left" class="nav-link signinLink " href="\signin\">Войти</a>
+                  <a align="left" class="nav-link profileLink " href="\signin\">Войти</a>
                   {% endif %}
 
                   <a class="nav-link makeChallengeLink menuLink" href="\challenge\make\">

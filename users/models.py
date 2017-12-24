@@ -41,6 +41,8 @@ class ScUser(models.Model):
     link_karma = models.IntegerField(default=0)
 
     def getDate(self):
+        if self.date == None:
+            return ""
         return self.date.strftime("%d/%m/%y")
 
     def update_profile_data(self):
