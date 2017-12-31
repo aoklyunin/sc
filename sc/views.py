@@ -255,6 +255,11 @@ def submit(request):
             submission.author = redditUser
             submission.author_name = user.username
             submission.save()
+            submission.creativeType.clear()
+            for tp in submission_form.cleaned_data['ctp']:
+                print(tp)
+                submission.creativeType.add(tp)
+
             messages.success(request, 'Submission created')
             return redirect('/comments/{}'.format(submission.id))
 

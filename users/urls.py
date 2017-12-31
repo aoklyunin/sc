@@ -13,6 +13,6 @@ urlpatterns = [
     url(r'^user/(?P<username>[0-9a-zA-Z_]*)/conception/$', views.user_conception, name="user_conception"),
     url(r'^user/(?P<username>[0-9a-zA-Z_]*)/story/$', views.user_story, name="user_story"),
     url(r'^user/(?P<username>[0-9a-zA-Z_]*)/music/$', views.user_music, name="user_music"),
-    url(r'^user/(?P<username>[0-9a-zA-Z_]*)/design/$', views.user_invention, name="user_invention"),
+    url(r'^user/(?P<username>[0-9a-zA-Z_]*)/invention/$', views.user_invention, name="user_invention"),
     url(r'^profile/edit/$', views.edit_profile, name="edit_profile"),
 ]

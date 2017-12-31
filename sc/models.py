@@ -12,10 +12,10 @@ class CreativeType(models.Model):
     name = models.CharField(max_length=100)
 
     def __unicode__(self):
-        return "<CreativeType:{}>".format(self.name)
+        return self.name
 
     def __str__(self):
-        return "<CreativeType:{}>".format(self.name)
+        return self.name
 
 
 class Submission(ContentTypeAware):

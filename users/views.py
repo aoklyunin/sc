@@ -7,7 +7,7 @@ from django.http import HttpResponseBadRequest, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 
 from sc.forms import UserForm, ProfileForm
-from sc.models import Submission, Vote
+from sc.models import Submission, Vote, CreativeType
 from sc.utils.helpers import post_only
 from users.models import ScUser
 
@@ -27,33 +27,24 @@ def user_profile(request, username):
     })
 
 
-def user_video(request):
-    pass
-
-def user_design(request):
-    pass
-
-def user_conception(request):
-    pass
-
-def user_story(request):
-    pass
-
-def user_music(request):
-    pass
-
-def user_invention(request):
-    pass
-
-def user_creative(request,username):
-    """
-    Serves frontpage and all additional submission listings
-    with maximum of 25 submissions per page.
-    """
-    # TODO: Serve user votes on submissions too.
+def getCreativeByType(request, username, template, ct, titleText):
     user = ScUser.objects.get(user=User.objects.get(username=username))
 
-    all_submissions = Submission.objects.filter(author=user).order_by('-score').all()
+    if ct != '':
+        all_submissions = Submission.objects.filter(author=user,
+                                                    tp=Submission.TP_CREATIVE,
+                                                    creativeType=CreativeType.objects.get(name=ct)
+                                                    ).order_by('-score').all()
+    else:
+        all_submissions = Submission.objects.filter(author=user,
+                                                    tp=Submission.TP_CREATIVE,
+                                                    ).order_by('-score').all()
+    """
+      Serves frontpage and all additional submission listings
+      with maximum of 25 submissions per page.
+      """
+    # TODO: Serve user votes on submissions too.
+
     paginator = Paginator(all_submissions, 7)
 
     page = request.GET.get('page', 1)
@@ -77,10 +68,53 @@ def user_creative(request,username):
             except Vote.DoesNotExist:
                 pass
 
-    return render(request, 'public/creative_list.html', {
-        'submissions'     : submissions,
+    return render(request, template, {
+        'submissions': submissions,
+        'titleText': titleText,
         'submission_votes': submission_votes
     })
+
+
+def user_video(request, username):
+    user = User.objects.get(username=username)
+    return getCreativeByType(request, username, 'public/creative_list.html', 'Видео',
+                      user.first_name + " " + user.last_name)
+
+
+def user_design(request, username):
+    user = User.objects.get(username=username)
+    return getCreativeByType(request, username, 'public/creative_list.html', 'Дизайн',
+                      user.first_name + " " + user.last_name)
+
+
+def user_conception(request, username):
+    user = User.objects.get(username=username)
+    return getCreativeByType(request, username, 'public/creative_list.html', 'Концепция',
+                      user.first_name + " " + user.last_name)
+
+
+def user_story(request, username):
+    user = User.objects.get(username=username)
+    return getCreativeByType(request, username, 'public/creative_list.html', 'Сюжет',
+                      user.first_name + " " + user.last_name)
+
+
+def user_music(request, username):
+    user = User.objects.get(username=username)
+    return getCreativeByType(request, username, 'public/creative_list.html', 'Музыка',
+                      user.first_name + " " + user.last_name)
+
+
+def user_invention(request, username):
+    user = User.objects.get(username=username)
+    return getCreativeByType(request, username, 'public/creative_list.html', 'Изобретения',
+                      user.first_name + " " + user.last_name)
+
+
+def user_creative(request, username):
+    user = User.objects.get(username=username)
+    return getCreativeByType(request, username, 'public/creative_list.html', '',
+                      user.first_name + " " + user.last_name)
 
 
 @login_required

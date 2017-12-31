@@ -2,13 +2,13 @@
 {% load humanize %}
 
  {%block menu %}
-                <div class="menuPageCaption"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/creative/">Креатив</a></div><br><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/video/">Видео</a></div><br>
-                <div class="pageMenuItemSelected"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/design/"> Дизайн</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/conception/">Концепция</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/story/">Сюжет</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/music/">Музыка</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/invention/">Изобретения</a></div><br>
+                <div class="menuPageCaption"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/creative/">Креатив</a></div><br><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/video/">Видео</a></div><br>
+                <div class="pageMenuItemSelected"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/design/"> Дизайн</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/conception/">Концепция</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/story/">Сюжет</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/music/">Музыка</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/invention/">Изобретения</a></div><br>
   {%endblock%}
 
 {%block page_content %}
@@ -23,6 +23,10 @@
                         </div>
     </div>
     <div class="row" style="padding-top:15px;">
+          <div class="info-container" style="width:100%;">
+
+                    <br>
+
                       {% if submission.link_type == 2 %}
                         <iframe class = "ytframe" width="100%" height="100"
                               src="{{ submission.url }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
@@ -33,6 +37,7 @@
                       {% if submission.link_type == 3 %}
                         <iframe width="100%" height="180" scrolling="no" frameborder="no" src="{{ submission.url }}"></iframe>
                       {% endif %}
+          </div>
     </div>
     <div class="row" style="padding-top:15px;" >
                             <div class="col-11"   style="background: rgba(59, 96,  110,0.2); position:relative; " >
