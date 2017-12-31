@@ -257,7 +257,7 @@ def submit(request):
             submission.save()
             submission.creativeType.clear()
             for tp in submission_form.cleaned_data['ctp']:
-                print(tp)
+             #   print(tp)
                 submission.creativeType.add(tp)
 
             messages.success(request, 'Submission created')
