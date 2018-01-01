@@ -58,7 +58,7 @@ def frontpage(request):
             except Vote.DoesNotExist:
                 pass
 
-    return render(request, 'public/frontpage.html', {'submissions'     : submissions,
+    return render(request, 'public/frontpage.html', {'submissions': submissions,
                                                      'submission_votes': submission_votes})
 
 
@@ -110,10 +110,23 @@ def comments(request, thread_id=None):
             pass
 
     return render(request, 'public/comments.html',
-                  {'submission'   : this_submission,
-                   'comments'     : thread_comments,
+                  {'submission': this_submission,
+                   'comments': thread_comments,
                    'comment_votes': comment_votes,
-                   'sub_vote'     : sub_vote_value})
+                   'sub_vote': sub_vote_value})
+
+
+def edit(request, thread_id=None):
+    """
+      Handles new submission.. submission.
+      """
+    this_submission = get_object_or_404(Submission, id=thread_id)
+    #print(this_submission.getCtp())
+    #submission_form = SubmissionForm(instance=this_submission)
+
+
+    #return render(request, 'public/submit.html', {'form': submission_form})
+    return render(request, 'public/submit.html', {'form': None})
 
 
 @post_only
@@ -214,7 +227,7 @@ def vote(request):
                            vote_value=new_vote_value)
         vote.save()
         vote_diff = new_vote_value
-        return JsonResponse({'error'   : None,
+        return JsonResponse({'error': None,
                              'voteDiff': vote_diff})
 
     # User already voted on this item, this means the vote is either
@@ -232,7 +245,7 @@ def vote(request):
             return HttpResponseBadRequest(
                 'Wrong values for old/new vote combination')
 
-    return JsonResponse({'error'   : None,
+    return JsonResponse({'error': None,
                          'voteDiff': vote_diff})
 
 
@@ -257,7 +270,7 @@ def submit(request):
             submission.save()
             submission.creativeType.clear()
             for tp in submission_form.cleaned_data['ctp']:
-             #   print(tp)
+                #   print(tp)
                 submission.creativeType.add(tp)
 
             messages.success(request, 'Submission created')
@@ -267,7 +280,7 @@ def submit(request):
 
 
 def test(request):
-    return render(request, 'public/test.html', {'flgMainPage':True})
+    return render(request, 'public/test.html', {'flgMainPage': True})
 
 
 def ehandler404(request):

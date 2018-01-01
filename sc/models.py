@@ -44,6 +44,12 @@ class Submission(ContentTypeAware):
     link_width = models.IntegerField(default=0)
     link_height = models.IntegerField(default=0)
 
+    def getCtp(self):
+        lst = []
+        for sch in self.creativeType.all():
+            lst.append(str(sch.pk))
+        return lst
+
     def generate_html(self):
         if self.text:
             html = mistune.markdown(self.text)

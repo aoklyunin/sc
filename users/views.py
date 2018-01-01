@@ -68,9 +68,13 @@ def getCreativeByType(request, username, template, ct, titleText):
             except Vote.DoesNotExist:
                 pass
 
+    print(titleText)
+    print(ct)
+
     return render(request, template, {
         'submissions': submissions,
         'titleText': titleText,
+        'ct':ct,
         'submission_votes': submission_votes
     })
 

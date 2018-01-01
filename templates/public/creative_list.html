@@ -7,13 +7,13 @@
 {% load static %}
 
    {%block menu %}
-                <div class="menuPageCaption"><a class="pageMenuLink active" href="../creative/">Креатив</a></div><br><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="../video/">Видео</a></div><br>
-                <div class="pageMenuItemSelected"><a class="pageMenuLink" href="../design/"> Дизайн</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="../conception/">Концепция</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="../story/">Сюжет</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="../music/">Музыка</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="../invention/">Изобретения</a></div><br>
+                <div class="menuPageCaption"><a class="pageMenuLink {% ifequal ct  '' %} active {% endifequal %}" href="../creative/">Креатив</a></div><br><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Видео' %} active {% endifequal %}" href="../video/">Видео</a></div><br>
+                <div class="pageMenuItemSelected"><a class="pageMenuLink {% ifequal ct 'Дизайн'  %} active {% endifequal %}" href="../design/"> Дизайн</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Концепция' %} active {% endifequal %}" href="../conception/">Концепция</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Сюжет' %} active {% endifequal %}" href="../story/">Сюжет</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Музыка' %} active {% endifequal %}" href="../music/">Музыка</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Изобретения' %} active {% endifequal %}" href="../invention/">Изобретения</a></div><br>
 
     {%endblock%}
 
@@ -28,7 +28,7 @@
               </a>
           </div>
           <div align="right" class="offset-1 col-8" style="font-size:50;">
-            {{titleText}}
+            {{titleText}}|{{ct}}
           </div>
 
         </div>
