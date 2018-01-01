@@ -1,4 +1,4 @@
-{% extends 'base_new.html' %}
+{% extends 'public/default_page.html' %}
 
 {% block content %}
 <br><br>
@@ -6,97 +6,95 @@
     <form class="form-horizontal" action="/profile/edit/" method="post">
         {% csrf_token %}
         <fieldset>
-            <legend>Редактирование профиля</legend>
-            <div class="row">
-                <div class="col-4">
-                    <div class="form-group">
-                        <label for="first_name" class="col-lg-2 control-label">Имя</label>
+            <h2 class="bebasWhiteText">Редактирование профиля</h2>
+          <br>
+          <div class="form-group">
+            <div class="row" style="padding-bottom:10px;">
 
-                        <div class="col-lg-10">
+
+                        <label for="first_name" align="right" class="col-1 control-label bebasWhiteText" style="position:relative; top:10px; font-size:30;">Имя</label>
+
+                        <div class="col-2" align="left"  style="opacity:0.7">
                             {{ form.first_name }}
                             {% for error in form.first_name.errors %}
                                 <p class="text-danger">{{ error }}</p>
                             {% endfor %}
                         </div>
 
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-group">
-                        <label for="last_name" class="col-lg-2 control-label">Фамилия</label>
+                        <label align="right" for="last_name" class="col-2 control-label bebasWhiteText"  style="position:relative; top:10px; font-size:30;">Фамилия</label>
 
-                        <div class="col-lg-10">
+                        <div class="col-2" align="left" style="opacity:0.7">
                             {{ form.last_name }}
                             {% for error in form.last_name.errors %}
                                 <p class="text-danger">{{ error }}</p>
                             {% endfor %}
                         </div>
+          <label align="right" for="email" class="col-1 control-label bebasWhiteText"  style="position:relative; top:10px; font-size:30;">Email</label>
 
-                    </div>
-                </div>
-                  <div class="col-4">
-          <label for="email" class="col-lg-2 control-label">Email</label>
-
-                        <div class="col-lg-10">
+                        <div class="col-3"  style="opacity:0.7" >
                             {{ form.email }}
                             {% for error in form.email.errors %}
                                 <p class="text-danger">{{ error }}</p>
                             {% endfor %}
                         </div>
-            </div>   </div>
+            </div>
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
+                <div class="col-6">
+                  <div class="row" style="padding:10px">
+                        <label for="instagram" class="control-label bebasWhiteText col-3" style="position:relative; top:10px; font-size:30;">Instagram</label>
 
-
-                        <label for="instagram" class="control-label">Instagram</label>
-
-                        <div class="input-group col-lg-10">
+           <div class="input-group col-8" style="opacity:0.7">
                             {{ form.instagram }}
                             {% for error in form.instagram.errors %}
                                 <p class="text-danger">{{ error }}</p>
                             {% endfor %}
                         </div>
-                        <label for="twitter" class="control-label">Twitter</label>
+                    </div>
+<div class="row" style="padding:10px">
+                        <label for="twitter" class="control-label bebasWhiteText col-3"  style="position:relative; top:10px; font-size:30;">Twitter</label>
 
-                        <div class="input-group col-lg-10">
+                        <div class="input-group col-8" style="opacity:0.7">
                             {{ form.twitter }}
                             {% for error in form.twitter.errors %}
                                 <p class="text-danger">{{ error }}</p>
                             {% endfor %}
                         </div>
+  </div>
+<div class="row" style="padding:10px">
+                      <label for="fb" class="control-label bebasWhiteText col-3" style="position:relative; top:10px; font-size:30;">FaceBook</label>
 
-                      <label for="fb" class="control-label">FaceBook</label>
-
-                        <div class="input-group col-lg-10">
+                        <div class="input-group col-8" style="opacity:0.7">
                             {{ form.fb }}
                             {% for error in form.fb.errors %}
                                 <p class="text-danger">{{ error }}</p>
                             {% endfor %}
                         </div>
+  </div>
+<div class="row" style="padding:10px">
+                      <label for="vk" class="control-label bebasWhiteText col-3"  style="position:relative; top:10px; font-size:30;">VK</label>
 
-                      <label for="vk" class="control-label">VK</label>
-
-                        <div class="input-group col-lg-10">
+                        <div class="input-group col-8" style="opacity:0.7">
                             {{ form.vk }}
                             {% for error in form.vk.errors %}
                                 <p class="text-danger">{{ error }}</p>
                             {% endfor %}
                         </div>
+  </div>
+<div class="row" style="padding:10px">
+                      <label for="telegram" class="control-label bebasWhiteText col-3"  style="position:relative; top:10px; font-size:30;">Telegram</label>
 
-                      <label for="telegram" class="control-label">Telegram</label>
-
-                        <div class="input-group col-lg-10">
+                        <div class="input-group col-8" style="opacity:0.7">
                             {{ form.telegram }}
                             {% for error in form.telegram.errors %}
                                 <p class="text-danger">{{ error }}</p>
                             {% endfor %}
                         </div>
+  </div>
+<div class="row" style="padding:10px">
+                       <label for="youtube" class="control-label bebasWhiteText col-3"  style="position:relative; top:10px; font-size:30;">YouTube</label>
 
-                       <label for="youtube" class="control-label">YouTube</label>
-
-                        <div class="input-group col-lg-10">
+                        <div class="input-group col-8" style="opacity:0.7">
                             {{ form.youtube }}
                             {% for error in form.youtube.errors %}
                                 <p class="text-danger">{{ error }}</p>
@@ -105,42 +103,38 @@
 
 
                     </div>
-                  <div>
-                    </div>
   </div>
 
                     <div class="col-6">
-                      <div class="row">
                   <div class="form-group">
-                <label for="about_me" class="col-lg-2 control-label">About me</label>
+                      <div class="row" style="padding:10px">
+                <label  align="right" for="about_me" class="col-2 control-label bebasWhiteText"  style="font-size:25;position:relative;top:25px">Обо Мне</МНЕ></label>
 
-                <div class="col-lg-10">
+                <div class="col-10"  style="opacity:0.7">
                     {{ form.about_text }}
                     {% for error in form.about_text.errors %}
                         <p class="text-danger">{{ error }}</p>
                     {% endfor %}
-                    <span class="help-block">Up to 500 characters of about me text that will be displayed on your proifle page.</span>
+                    <span class="help-block bebasWhiteText">У Вас не больше 500 символов.</span>
                 </div>
 
             </div>
-                        </div>
 
-                      <div class="row">
-                         <label for="homepage" class="col-lg-2 control-label">Мой сайт</label>
+                      <div class="row" style="padding:10px">
+                         <label align="right" for="homepage" class="col-lg-3 control-label bebasWhiteText" style=" font-size:30; top:10px;">Мой сайт</label>
 
-                        <div class="col-lg-10">
+                        <div class="col-lg-9"  style="opacity:0.7">
                             {{ form.homepage }}
                             {% for error in form.homepage.errors %}
                                 <p class="text-danger">{{ error }}</p>
                             {% endfor %}
                         </div>
                       </div>
-        <div class="row">
+        <div class="row" style="padding-top:10px">
 
                         <div class="col-12">
                     <div class="form-group">
-
-                            <div class="checkbox " style="valign:bottom;">
+                            <div align="center" class="checkbox bebasWhiteText" style="valign:bottom; font-size:30">
                                 <label>
                                     {{ form.display_picture }} Показывать граватар
                                 </label>
@@ -151,11 +145,7 @@
                 </div>
                       </div>
  <div class="row">
-
-                        <div class="col-12">
-                    <div class="form-group">
-
-                            <div class="col-lg-10">
+                            <div class="col-3 offset-3" align="right" style="opacity:0.7">
                             {{ form.date }}
                             {% for error in form.date.errors %}
                                 <p class="text-danger">{{ error }}</p>
@@ -163,16 +153,16 @@
                         </div>
 
 
-                    </div>
-                </div>
-                      </div>
+ <label align="left" for="date" class="col-5 control-label bebasWhiteText" style=" font-size:30; top:10px;">Дата рождения</label>
 
-<div class="row">
+
+                    </div>
+<div class="row" style="padding-top:15px">
 
                 <div class="col-12" align="center">
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                    <a class="btn btn-primary" href="/user/{{ user.username }}">View your profile</a>
+                    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                    <a class="btn btn-primary" href="/user/{{ user.username }}">Вернуться в профиль</a>
                   </div>
               </div>
             </div>
