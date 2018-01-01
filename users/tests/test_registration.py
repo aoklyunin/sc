@@ -20,7 +20,7 @@ class RegistrationFormTestCase(TestCase):
                      'password': 'password'}
         form = UserForm(data=test_data)
         self.assertEqual(form.errors['username'], [
-            "Ensure this value has at least 3 characters (it has 1)."])
+            "Убедитесь, что значение содержит больше 2 символов (их 1)."])
         self.assertFalse(form.is_valid())
 
     def test_too_long_username(self):
@@ -29,7 +29,7 @@ class RegistrationFormTestCase(TestCase):
 
         form = UserForm(data=test_data)
         self.assertEqual(form.errors['username'], [
-            "Ensure this value has at most 12 characters (it has 13)."])
+            "Убедитесь, что значение содержит меньше 12 символов (их 13)."])
         self.assertFalse(form.is_valid())
 
     def test_invalid_username(self):
@@ -37,15 +37,15 @@ class RegistrationFormTestCase(TestCase):
                      'password': 'password'}
         form = UserForm(data=test_data)
         self.assertEqual(form.errors['username'],
-                         ["This value may contain only letters, "
-                          "numbers and _ characters."])
+                         ["Это значение может содержать буквы, "
+                          "цифры и знак _."])
 
     def test_invalid_password(self):
         test_data = {'username': 'username',
                      'password': '_'}
         form = UserForm(data=test_data)
         self.assertEqual(form.errors['password'], [
-            "Ensure this value has at least 4 characters (it has 1)."])
+            "Убедитесь, что значение содержит больше 3 символов  (их 1)."])
         self.assertFalse(form.is_valid())
 
     def test_existing_username(self):
@@ -54,13 +54,13 @@ class RegistrationFormTestCase(TestCase):
 
         form = UserForm(data=test_data)
         self.assertEqual(form.errors['username'],
-                         ["A user with that username already exists."])
+                         ["Пользователь с таким именем уже существует"])
         self.assertFalse(form.is_valid())
 
     def test_missing_username(self):
         test_data = {'password': 'password'}
         form = UserForm(data=test_data)
-        self.assertEqual(form.errors['username'], ["This field is required."])
+        self.assertEqual(form.errors['username'], ["Это поле обязательно."])
 
     def test_missing_password(self):
         test_data = {'username': 'username'}

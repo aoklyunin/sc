@@ -30,7 +30,7 @@ def user_profile(request, username):
 def getCreativeByType(request, username, template, ct):
     user = ScUser.objects.get(user=User.objects.get(username=username))
 
-    titleText = user.first_name+" "+user.last_name
+    titleText = user.first_name + " " + user.last_name
 
     if ct != '':
         all_submissions = Submission.objects.filter(author=user,
@@ -70,11 +70,10 @@ def getCreativeByType(request, username, template, ct):
             except Vote.DoesNotExist:
                 pass
 
-
     return render(request, template, {
         'submissions': submissions,
         'titleText': titleText,
-        'ct':ct,
+        'ct': ct,
         'submission_votes': submission_votes
     })
 
@@ -162,8 +161,8 @@ def user_login(request):
     return render(request, 'public/login.html')
 
 
-@post_only
 def user_logout(request):
+
     """
     Log out user if one is logged in and redirect them to frontpage.
     """
@@ -171,8 +170,9 @@ def user_logout(request):
     if request.user.is_authenticated():
         redirect_page = request.POST.get('current_page', '/')
         logout(request)
-        messages.success(request, 'Logged out!')
+        #messages.success(request, 'Logged out!')
         return redirect(redirect_page)
+
     return redirect('frontpage')
 
 
@@ -187,22 +187,28 @@ def register(request):
     user_form = UserForm()
     if request.user.is_authenticated():
         messages.warning(request,
-                         'You are already registered and logged in.')
+                         'Вы уже зарегистрированы и вошли')
         return render(request, 'public/register.html', {'form': user_form})
 
     if request.method == "POST":
         user_form = UserForm(request.POST)
 
         if user_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            reddit_user = ScUser()
-            reddit_user.user = user
-            reddit_user.save()
-            user = authenticate(username=request.POST['username'],
-                                password=request.POST['password'])
-            login(request, user)
-            return redirect('frontpage')
+            print(user_form.cleaned_data["keyWord"])
+            if user_form.cleaned_data["keyWord"] == "123qwe123":
+                print("complete")
+                user = user_form.save()
+                user.set_password(user.password)
+                user.save()
+                reddit_user = ScUser()
+                reddit_user.user = user
+                reddit_user.save()
+                user = authenticate(username=request.POST['username'],
+                                    password=request.POST['password'])
+                login(request, user)
+                return redirect('frontpage')
+            else:
+                messages.error(request,'Неправильный ключ')
+
 
     return render(request, 'public/register.html', {'form': user_form})

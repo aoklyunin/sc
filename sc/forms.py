@@ -10,12 +10,23 @@ from users.models import ScUser
 
 class UserForm(forms.ModelForm):
     alphanumeric = RegexValidator(r'^[0-9a-zA-Z_]*$',
-                                  'This value may contain only letters, '
-                                  'numbers and _ characters.')
+                                  'Это поле может содержать только буквы, '
+                                  'числа и символ _.')
+    keyWord = forms.CharField(widget=forms.TextInput(
+        attrs=
+        {'class': "form-control",
+         'placeholder': "Ключ для регистрации",
+         'required': '',
+         'autofocus': ''}),
+        max_length=12,
+        min_length=3,
+        required=True,
+        validators=[alphanumeric])
+
     username = forms.CharField(widget=forms.TextInput(
         attrs=
         {'class': "form-control",
-         'placeholder': "Username",
+         'placeholder': "Логин",
          'required': '',
          'autofocus': ''}),
         max_length=12,
@@ -25,7 +36,7 @@ class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(
         attrs=
         {'class': "form-control",
-         'placeholder': "Password",
+         'placeholder': "Пароль",
          'required': ''}),
         min_length=4,
         required=True)

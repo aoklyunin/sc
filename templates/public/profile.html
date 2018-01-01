@@ -93,11 +93,11 @@
 {% block footer_script %}
 <script>
  $('a.profileNameLink').click(function (e) {
-    if ( $(this).text() != "Редактировать"){
+    if ( $(this).text() != "Выйти"){
       e.preventDefault();
     }
-    $(this).text("Редактировать");
-    $(this).attr('href', '/profile/edit/');
+    $(this).text("Выйти");
+    $(this).attr('href', '/logout/');
 });
   </script>
 
