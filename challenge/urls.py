@@ -5,7 +5,11 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.challenge, name="challenge"),
-    url(r'^make/$', views.make, name="make"),
-    url(r'^take/$', views.take, name="take"),
+    url(r'^design/$', views.design, name="design"),
+    url(r'^conception/$', views.conception, name="conception"),
+    url(r'^story/$', views.story, name="story"),
+    url(r'^invention/$', views.invention, name="invention"),
+    url(r'^music/$', views.music, name="music"),
+    url(r'^video/$', views.video, name="video"),
 ]
 

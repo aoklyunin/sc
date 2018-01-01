@@ -86,7 +86,7 @@ def story(request):
 
 
 def invention(request):
-    return getCreativeByType(request, 'public/creative_list.html', 'Изобретение',False)
+    return getCreativeByType(request, 'public/creative_list.html', 'Изобретения',False)
 
 
 def music(request):

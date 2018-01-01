@@ -5,11 +5,30 @@ from creative.views import getCreativeByType
 
 
 def challenge(request):
-    return getCreativeByType(request, 'public/creative_list.html', '', True)
+    return getCreativeByType(request, 'public/power_creative_list.html', '', True)
 
 
-def make(request):
-    return render(request, 'challenge/make.html', {})
 
-def take(request):
-    return render(request, 'challenge/take.html', {})
+def design(request):
+    return getCreativeByType(request, 'public/power_creative_list.html', 'Дизайн',True)
+
+
+def conception(request):
+    return getCreativeByType(request, 'public/power_creative_list.html', 'Концепция',True)
+
+
+def story(request):
+    return getCreativeByType(request, 'public/power_creative_list.html', 'История',True)
+
+
+def invention(request):
+    return getCreativeByType(request, 'public/power_creative_list.html', 'Изобретения',True)
+
+
+def music(request):
+    return getCreativeByType(request, 'public/power_creative_list.html', 'Музыка',True)
+
+
+def video(request):
+    return getCreativeByType(request, 'public/power_creative_list.html', 'Видео',True)
+
