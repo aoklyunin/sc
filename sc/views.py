@@ -116,17 +116,41 @@ def comments(request, thread_id=None):
                    'sub_vote': sub_vote_value})
 
 
+@login_required
 def edit(request, thread_id=None):
     """
       Handles new submission.. submission.
       """
     this_submission = get_object_or_404(Submission, id=thread_id)
-    #print(this_submission.getCtp())
-    #submission_form = SubmissionForm(instance=this_submission)
+    url = this_submission.url
+    if this_submission.link_type == Submission.LINK_TYPE_FLICKR:
+        url = '<img src="' + this_submission.url + '">'
+    elif this_submission.link_type == Submission.LINK_TYPE_SOUNDCLOUND:
+        url = 'src="' + this_submission.url + '"'
+    elif this_submission.link_type == Submission.LINK_TYPE_YOUTUBE:
+        url = this_submission.url.replace("embed/","watch?v=")
 
+    submission_form = SubmissionForm(instance=this_submission, initial={'ctp': this_submission.getCtp(), 'url': url})
 
-    #return render(request, 'public/submit.html', {'form': submission_form})
-    return render(request, 'public/submit.html', {'form': None})
+    if request.method == 'POST':
+        submission_form = SubmissionForm(request.POST)
+        if submission_form.is_valid():
+            submission_form.save(commit=False)
+            this_submission.link_type = submission_form.link_type
+            this_submission.tp = Submission.TP_CREATIVE
+            this_submission.generate_html()
+            this_submission.title = submission_form.cleaned_data["title"]
+            this_submission.save()
+
+            this_submission.creativeType.clear()
+            for tp in submission_form.cleaned_data['ctp']:
+                #   print(tp)
+                this_submission.creativeType.add(tp)
+
+            return redirect('/comments/{}'.format(this_submission.id))
+
+    return render(request, 'public/edit.html', {'form': submission_form})
+    # return render(request, 'public/submit.html', {'form': None})
 
 
 @post_only
@@ -273,7 +297,6 @@ def submit(request):
                 #   print(tp)
                 submission.creativeType.add(tp)
 
-            messages.success(request, 'Submission created')
             return redirect('/comments/{}'.format(submission.id))
 
     return render(request, 'public/submit.html', {'form': submission_form})

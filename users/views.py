@@ -27,8 +27,10 @@ def user_profile(request, username):
     })
 
 
-def getCreativeByType(request, username, template, ct, titleText):
+def getCreativeByType(request, username, template, ct):
     user = ScUser.objects.get(user=User.objects.get(username=username))
+
+    titleText = user.first_name+" "+user.last_name
 
     if ct != '':
         all_submissions = Submission.objects.filter(author=user,
@@ -68,8 +70,6 @@ def getCreativeByType(request, username, template, ct, titleText):
             except Vote.DoesNotExist:
                 pass
 
-    print(titleText)
-    print(ct)
 
     return render(request, template, {
         'submissions': submissions,
@@ -80,45 +80,31 @@ def getCreativeByType(request, username, template, ct, titleText):
 
 
 def user_video(request, username):
-    user = User.objects.get(username=username)
-    return getCreativeByType(request, username, 'public/creative_list.html', 'Видео',
-                      user.first_name + " " + user.last_name)
+    return getCreativeByType(request, username, 'public/creative_list.html', 'Видео')
 
 
 def user_design(request, username):
-    user = User.objects.get(username=username)
-    return getCreativeByType(request, username, 'public/creative_list.html', 'Дизайн',
-                      user.first_name + " " + user.last_name)
+    return getCreativeByType(request, username, 'public/creative_list.html', 'Дизайн')
 
 
 def user_conception(request, username):
-    user = User.objects.get(username=username)
-    return getCreativeByType(request, username, 'public/creative_list.html', 'Концепция',
-                      user.first_name + " " + user.last_name)
+    return getCreativeByType(request, username, 'public/creative_list.html', 'Концепция')
 
 
 def user_story(request, username):
-    user = User.objects.get(username=username)
-    return getCreativeByType(request, username, 'public/creative_list.html', 'Сюжет',
-                      user.first_name + " " + user.last_name)
+    return getCreativeByType(request, username, 'public/creative_list.html', 'Сюжет')
 
 
 def user_music(request, username):
-    user = User.objects.get(username=username)
-    return getCreativeByType(request, username, 'public/creative_list.html', 'Музыка',
-                      user.first_name + " " + user.last_name)
+    return getCreativeByType(request, username, 'public/creative_list.html', 'Музыка')
 
 
 def user_invention(request, username):
-    user = User.objects.get(username=username)
-    return getCreativeByType(request, username, 'public/creative_list.html', 'Изобретения',
-                      user.first_name + " " + user.last_name)
+    return getCreativeByType(request, username, 'public/creative_list.html', 'Изобретения')
 
 
 def user_creative(request, username):
-    user = User.objects.get(username=username)
-    return getCreativeByType(request, username, 'public/creative_list.html', '',
-                      user.first_name + " " + user.last_name)
+    return getCreativeByType(request, username, 'public/creative_list.html', '')
 
 
 @login_required

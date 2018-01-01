@@ -1,6 +1,9 @@
 {% extends 'public/default_page.html' %}
 {% load humanize %}
 
+{% load staticfiles %}
+
+{% load static %}
  {%block menu %}
                 <div class="menuPageCaption"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/creative/">Креатив</a></div><br><br>
                 <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/video/">Видео</a></div><br>
@@ -17,6 +20,9 @@
     <div class="row" >
                         <div class="col-6">
                           <a class="thread-title bebasWhiteText" href="{{ submission.comments_url }}">{{ submission.title }}</a>
+                          <a href="/edit/{{submission.pk}}">
+            <img src="{% static 'img/editPost.png'%}" width="30px" height="30px" style="position:relative;left:5px;top:-10px">
+          </a>
                         </div>
                         <div class="col-6 bebasWhiteText" style="font-size:30" align="right" >
                           {{ submission.timestamp|date:"d M" }}
@@ -55,7 +61,7 @@
                               {% endifnotequal %}
                             </div>
                     <div class="col-1" align="right">
-                      <div class="vote" style="position:relative; top:20px"
+                      <div class="vote" style="position:relative; top:10px"
                          data-what-type="submission"
                          data-what-id="{{ submission.id }}">
                         {% with vote_value=submission.id %}

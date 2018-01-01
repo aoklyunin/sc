@@ -164,13 +164,16 @@ class SubmissionForm(forms.ModelForm):
         max_length=5000,
         required=False)
 
+
     def clean_url(self):
         url = self.cleaned_data['url']
+        print(url)
         # flickr
         match = re.search(r'<img src="[\'"]?([^\'" >]+)staticflickr([^\'" >]+)"',url)
         if match:
             url = match.group(0)[10:-1]
             self.link_type = Submission.LINK_TYPE_FLICKR
+            print("matches")
         else:
             # soundcloud
             match = re.search(r'src="https:\/\/w.soundcloud.com\/[\'"]?([^\'" >]+)"', url)
