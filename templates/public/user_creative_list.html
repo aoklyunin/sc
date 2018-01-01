@@ -1,0 +1,17 @@
+{% extends 'public/creative_list.html' %}
+{% load humanize %}
+
+
+{% load staticfiles %}
+
+{% load static %}
+
+   {%block menu %}
+                <div class="menuPageCaption"><a class="pageMenuLink {% ifequal ct  '' %} active {% endifequal %}" href="../creative/">Креатив</a></div><br><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Видео' %} active {% endifequal %}" href="../video/">Видео</a></div><br>
+                <div class="pageMenuItemSelected"><a class="pageMenuLink {% ifequal ct 'Дизайн'  %} active {% endifequal %}" href="../design/"> Дизайн</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Концепция' %} active {% endifequal %}" href="../conception/">Концепция</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Сюжет' %} active {% endifequal %}" href="../story/">Сюжет</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Музыка' %} active {% endifequal %}" href="../music/">Музыка</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Изобретения' %} active {% endifequal %}" href="../invention/">Изобретения</a></div><br>
+    {%endblock%}

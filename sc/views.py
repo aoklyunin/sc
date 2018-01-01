@@ -126,7 +126,7 @@ def edit(request, thread_id=None):
     if this_submission.link_type == Submission.LINK_TYPE_FLICKR:
         url = '<img src="' + this_submission.url + '">'
     elif this_submission.link_type == Submission.LINK_TYPE_SOUNDCLOUND:
-        url = 'src="' + this_submission.url + '"'
+        url = 'src="' + this_submission.url + '">'
     elif this_submission.link_type == Submission.LINK_TYPE_YOUTUBE:
         url = this_submission.url.replace("embed/","watch?v=")
 

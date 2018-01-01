@@ -1,10 +1,11 @@
 from django.shortcuts import render
 
 # Create your views here.
+from creative.views import getCreativeByType
 
 
 def challenge(request):
-    return render(request, 'challenge/main.html', {})
+    return getCreativeByType(request, 'public/creative_list.html', '', True)
 
 
 def make(request):

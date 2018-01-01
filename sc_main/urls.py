@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^', include("sc.urls")),
     url(r'^', include("users.urls")),
     url(r'^creative/', include("creative.urls")),
-    url(r'^challenge/', include("challenge.urls")),
+    url(r'^power/creative/', include("challenge.urls")),
     url(r'^shame/', include("shame.urls")),
 ]
 

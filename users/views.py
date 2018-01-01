@@ -80,31 +80,31 @@ def getCreativeByType(request, username, template, ct):
 
 
 def user_video(request, username):
-    return getCreativeByType(request, username, 'public/creative_list.html', 'Видео')
+    return getCreativeByType(request, username, 'public/user_creative_list.html', 'Видео')
 
 
 def user_design(request, username):
-    return getCreativeByType(request, username, 'public/creative_list.html', 'Дизайн')
+    return getCreativeByType(request, username, 'public/user_creative_list.html', 'Дизайн')
 
 
 def user_conception(request, username):
-    return getCreativeByType(request, username, 'public/creative_list.html', 'Концепция')
+    return getCreativeByType(request, username, 'public/user_creative_list.html', 'Концепция')
 
 
 def user_story(request, username):
-    return getCreativeByType(request, username, 'public/creative_list.html', 'Сюжет')
+    return getCreativeByType(request, username, 'public/user_creative_list.html', 'Сюжет')
 
 
 def user_music(request, username):
-    return getCreativeByType(request, username, 'public/creative_list.html', 'Музыка')
+    return getCreativeByType(request, username, 'public/user_creative_list.html', 'Музыка')
 
 
 def user_invention(request, username):
-    return getCreativeByType(request, username, 'public/creative_list.html', 'Изобретения')
+    return getCreativeByType(request, username, 'public/user_creative_list.html', 'Изобретения')
 
 
 def user_creative(request, username):
-    return getCreativeByType(request, username, 'public/creative_list.html', '')
+    return getCreativeByType(request, username, 'public/user_creative_list.html', '')
 
 
 @login_required
