@@ -79,7 +79,6 @@ class ProfileForm(forms.ModelForm):
                'id': "about_me",
                'rows': "4",
                }),
-        max_length=500,
         required=False
     )
 
