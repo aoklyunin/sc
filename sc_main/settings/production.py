@@ -10,7 +10,6 @@ from django.utils import six
 from .common import *  # noqa
 
 
-
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
