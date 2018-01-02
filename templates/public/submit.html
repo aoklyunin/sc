@@ -1,6 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'public/default_page.html' %}
+
 {% block content %}
-    <form class="form-horizontal" action="/submit/" method="post">
+    <form class="form-horizontal" action="" method="post">
         {% csrf_token %}
         <fieldset>
             <legend>New submission</legend>

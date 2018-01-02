@@ -9,7 +9,7 @@ from django.template import RequestContext
 from django.template.defaulttags import register
 
 from sc.forms import SubmissionForm
-from sc.models import Submission, Comment, Vote
+from sc.models import Submission, Comment, Vote, CreativeType
 from sc.utils.helpers import post_only
 from users.models import ScUser
 
@@ -128,7 +128,7 @@ def edit(request, thread_id=None):
     elif this_submission.link_type == Submission.LINK_TYPE_SOUNDCLOUND:
         url = 'src="' + this_submission.url + '">'
     elif this_submission.link_type == Submission.LINK_TYPE_YOUTUBE:
-        url = this_submission.url.replace("embed/","watch?v=")
+        url = this_submission.url.replace("embed/", "watch?v=")
 
     submission_form = SubmissionForm(instance=this_submission, initial={'ctp': this_submission.getCtp(), 'url': url})
 
@@ -302,6 +302,68 @@ def submit(request):
     return render(request, 'public/submit.html', {'form': submission_form})
 
 
+
+
+@login_required
+def submitFAQ(request):
+    """
+    Handles new submission.. submission.
+    """
+    submission_form = SubmissionForm()
+
+    if request.method == 'POST':
+        submission_form = SubmissionForm(request.POST)
+        if submission_form.is_valid():
+            submission = submission_form.save(commit=False)
+            submission.link_type = submission_form.link_type
+            submission.tp = Submission.TP_FAQ
+            submission.generate_html()
+            user = User.objects.get(username=request.user)
+            redditUser = ScUser.objects.get(user=user)
+            submission.author = redditUser
+            submission.author_name = user.username
+            submission.save()
+            submission.creativeType.clear()
+            for tp in submission_form.cleaned_data['ctp']:
+                #   print(tp)
+                submission.creativeType.add(tp)
+
+            return redirect('/comments/{}'.format(submission.id))
+
+    return render(request, 'public/submit.html', {'form': submission_form})
+
+
+
+
+@login_required
+def submitPower(request):
+    """
+    Handles new submission.. submission.
+    """
+    submission_form = SubmissionForm()
+
+    if request.method == 'POST':
+        submission_form = SubmissionForm(request.POST)
+        if submission_form.is_valid():
+            submission = submission_form.save(commit=False)
+            submission.link_type = submission_form.link_type
+            submission.tp = Submission.TP_CHALLENGE
+            submission.generate_html()
+            user = User.objects.get(username=request.user)
+            redditUser = ScUser.objects.get(user=user)
+            submission.author = redditUser
+            submission.author_name = user.username
+            submission.save()
+            submission.creativeType.clear()
+            for tp in submission_form.cleaned_data['ctp']:
+                #   print(tp)
+                submission.creativeType.add(tp)
+
+            return redirect('/comments/{}'.format(submission.id))
+
+    return render(request, 'public/submit.html', {'form': submission_form})
+
+
 def test(request):
     return render(request, 'public/test.html', {'flgMainPage': True})
 
@@ -318,3 +380,69 @@ def ehandler500(request):
                                   context_instance=RequestContext(request))
     response.status_code = 500
     return response
+
+
+def getCreativeByType(request, template, ct, sctp, username=""):
+    if sctp == Submission.TP_CHALLENGE:
+        titleText = 'Боевой Креатив'
+        titleLink = '/power/creative'
+        createLink = '/submit/power/'
+    elif sctp == Submission.TP_CREATIVE:
+        titleText = 'Креатив'
+        titleLink = '/creative'
+        createLink = '/submit/'
+    elif sctp == Submission.TP_FAQ:
+        titleText = 'О проекте'
+        titleLink = '/faq/'
+        createLink = '/submit/faq/'
+    elif sctp ==Submission.TP_USER_CREATIVE:
+        sctp = Submission.TP_CREATIVE
+        titleText = username
+        titleLink = '/user/'+username
+        createLink = '/submit/'
+
+    if ct != '':
+        all_submissions = Submission.objects.filter(
+            tp=sctp,
+            creativeType=CreativeType.objects.get(name=ct)
+        ).order_by('-score').all()
+    else:
+        all_submissions = Submission.objects.filter(tp=sctp,
+                                                    ).order_by('-score').all()
+    """
+      Serves frontpage and all additional submission listings
+      with maximum of 25 submissions per page.
+      """
+    # TODO: Serve user votes on submissions too.
+
+    paginator = Paginator(all_submissions, 7)
+
+    page = request.GET.get('page', 1)
+    try:
+        submissions = paginator.page(page)
+    except PageNotAnInteger:
+        raise Http404
+    except EmptyPage:
+        submissions = paginator.page(paginator.num_pages)
+
+    submission_votes = {}
+
+    if request.user.is_authenticated():
+        for submission in submissions:
+            try:
+                vote = Vote.objects.get(
+                    vote_object_type=submission.get_content_type(),
+                    vote_object_id=submission.id,
+                    user=ScUser.objects.get(user=request.user))
+                submission_votes[submission.id] = vote.value
+            except Vote.DoesNotExist:
+                pass
+
+    return render(request, template, {
+        'submissions': submissions,
+        'titleText': titleText,
+        'titleLink': titleLink,
+        'createLink':createLink,
+        'ct': ct,
+        'submission_votes': submission_votes
+    })

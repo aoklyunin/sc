@@ -7,8 +7,8 @@ from django.http import HttpResponseBadRequest, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 
 from sc.forms import UserForm, ProfileForm
-from sc.models import Submission, Vote, CreativeType
-from sc.utils.helpers import post_only
+from sc.models import Submission
+from sc.views import getCreativeByType
 from users.models import ScUser
 
 
@@ -27,83 +27,33 @@ def user_profile(request, username):
     })
 
 
-def getCreativeByType(request, username, template, ct):
-    user = ScUser.objects.get(user=User.objects.get(username=username))
-
-    titleText = user.first_name + " " + user.last_name
-
-    if ct != '':
-        all_submissions = Submission.objects.filter(author=user,
-                                                    tp=Submission.TP_CREATIVE,
-                                                    creativeType=CreativeType.objects.get(name=ct)
-                                                    ).order_by('-score').all()
-    else:
-        all_submissions = Submission.objects.filter(author=user,
-                                                    tp=Submission.TP_CREATIVE,
-                                                    ).order_by('-score').all()
-    """
-      Serves frontpage and all additional submission listings
-      with maximum of 25 submissions per page.
-      """
-    # TODO: Serve user votes on submissions too.
-
-    paginator = Paginator(all_submissions, 7)
-
-    page = request.GET.get('page', 1)
-    try:
-        submissions = paginator.page(page)
-    except PageNotAnInteger:
-        raise Http404
-    except EmptyPage:
-        submissions = paginator.page(paginator.num_pages)
-
-    submission_votes = {}
-
-    if request.user.is_authenticated():
-        for submission in submissions:
-            try:
-                vote = Vote.objects.get(
-                    vote_object_type=submission.get_content_type(),
-                    vote_object_id=submission.id,
-                    user=ScUser.objects.get(user=request.user))
-                submission_votes[submission.id] = vote.value
-            except Vote.DoesNotExist:
-                pass
-
-    return render(request, template, {
-        'submissions': submissions,
-        'titleText': titleText,
-        'ct': ct,
-        'submission_votes': submission_votes
-    })
-
 
 def user_video(request, username):
-    return getCreativeByType(request, username, 'creative_lists/user.html', 'Видео')
+    return getCreativeByType(request, 'creative_lists/user.html', 'Видео', Submission.TP_USER_CREATIVE,username)
 
 
 def user_design(request, username):
-    return getCreativeByType(request, username, 'creative_lists/user.html', 'Дизайн')
+    return getCreativeByType(request, 'creative_lists/user.html', 'Дизайн', Submission.TP_USER_CREATIVE,username)
 
 
 def user_conception(request, username):
-    return getCreativeByType(request, username, 'creative_lists/user.html', 'Концепция')
+    return getCreativeByType(request, 'creative_lists/user.html', 'Концепция', Submission.TP_USER_CREATIVE,username)
 
 
 def user_story(request, username):
-    return getCreativeByType(request, username, 'creative_lists/user.html', 'Сюжет')
+    return getCreativeByType(request, 'creative_lists/user.html', 'Сюжет', Submission.TP_USER_CREATIVE,username)
 
 
 def user_music(request, username):
-    return getCreativeByType(request, username, 'creative_lists/user.html', 'Музыка')
+    return getCreativeByType(request,  'creative_lists/user.html', 'Музыка', Submission.TP_USER_CREATIVE,username)
 
 
 def user_invention(request, username):
-    return getCreativeByType(request, username, 'creative_lists/user.html', 'Изобретения')
+    return getCreativeByType(request, 'creative_lists/user.html', 'Изобретения', Submission.TP_USER_CREATIVE,username)
 
 
 def user_creative(request, username):
-    return getCreativeByType(request, username, 'creative_lists/user.html', '')
+    return getCreativeByType(request, 'creative_lists/user.html', '', Submission.TP_USER_CREATIVE,username)
 
 
 @login_required

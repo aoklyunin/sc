@@ -22,6 +22,7 @@ class Submission(ContentTypeAware):
     TP_CREATIVE = 0
     TP_CHALLENGE = 1
     TP_FAQ = 2
+    TP_USER_CREATIVE = 3
 
     LINK_TYPE_NOT_PROCESSED = 0
     LINK_TYPE_FLICKR = 1
