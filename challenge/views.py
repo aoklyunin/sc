@@ -19,7 +19,7 @@ def conception(request):
 
 
 def story(request):
-    return getCreativeByType(request, 'creative_lists/power.html', 'История',Submission.TP_CHALLENGE)
+    return getCreativeByType(request, 'creative_lists/power.html', 'Сюжет',Submission.TP_CHALLENGE)
 
 
 def invention(request):
