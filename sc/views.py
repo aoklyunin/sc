@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse, HttpResponseBadRequest, Http404, \
-    HttpResponseForbidden
+    HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.template.defaulttags import register
@@ -114,6 +114,27 @@ def comments(request, thread_id=None):
                    'comments': thread_comments,
                    'comment_votes': comment_votes,
                    'sub_vote': sub_vote_value})
+
+
+def delete(request, thread_id=None):
+    """
+    Handles comment view when user opens the thread.
+    On top of serving all comments in the thread it will
+    also return all votes user made in that thread
+    so that we can easily update comments in template
+    and display via css whether user voted or not.
+
+    :param thread_id: Thread ID as it's stored in database
+    :type thread_id: int
+    """
+
+    this_submission = get_object_or_404(Submission, id=thread_id)
+    # удаляем комментарии
+    Comment.objects.filter(submission=this_submission).delete()
+    Vote.objects.filter(submission=this_submission).delete()
+    this_submission.delete()
+    return HttpResponseRedirect('/creative/')
+
 
 
 @login_required

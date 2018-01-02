@@ -23,13 +23,14 @@
                           <a href="/edit/{{submission.pk}}">
             <img src="{% static 'img/editPost.png'%}" title="Редактировать" width="30px" height="30px" style="position:relative;left:5px;top:-10px">
           </a>
+                           <a style="position:relative; left:10px; top:-8px;" href="/delete/{{submission.pk}}" class="bebasWhiteText confirmation">Удалить</a>
                         </div>
                         <div class="col-6 bebasWhiteText" style="font-size:30" align="right" >
                           {{ submission.timestamp|date:"H:i  d/m/y" }}
                         </div>
     </div>
     <div class="row" >
-                    <a class="bebasYellowText" style="position:relative;left:15px;font-size:25" href ="\user\{{submission.author.user.username}}">
+                    <a class="bebasYellowText " style="position:relative;left:15px;font-size:25" href ="\user\{{submission.author.user.username}}">
                       {{submission.author.user.username}}
                       </a>
                   </div>

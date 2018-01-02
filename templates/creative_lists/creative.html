@@ -40,7 +40,7 @@
                           <a class="thread-title bebasWhiteText" href="{{ submission.comments_url }}">{{ submission.title }}</a>
                           <a href="/edit/{{submission.pk}}">
             <img src="{% static 'img/editPost.png'%}" title="Редактировать" width="30px" height="30px" style="position:relative;left:5px;top:-10px">
-          </a>
+          </a> <a style="position:relative; left:10px; top:-8px;" href="/delete/{{submission.pk}}" class="bebasWhiteText confirmation">Удалить</a>
                         </div>
                       <div class="col-3 bebasWhiteText" style="font-size:30" align="right" >
                          {{ submission.timestamp|date:"d M" }}
