@@ -5,8 +5,8 @@
 **/
 
 .hamburger {
-  position: absolute;
-  top: 6em;
+  position: fixed;
+  top: 4em;
   right: 4em;
   margin-left: -2em;
   margin-top: -45px;
