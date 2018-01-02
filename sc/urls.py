@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^test/$', views.frontpage, name="test"),
     url(r'^comments/(?P<thread_id>[0-9]+)$', views.comments, name="thread"),
     url(r'^delete/(?P<thread_id>[0-9]+)$', views.delete, name="delete"),
+    url(r'^delete/comment/(?P<thread_id>[0-9]+)$', views.deleteComment, name="deleteComment"),
     url(r'^edit/(?P<thread_id>[0-9]+)$', views.edit, name="edit"),
     url(r'^submit/$', views.submit, name="submit"),
     url(r'^submit/faq/$', views.submitFAQ, name="submitFAQ"),

@@ -136,6 +136,32 @@ def delete(request, thread_id=None):
     return HttpResponseRedirect('/creative/')
 
 
+def deleteCommentWithChildren(comment):
+    for com in Comment.objects.filter(parent=comment):
+        deleteCommentWithChildren(com)
+
+    comment.submission.comment_count = comment.submission.comment_count-1
+    comment.submission.save()
+    comment.delete()
+
+
+def deleteComment(request, thread_id=None):
+    """
+    Handles comment view when user opens the thread.
+    On top of serving all comments in the thread it will
+    also return all votes user made in that thread
+    so that we can easily update comments in template
+    and display via css whether user voted or not.
+
+    :param thread_id: Thread ID as it's stored in database
+    :type thread_id: int
+    """
+
+    this_comment = get_object_or_404(Comment, id=thread_id)
+    deleteCommentWithChildren(this_comment)
+
+    return HttpResponseRedirect('/creative/')
+
 
 @login_required
 def edit(request, thread_id=None):

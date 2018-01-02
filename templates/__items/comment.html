@@ -39,13 +39,12 @@
                 <ul class="buttons">
                     <li><a href="javascript:void(0)" name="replyButton"
                     style="color: #0176d3;">Ответить</a></li>
-                     <li><a href="/delete/comment/{{node.pk}}" name="replyButton"
+                     <li><a class="confirmation" href="/delete/comment/{{node.pk}}" name="deleteButton"
                     style="color: #0176d3;">Удалить</a></li>
                 </ul>
             </div>
             </div>
           </div>
-
 
         <div class="col-12">
             {% if not node.is_leaf_node %}
