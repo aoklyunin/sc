@@ -9,15 +9,7 @@ from django.utils import six
 
 from .common import *  # noqa
 
-import os
-import raven
 
-RAVEN_CONFIG = {
-    'dsn': 'https://bc3bb944a4244c7a8cbd1a9bb74600f1:2639868d150a4bc4a901d817c740a18d@sentry.io/265798',
-    # If you are using git, you can also automatically configure the
-    # release based on the git info.
-    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
-}
 
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
