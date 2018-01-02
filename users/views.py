@@ -73,7 +73,7 @@ def edit_profile(request):
     else:
         raise Http404
 
-    return render(request, 'private/edit_profile.html', {'form': profile_form})
+    return render(request, 'private/edit_profile.html', {'form': profile_form,'caption':'Добавить пост'})
 
 
 def user_login(request):

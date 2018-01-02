@@ -196,7 +196,7 @@ def edit(request, thread_id=None):
 
             return redirect('/comments/{}'.format(this_submission.id))
 
-    return render(request, 'public/edit.html', {'form': submission_form})
+    return render(request, 'public/submit.html', {'form': submission_form,'caption':'Редактирование'})
     # return render(request, 'public/submit.html', {'form': None})
 
 
@@ -346,7 +346,7 @@ def submit(request):
 
             return redirect('/comments/{}'.format(submission.id))
 
-    return render(request, 'public/submit.html', {'form': submission_form})
+    return render(request, 'public/submit.html', {'form': submission_form,'caption':'Добавить пост'})
 
 
 
@@ -377,7 +377,7 @@ def submitFAQ(request):
 
             return redirect('/comments/{}'.format(submission.id))
 
-    return render(request, 'public/submit.html', {'form': submission_form})
+    return render(request, 'public/submit.html', {'form': submission_form,'caption':'Добавить'})
 
 
 
@@ -408,7 +408,7 @@ def submitPower(request):
 
             return redirect('/comments/{}'.format(submission.id))
 
-    return render(request, 'public/submit.html', {'form': submission_form})
+    return render(request, 'public/submit.html', {'form': submission_form,'caption':'Добавить'})
 
 
 def test(request):

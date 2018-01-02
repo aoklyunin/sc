@@ -157,12 +157,12 @@ class SubmissionForm(forms.ModelForm):
 
     title = forms.CharField(widget=forms.TextInput(
         attrs={'class': "form-control",
-               'placeholder': "Submission title"}),
+               'placeholder': "Заголовок поста"}),
         required=True, min_length=1, max_length=250)
 
     url = forms.CharField(widget=forms.TextInput(
         attrs={'class': "form-control",
-               'placeholder': "(Optional) http:///www.example.com"}),
+               'placeholder': "(Необязательно) http:///www.example.com"}),
         required=False)
 
     ctp = forms.ModelMultipleChoiceField(required=False,queryset=CreativeType.objects.all())
@@ -170,7 +170,7 @@ class SubmissionForm(forms.ModelForm):
         attrs={
             'class': "form-control",
             'rows': "3",
-            'placeholder': "Optional text"}),
+            'placeholder': "(Необязательно) текст"}),
         max_length=5000,
         required=False)
 
