@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^', include("users.urls")),
     url(r'^creative/', include("creative.urls")),
     url(r'^power/creative/', include("challenge.urls")),
-    url(r'^shame/', include("shame.urls")),
+    url(r'^faq/', include("faq.urls")),
 ]
 
 handler404 = ehandler404

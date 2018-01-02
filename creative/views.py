@@ -70,29 +70,29 @@ def getCreativeByType(request, template, ct, flgPowerCreative):
     })
 
 def creative(request):
-    return getCreativeByType(request,  'public/creative_list.html', '',False)
+    return getCreativeByType(request,  'creative_lists/creative.html', '',False)
 
 
 def design(request):
-    return getCreativeByType(request, 'public/creative_list.html', 'Дизайн',False)
+    return getCreativeByType(request, 'creative_lists/creative.html', 'Дизайн',False)
 
 
 def conception(request):
-    return getCreativeByType(request, 'public/creative_list.html', 'Концепция',False)
+    return getCreativeByType(request, 'creative_lists/creative.html', 'Концепция',False)
 
 
 def story(request):
-    return getCreativeByType(request, 'public/creative_list.html', 'История',False)
+    return getCreativeByType(request, 'creative_lists/creative.html', 'История',False)
 
 
 def invention(request):
-    return getCreativeByType(request, 'public/creative_list.html', 'Изобретения',False)
+    return getCreativeByType(request, 'creative_lists/creative.html', 'Изобретения',False)
 
 
 def music(request):
-    return getCreativeByType(request, 'public/creative_list.html', 'Музыка',False)
+    return getCreativeByType(request, 'creative_lists/creative.html', 'Музыка',False)
 
 
 def video(request):
-    return getCreativeByType(request, 'public/creative_list.html', 'Видео',False)
+    return getCreativeByType(request, 'creative_lists/creative.html', 'Видео',False)
 

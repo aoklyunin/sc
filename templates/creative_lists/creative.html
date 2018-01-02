@@ -106,7 +106,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row delimeterRow">
                     <div class="col-6 " align="left" style="padding:0">
                        <img style="opacity:0.5" class="delimeterListImg" src="{% static 'img/delimeter.png' %}"  width="20px" height="20px">
 
@@ -165,28 +165,21 @@ $(document).ready(function(){
 });
 
 function onWheel(e) {
-     $('.creativePost').each(function(){
+     $('.delimeterRow').each(function(){
         var pos = $(this).offset(),
             wY = $(window).scrollTop(),
             wH = $(window).height(),
             oH = $(this).outerHeight();
 
         cDiv =  $(this).find($('.delimeterListImg'));
-        cDivPrev  =$(this).prev().find($('.delimeterListImg'));
-
-        if (pos.top >= wY && oH + pos.top <= wY + wH ){
+        var delta=20;
+        if (pos.top >= wY+delta && oH + pos.top <= wY + wH-delta ){
              for (var i = 0; i < cDiv.length; i++) {
                   cDiv[i].style.opacity = '1';  //do styling here
              }
-            for (var i = 0; i < cDivPrev.length; i++) {
-                  cDivPrev[i].style.opacity = '1';  //do styling here
-             }
         }else{
-         for (var i = 0; i < cDiv.length; i++) {
+             for (var i = 0; i < cDiv.length; i++) {
                   cDiv[i].style.opacity = '0.5';  //do styling here
-             }
-          for (var i = 0; i < cDivPrev.length; i++) {
-                  cDivPrev[i].style.opacity =  '0.5';  //do styling here
              }
         }
     });

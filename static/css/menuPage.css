@@ -115,3 +115,13 @@ a.active.menuLink{
 #toggle {
   display: none;
 }
+
+
+.faqLink{
+   position: absolute;
+      font-size: 100;
+       bottom: 0.8em;
+      left:1.4em;
+      color: #feed00;
+}
+
