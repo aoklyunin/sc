@@ -45,6 +45,9 @@ class Submission(ContentTypeAware):
     link_type = models.IntegerField(default=-1)
     link_width = models.IntegerField(default=0)
     link_height = models.IntegerField(default=0)
+    viewCnt = models.IntegerField(default=0)
+    regard = models.IntegerField(default=0)
+    stoDate = models.DateTimeField(default=timezone.now)
 
     def getCtp(self):
         lst = []
@@ -84,6 +87,7 @@ class Comment(MttpContentTypeAware):
     score = models.IntegerField(default=0)
     raw_comment = models.TextField(blank=True)
     html_comment = models.TextField(blank=True)
+    markedBySubmissionOwner = models.BooleanField(default=False)
 
     class MPTTMeta:
         order_insertion_by = ['-score']
