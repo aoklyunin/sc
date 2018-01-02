@@ -10,9 +10,9 @@
       <div class="row ">
         <div class="offset-2 col-8 captionTextRight" >
           <a href="/profile/edit/">
-            <img src="{% static 'img/editProfile.png'%}" width="40px" height="40px">
+            <img src="{% static 'img/editProfile.png'%}" title="Редактировать" width="40px" height="40px">
           </a>
-          <a class="pagemenuLink active profileNameLink">
+          <a class="pagemenuLink active profileNameLink" title="Нажмите для выхода">
 
             {% if profile.first_name %}{{ profile.first_name }}
 
@@ -49,12 +49,12 @@
                       </div>
                     <div class="col-6 profileRightSocialMenu">
                       <div class="row socialLinks">
-                        <div class="col-1 offset-6" ><a href="{{profile.instagram}}" ><img width="40px" height="50px" src="{%static 'img/insta1.png' %}"></a></div>
-                          <div class="col-1"><a href="{{profile.fb}}"><img width="40px" height="50px" src="{%static 'img/fb1.png' %}"></a></div>
-                          <div class="col-1"><a href="{{profile.vk}}"><img width="40px" height="50px" src="{%static 'img/vk1.png' %}"></a></div>
-                          <div class="col-1" ><a href="{{profile.telegram}}"><img width="40px" height="50px" src="{%static 'img/teleg1.png' %}"></a></div>
-                          <div class="col-1"><a href="{{profile.email}}"><img width="40px" height="50px" src="{%static 'img/mail1.png' %}"></a></div>
-                          <div class="col-1"><a href="{{profile.youtube}}"><img width="40px" height="50px" src="{%static 'img/yt1.png' %}"></a></div>
+                        <div class="col-1 offset-6" ><a class="socialImg" href="{{profile.instagram}}" ><img title=" Instagram" width="40px" height="50px" src="{%static 'img/insta1.png' %}"></a></div>
+                          <div class="col-1"><a class="socialImg" href="{{profile.fb}}"><img  title="FaceBook" width="40px" height="50px" src="{%static 'img/fb1.png' %}"></a></div>
+                          <div class="col-1"><a class="socialImg" href="{{profile.vk}}"><img  title="VK" width="40px" height="50px" src="{%static 'img/vk1.png' %}"></a></div>
+                          <div class="col-1" ><a class="socialImg" href="{{profile.telegram}}"><img  title="Telegram"  width="40px" height="50px" src="{%static 'img/teleg1.png' %}"></a></div>
+                          <div class="col-1"><a class="socialImg" href="{{profile.email}}"><img   title="E-mail" width="40px" height="50px" src="{%static 'img/mail1.png' %}"></a></div>
+                          <div class="col-1"><a class="socialImg" href="{{profile.youtube}}"><img   title="Youtube" width="40px" height="50px" src="{%static 'img/yt1.png' %}"></a></div>
                       </div><br>
                       <div class="profileRightMenuText">
                         <div class="bebasWhiteText"> {{date}}</div><br>
@@ -82,6 +82,31 @@
            {% endif %}
   </div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Перейти или скопировать?</h4>
+        </div>
+        <div class="modal-body">
+          <p>Вы нажали на ссылку для перехода на другой ресурс</p>
+          <p> Адрес: <a id="modalAddress"></a></p>
+        </div>
+        <div class="modal-footer">
+          <a href="" class="btn btn-default goLink" >Перейти</a>
+            <a href=""  class="btn btn-default copyLink">Скопировать</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+ <textarea id="TmpTextarea" style="position:absolute;  top:-50px">Hello I'm some text</textarea>
+
 {% endblock %}
 
 {% block footer_script %}
@@ -93,6 +118,35 @@
     $(this).text("Выйти");
     $(this).attr('href', '/logout/');
 });
+
+$('a.socialImg').click(function (e) {
+    //if ( $(this).text() != "Выйти"){
+     e.preventDefault();
+     $("#modalAddress").text($(this).attr('href'));
+     $("#modalAddress").attr('href',$(this).attr('href'));
+     $(".goLink").attr('href',$(this).attr('href'));
+     $(".copyLink").attr('href',$(this).attr('href'));
+     $("#myModal").modal();
+   // }
+   // $(this).text("Выйти");
+   // $(this).attr('href', '/logout/');
+});
+
+ $('.copyLink').click(function (e) {
+    e.preventDefault();
+    $('#TmpTextarea').text($(this).attr('href'));
+    $('#TmpTextarea').select();
+
+    try {
+      var successful = document.execCommand('copy');
+      var msg = successful ? 'successful' : 'unsuccessful';
+      console.log('Copying text command was ' + msg);
+    }   catch (err) {
+      console.log('Oops, unable to copy');
+    }
+
+});
+
   </script>
 
 {%endblock %}

@@ -270,6 +270,7 @@ p {
   position: absolute;
    top: 2.2em;
    left : 5em;
+
 }
 
 
@@ -348,4 +349,8 @@ style="background: rgba(59, 96,  110, 90);  font-size:50; height=30%;
 
 #about_me.form-control{
    overflow-x: hidden;
+}
+
+.img-circle{
+ border-radius: 0%;
 }
