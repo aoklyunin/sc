@@ -25,9 +25,14 @@
           </a>
                         </div>
                         <div class="col-6 bebasWhiteText" style="font-size:30" align="right" >
-                          {{ submission.timestamp|date:"d M" }}
+                          {{ submission.timestamp|date:"H:i  d/m/y" }}
                         </div>
     </div>
+    <div class="row" >
+                    <a class="bebasYellowText" style="position:relative;left:15px;font-size:25" href ="\user\{{submission.author.user.username}}">
+                      {{submission.author.user.username}}
+                      </a>
+                  </div>  
     <div class="row" style="padding-top:15px;">
           <div class="info-container" style="width:100%;">
 
