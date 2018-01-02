@@ -21,6 +21,7 @@ class CreativeType(models.Model):
 class Submission(ContentTypeAware):
     TP_CREATIVE = 0
     TP_CHALLENGE = 1
+    TP_FAQ = 2
 
     LINK_TYPE_NOT_PROCESSED = 0
     LINK_TYPE_FLICKR = 1
