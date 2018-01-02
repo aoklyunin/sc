@@ -15,7 +15,7 @@ def conception(request):
 
 
 def story(request):
-    return getCreativeByType(request, 'creative_lists/creative.html', 'История',Submission.TP_CREATIVE)
+    return getCreativeByType(request, 'creative_lists/creative.html', 'Сюжет',Submission.TP_CREATIVE)
 
 
 def invention(request):
