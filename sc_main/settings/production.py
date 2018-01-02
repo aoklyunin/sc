@@ -9,6 +9,16 @@ from django.utils import six
 
 from .common import *  # noqa
 
+import os
+import raven
+
+RAVEN_CONFIG = {
+    'dsn': 'https://bc3bb944a4244c7a8cbd1a9bb74600f1:2639868d150a4bc4a901d817c740a18d@sentry.io/265798',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+}
+
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
@@ -21,7 +31,7 @@ SECRET_KEY = "lh6ys+!cvm+s+2nl7^!n3-331rmytc!2+_4qmedh!dtk!o-khu"
 
 # django-secure
 # ------------------------------------------------------------------------------
-INSTALLED_APPS += ("djangosecure",)
+INSTALLED_APPS += ("djangosecure","raven.contrib.django.raven_compat")
 
 SECURITY_MIDDLEWARE = (
   #  'djangosecure.middleware.SecurityMiddleware',
@@ -106,40 +116,38 @@ CACHES = {
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s '
-                      '%(process)d %(thread)d %(message)s'
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
         },
     },
     'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
+        'sentry': {
+            'level': 'WARNING',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
         },
         'console': {
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
+            'formatter': 'verbose'
+        }
     },
     'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True
+        'django': {
+            'handlers': ['sentry'],
+            'level': 'WARNING',
+            'propagate': True,
         },
-        'django.security.DisallowedHost': {
-            'level': 'ERROR',
-            'handlers': ['console', 'mail_admins'],
-            'propagate': True
-        }
+        'raven': {
+            'level': 'WARNING',
+            'handlers': ['sentry'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'WARNING',
+            'handlers': ['sentry'],
+            'propagate': False,
+        },
     }
 }
 # Custom Admin URL
