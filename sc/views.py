@@ -75,6 +75,8 @@ def comments(request, thread_id=None):
     """
 
     this_submission = get_object_or_404(Submission, id=thread_id)
+    this_submission.viewCnt += 1
+    this_submission.save()
 
     thread_comments = Comment.objects.filter(submission=this_submission)
 
@@ -109,8 +111,16 @@ def comments(request, thread_id=None):
         except:
             pass
 
+    if this_submission.tp == Submission.TP_CREATIVE:
+        linkPrefix = '/creative/'
+    elif this_submission.tp == Submission.TP_CHALLENGE:
+        linkPrefix = '/power/creative/'
+    elif this_submission.tp == Submission.TP_FAQ:
+        linkPrefix = '/faq/'
+
     return render(request, 'public/comments.html',
                   {'submission': this_submission,
+                   'linkPrefix': linkPrefix,
                    'comments': thread_comments,
                    'comment_votes': comment_votes,
                    'sub_vote': sub_vote_value})
@@ -430,10 +440,14 @@ def ehandler500(request):
 
 
 def getCreativeByType(request, template, ct, sctp, username=""):
+    flgPower = False
+
     if sctp == Submission.TP_CHALLENGE:
         titleText = 'Боевой Креатив'
         titleLink = '/power/creative'
         createLink = '/submit/power/'
+        flgPower = True
+
     elif sctp == Submission.TP_CREATIVE:
         titleText = 'Креатив'
         titleLink = '/creative'
@@ -442,20 +456,34 @@ def getCreativeByType(request, template, ct, sctp, username=""):
         titleText = 'О проекте'
         titleLink = '/faq/'
         createLink = '/submit/faq/'
-    elif sctp ==Submission.TP_USER_CREATIVE:
+
+    if sctp ==Submission.TP_USER_CREATIVE:
         sctp = Submission.TP_CREATIVE
         titleText = username
         titleLink = '/user/'+username
         createLink = '/submit/'
 
-    if ct != '':
-        all_submissions = Submission.objects.filter(
-            tp=sctp,
-            creativeType=CreativeType.objects.get(name=ct)
-        ).order_by('-score').all()
+        if ct != '':
+            all_submissions = Submission.objects.filter(
+                author=ScUser.objects.get(user=User.objects.get(username=username)),
+                tp=sctp,
+                creativeType=CreativeType.objects.get(name=ct)
+            ).order_by('-score').all()
+        else:
+            all_submissions = Submission.objects.filter(
+                author=ScUser.objects.get(user=User.objects.get(username=username)),
+                tp=sctp,
+                ).order_by('-score').all()
     else:
-        all_submissions = Submission.objects.filter(tp=sctp,
+        if ct != '':
+            all_submissions = Submission.objects.filter(
+                tp=sctp,
+                creativeType=CreativeType.objects.get(name=ct)
+            ).order_by('-score').all()
+        else:
+            all_submissions = Submission.objects.filter(tp=sctp,
                                                     ).order_by('-score').all()
+
     """
       Serves frontpage and all additional submission listings
       with maximum of 25 submissions per page.
@@ -489,7 +517,8 @@ def getCreativeByType(request, template, ct, sctp, username=""):
         'submissions': submissions,
         'titleText': titleText,
         'titleLink': titleLink,
-        'createLink':createLink,
+        'createLink': createLink,
         'ct': ct,
+        'flgPower':flgPower,
         'submission_votes': submission_votes
     })

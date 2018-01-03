@@ -1,8 +1,12 @@
+from random import randint
+
 import mistune
+import re
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.db.models import Count
 from django.utils import timezone
 from mptt.models import MPTTModel, TreeForeignKey
 from sc_main.utils.model_utils import ContentTypeAware, MttpContentTypeAware
@@ -10,6 +14,8 @@ from sc_main.utils.model_utils import ContentTypeAware, MttpContentTypeAware
 
 class CreativeType(models.Model):
     name = models.CharField(max_length=100)
+
+
 
     def __unicode__(self):
         return self.name
@@ -48,6 +54,34 @@ class Submission(ContentTypeAware):
     viewCnt = models.IntegerField(default=0)
     regard = models.IntegerField(default=0)
     stoDate = models.DateTimeField(default=timezone.now)
+
+
+    def processUrl(self):
+        # flickr
+        match = re.search(r'<img src="[\'"]?([^\'" >]+)staticflickr([^\'" >]+)"', self.url)
+        if match:
+            self.url = match.group(0)[10:-1]
+            self.link_type = Submission.LINK_TYPE_FLICKR
+        else:
+            # soundcloud
+            match = re.search(r'src="https:\/\/w.soundcloud.com\/[\'"]?([^\'" >]+)"', self.url)
+            if match:
+                self.url = match.group(0)[5:-1]
+                self.link_type = Submission.LINK_TYPE_SOUNDCLOUND
+            else:
+                # youtube
+                match = re.search(r'[\'"]?([^\'" >]+)youtube([^\'" >]+)', self.url)
+                if match:
+                    self.url = match.group(0).replace("watch?v=", "embed/")
+                    self.link_type = Submission.LINK_TYPE_YOUTUBE
+                else:
+                    match = re.search(r'[\'"]?([^\'" >]+).([^\'" >]+)', self.url)
+                    if match:
+                        self.link_type = Submission.LINK_TYPE_NOT_PROCESSED
+                        self.url = match.group(0)
+                    else:
+                        pass
+                        # raise ValidationError("Не удалось расшифровать ссылку")
 
     def getCtp(self):
         lst = []

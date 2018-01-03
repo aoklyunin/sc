@@ -12,7 +12,7 @@ class CommentsInline(admin.StackedInline):
     max_num = 10
 
 class SubmissionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'url', 'author')
+    list_display = ('title', 'url', 'author','tp')
     inlines = [CommentsInline]
 
 admin.site.register(Submission, SubmissionAdmin)
