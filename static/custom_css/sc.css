@@ -75,6 +75,7 @@ table a.menuLink:not(.btn) {
 /* число с рейтингом */
 .score {
     color:#ffffff;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 /* блок голосования */
@@ -106,7 +107,16 @@ table a.menuLink:not(.btn) {
 .readableText{
   color: #ffffff;
   font-size: 18;
+  opacity:1;
+  line-height: 1.6em;
+  text-align:justify;
   font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* подложка для текста */
+.textBackground{
+  background: rgba(59, 96,  110,0.2);
+  position:relative;
 }
 /* заголовок списка креатива */
 .creativeListHeader{
@@ -144,6 +154,34 @@ table a.menuLink:not(.btn) {
   top:-8px;
 }
 
+/* пост в списке */
+.creativePost{
+ padding-bottom:60px;
+}
+
+/* дата публикации */
+.postDate{
+  font-size:30;
+}
+
+/* дата публикации для боевого креатива */
+.powerDate{
+  color: #dddd19;
+}
+
+/* username в списке */
+.postListUserName{
+ position:relative;
+ left:15px;
+ font-size:25;
+}
+
+/* вознаграждение в списке */
+.postListRegard{
+ position:relative;
+ left:70px;
+ font-size:25;
+}
 
 .pageMenuItemSelected{
   text-align:left;
