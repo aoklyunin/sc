@@ -69,7 +69,7 @@ def edit_profile(request):
             profile = profile_form.save(commit=False)
             profile.update_profile_data()
             profile.save()
-            messages.success(request, "Profile settings saved")
+           # messages.success(request, "Profile settings saved")
     else:
         raise Http404
 
@@ -83,7 +83,7 @@ def user_login(request):
     """
 
     if request.user.is_authenticated():
-        messages.warning(request, "You are already logged in.")
+       # messages.warning(request, "You are already logged in.")
         return render(request, 'public/login.html')
 
     if request.method == "POST":
@@ -101,7 +101,7 @@ def user_login(request):
                 redirect_url = request.POST.get('next') or 'frontpage'
                 return redirect('/user/' + username + '/')
             else:
-                messages.error("Доступ запрещён")
+               # messages.error("Доступ запрещён")
                 return render(request, 'public/login.html',
                               {'login_error': "Аккаунт запрещён"})
         else:
@@ -136,8 +136,8 @@ def register(request):
     """
     user_form = UserForm()
     if request.user.is_authenticated():
-        messages.warning(request,
-                         'Вы уже зарегистрированы и вошли')
+       # messages.warning(request,
+        #                 'Вы уже зарегистрированы и вошли')
         return render(request, 'public/register.html', {'form': user_form})
 
     if request.method == "POST":
@@ -158,7 +158,8 @@ def register(request):
                 login(request, user)
                 return redirect('frontpage')
             else:
-                messages.error(request,'Неправильный ключ')
+                #messages.error(request,'Неправильный ключ')
+                pass
 
 
     return render(request, 'public/register.html', {'form': user_form})

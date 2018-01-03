@@ -150,7 +150,7 @@ def deleteCommentWithChildren(comment):
     for com in Comment.objects.filter(parent=comment):
         deleteCommentWithChildren(com)
 
-    comment.submission.comment_count = comment.submission.comment_count-1
+    comment.submission.comment_count = comment.submission.comment_count - 1
     comment.submission.save()
     comment.delete()
 
@@ -194,7 +194,6 @@ def edit(request, thread_id=None):
         if submission_form.is_valid():
             submission_form.save(commit=False)
             this_submission.link_type = submission_form.link_type
-            this_submission.tp = Submission.TP_CREATIVE
             this_submission.generate_html()
             this_submission.title = submission_form.cleaned_data["title"]
             this_submission.save()
@@ -206,7 +205,7 @@ def edit(request, thread_id=None):
 
             return redirect('/comments/{}'.format(this_submission.id))
 
-    return render(request, 'public/submit.html', {'form': submission_form,'caption':'Редактирование'})
+    return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Редактирование'})
     # return render(request, 'public/submit.html', {'form': None})
 
 
@@ -356,9 +355,7 @@ def submit(request):
 
             return redirect('/comments/{}'.format(submission.id))
 
-    return render(request, 'public/submit.html', {'form': submission_form,'caption':'Добавить пост'})
-
-
+    return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Добавить пост'})
 
 
 @login_required
@@ -387,9 +384,7 @@ def submitFAQ(request):
 
             return redirect('/comments/{}'.format(submission.id))
 
-    return render(request, 'public/submit.html', {'form': submission_form,'caption':'Добавить'})
-
-
+    return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Добавить'})
 
 
 @login_required
@@ -418,7 +413,7 @@ def submitPower(request):
 
             return redirect('/comments/{}'.format(submission.id))
 
-    return render(request, 'public/submit.html', {'form': submission_form,'caption':'Добавить'})
+    return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Добавить', 'flgPower': True})
 
 
 def test(request):
@@ -457,10 +452,10 @@ def getCreativeByType(request, template, ct, sctp, username=""):
         titleLink = '/faq/'
         createLink = '/submit/faq/'
 
-    if sctp ==Submission.TP_USER_CREATIVE:
+    if sctp == Submission.TP_USER_CREATIVE:
         sctp = Submission.TP_CREATIVE
         titleText = username
-        titleLink = '/user/'+username
+        titleLink = '/user/' + username
         createLink = '/submit/'
 
         if ct != '':
@@ -473,7 +468,7 @@ def getCreativeByType(request, template, ct, sctp, username=""):
             all_submissions = Submission.objects.filter(
                 author=ScUser.objects.get(user=User.objects.get(username=username)),
                 tp=sctp,
-                ).order_by('-score').all()
+            ).order_by('-score').all()
     else:
         if ct != '':
             all_submissions = Submission.objects.filter(
@@ -482,7 +477,7 @@ def getCreativeByType(request, template, ct, sctp, username=""):
             ).order_by('-score').all()
         else:
             all_submissions = Submission.objects.filter(tp=sctp,
-                                                    ).order_by('-score').all()
+                                                        ).order_by('-score').all()
 
     """
       Serves frontpage and all additional submission listings
@@ -519,6 +514,6 @@ def getCreativeByType(request, template, ct, sctp, username=""):
         'titleLink': titleLink,
         'createLink': createLink,
         'ct': ct,
-        'flgPower':flgPower,
+        'flgPower': flgPower,
         'submission_votes': submission_votes
     })

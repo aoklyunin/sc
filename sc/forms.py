@@ -174,6 +174,18 @@ class SubmissionForm(forms.ModelForm):
         max_length=5000,
         required=False)
 
+    regard = forms.IntegerField(widget=forms.TextInput(
+        attrs={
+            'class': "form-control",
+            "placeholder": "1000"}),
+        required=False)
+
+    stoDate = forms.DateField(widget=forms.TextInput(
+        attrs={
+            'class': "form-control",
+            "placeholder": "01/20/2018"}),
+        required=False)
+
 
     def clean_url(self):
         url = self.cleaned_data['url']
@@ -206,4 +218,4 @@ class SubmissionForm(forms.ModelForm):
 
     class Meta:
         model = Submission
-        fields = ('title', 'url', 'text','ctp')
+        fields = ('title', 'url', 'text','ctp','regard','stoDate')
