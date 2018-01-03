@@ -34,7 +34,7 @@
              data-parent-type="comment">
             <h5 class="media-heading"  style="color:#ffffff;"><a href="/user/{{ node.author_name }}" class="bebasYellowText">{{ node.author_name }}</a>
                   {{ node.timestamp|date:"H:i d/m/y" }}</h5>
-            <div style="color:#ffffff; background: rgba(59, 96,  110,0.3);" width="100%">{{ node.html_comment|safe }}</div>
+            <div class="readableText" style="background: rgba(59, 96,  110,0.3);" width="100%">{{ node.html_comment|safe }}</div>
             <div class="reply-container" style="opacity:1;">
                 <ul class="buttons">
                     <li><a href="javascript:void(0)" name="replyButton"

@@ -4,232 +4,161 @@
 }
 
 
-
+/*Уменьшаем расстояние между строками*/
 body {
-    /*Уменьшаем расстояние между строками*/
     line-height: 20px;
+     font-family: BebasNeue;
+     color:#ffffff;
+}
+/* убираем отступы в абзацах */
+p {
+    margin:0;
+}
+/* цвет ссылок */
+a{
+    color: #dddd19;
 }
 
-
-/* remove underlines in links*/
+/* Убираем нижние подчёркивания у ссылок*/
 a:link {
     text-decoration: none;
 }
-
 a:visited {
     text-decoration: none;
 }
-
 table a.menuLink:not(.btn) {
     text-decoration: none;
 }
 
-code {
-    font-size: 80%;
-}
-
-
-
-.title {
-    color: blue;
-    margin: 0 .4em 1px 0;
-}
-
-.domain, .domain a, .tagline, .buttons a {
-    margin: 0;
-    font-size: small;
-    color: #888;
-}
-
-.buttons a:hover, .tagline a:hover, #undertaf a:hover {
-    text-decoration: underline;
-}
-
+/* для кнопок делаем удобное позиционирование вряд */
 .buttons {
     margin: 0;
     padding: 0;
 }
-
 .buttons li {
     display: inline-block;
     padding-right: 4px;
     font-weight: bold;
 }
 
-input{
-  background-color : #d1d1d1;
-}
 
-/* Sign up/Sign in*/
+/* Форма входа/регистрации */
 .form-signin {
-    color: #ffffff;
     max-width: 330px;
     padding: 15px;
     padding-top: 200px;
     margin: 0 auto;
 }
 
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-    margin-bottom: 10px;
+/* голосование */
+.fa-chevron-up{
+  color: #dddd19;
 }
-
-.form-signin .checkbox {
-    font-weight: normal;
-}
-
-.form-signin .form-control {
-    position: relative;
-    height: auto;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 10px;
-    font-size: 16px;
-}
-
-
-
-.form-signin .form-control:focus {
-    z-index: 2;
-}
-
-
-.form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-
-
-
-/* upvote/downvote */
 .fa-chevron-up:hover {
     color: orangered;
     cursor: pointer;
 }
-
+.fa-chevron-down{
+  color: #dddd19;
+}
 .upvoted{
     color: orangered;
 }
-
 .downvoted{
     color: #5f99cf;
 }
-
 .fa-chevron-down:hover {
     color: #5f99cf;
     cursor: pointer;
 }
 
-.score:hover {
-    cursor: default;
-
+/* число с рейтингом */
+.score {
+    color:#ffffff;
 }
 
+/* блок голосования */
 .vote {
   position:relative;
   top: -20px;
     width:50px;
     font-size:14pt;
     text-align:center;
-    /*line-height: 15px;*/
 }
 
-.score {
-    color:#ffffff;
-}
-
-.thread-info{
-    margin: 0;
-}
-
+/* заголовок поста */
 .thread-title{
     font-size: 40px;
+    color: #ffffff;
 }
 
-.info-container{
-    padding-top: 5px;
-}
 
-.comment-group{
-    width: 50%;
-}
-
-.comment-media{
-    padding-right: 5px;
-}
-
+/* место для голосования за комментарий */
 .comment-votes{
     width: 20px;
 }
 
-p {
-    margin:0;
-}
-
-#footer {
-  height: 60px;
-  background-color: #f5f5f5;
-  margin-top:50px;
-  padding-top:20px;
-  padding-bottom:20px;
-}
-
-.fa-chevron-down{
-  color: #dddd19;
-}
-
-.fa-chevron-up{
-  color: #dddd19;
-}
-.profile
-{
-    min-height: 275px;
-    display: inline-block;
-    }
-
+/* отображение аватара */
 .img-responsive{
     display: inline;
 }
-
-.padded{
-  padding-top: 5%;
-}
-
-.withFon {
-    background: url("../img/fon.png") no-repeat center center fixed;
-}
-
-.withFonFullSize{
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: url("../img/fon.png") no-repeat center center fixed;
-}
-
-.bebasText{
-  font-family: BebasNeue;
-}
-
-.bebasWhiteText{
-  font-family: BebasNeue;
+/* отображение текста для чтения */
+.readableText{
   color: #ffffff;
+  font-size: 18;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+/* заголовок списка креатива */
+.creativeListHeader{
+   height:100px;
+   padding-top:40px;
+   padding-bottom:60px;
+}
+/* картинка добаления поста */
+.addPostImg{
+ position:relative;
+ top:-15px;
+ width:40px;
+ height:40px;
+}
+
+/* стиль заголовка в странице-списке */
+.creativeListTitle{
+  font-size:60;
 }
 
 
-.bebasYellowText{
-  font-family: BebasNeue;
+/* картинка редактирования поста */
+.editCreativeImg{
+  width:30px;
+  height:30px;
+  position:relative;
+  left:5px;
+  top:-10px;
+}
+
+/* кнопка удаления поста */
+.removeThreadBtn{
+  position:relative;
+  left:10px;
+  top:-8px;
+}
+
+
+.pageMenuItemSelected{
+  text-align:left;
+  padding-top: 0.3em;
   color: #dddd19;
 }
+
+.pageMenuItem{
+  padding-top: 0.3em;
+  color: #ffffff;
+  text-align:left;
+}
+
+
+
 
 .captionTextRight{
   top: 1.37em;
@@ -256,17 +185,6 @@ p {
   color: #dddd19;
 }
 
-.pageMenuItemSelected{
-  text-align:left;
-  padding-top: 0.3em;
-  color: #dddd19;
-}
-
-.pageMenuItem{
-  padding-top: 0.3em;
-  color: #ffffff;
-  text-align:left;
-}
 
 .avatarProfileBig{
   position: absolute;

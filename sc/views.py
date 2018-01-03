@@ -27,41 +27,6 @@ def get_item(dictionary, key):  # pragma: no cover
     return dictionary.get(key)
 
 
-def frontpage(request):
-    """
-    Serves frontpage and all additional submission listings
-    with maximum of 25 submissions per page.
-    """
-    # TODO: Serve user votes on submissions too.
-
-    all_submissions = Submission.objects.order_by('-score').all()
-    paginator = Paginator(all_submissions, 7)
-
-    page = request.GET.get('page', 1)
-    try:
-        submissions = paginator.page(page)
-    except PageNotAnInteger:
-        raise Http404
-    except EmptyPage:
-        submissions = paginator.page(paginator.num_pages)
-
-    submission_votes = {}
-
-    if request.user.is_authenticated():
-        for submission in submissions:
-            try:
-                vote = Vote.objects.get(
-                    vote_object_type=submission.get_content_type(),
-                    vote_object_id=submission.id,
-                    user=ScUser.objects.get(user=request.user))
-                submission_votes[submission.id] = vote.value
-            except Vote.DoesNotExist:
-                pass
-
-    return render(request, 'public/frontpage.html', {'submissions': submissions,
-                                                     'submission_votes': submission_votes})
-
-
 def comments(request, thread_id=None):
     """
     Handles comment view when user opens the thread.
@@ -420,8 +385,8 @@ def submitPower(request):
     return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Добавить', 'flgPower': True})
 
 
-def test(request):
-    return render(request, 'public/test.html', {'flgMainPage': True})
+def frontPage(request):
+    return render(request, 'public/front_page.html', {'flgMainPage': True})
 
 
 def ehandler404(request):

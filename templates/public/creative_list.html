@@ -13,41 +13,41 @@
                 <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Сюжет' %} active {% endifequal %}" href="{{prefix}}/story/">Сюжет</a></div><br>
                 <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Музыка' %} active {% endifequal %}" href="{{prefix}}/music/">Музыка</a></div><br>
                 <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Изобретения' %} active {% endifequal %}" href="{{prefix}}/invention/">Изобретения</a></div><br>
-
     {%endblock%}
 
 
 
-      {%block page_content %}
+{%block page_content %}
+  <div class="row creativeListHeader">
+    <div  class="offset-1 col-2">
+      <a href="{{createLink}}" >
+        <img class="addPostImg" src="{% static 'img/plus.png' %}" title="Добавить пост" >
+      </a>
+    </div>
+    <div align="right" class="offset-1 col-8" >
+      <a href = {{titleLink}} class="creativeListTitle"> {{titleText}}</a>
+    </div>
+  </div>
 
-        <div class="row bebasYellowText" height="100px" style="padding-top:40px;padding-bottom:60px;">
-          <div  class="offset-1 col-2">
-            <a href="{{createLink}}" >
-            <img src="{% static 'img/plus.png' %}" title="Добавить пост"  style="position:relative; top:-15px;" width="40px" height="40px">
-              </a>
-          </div>
-          <div align="right" class="offset-1 col-8" >
-            <a class="bebasYellowText" href = {{titleLink}} style="font-size:60;"> {{titleText}}</a>
-          </div>
-
-        </div>
-        <div id="creativeList">
-
-            {% for submission in submissions %}
-           <div class="row creativePost" style="padding-bottom:60px;">
-                <div class="col-10 offset-1 ">
-                    <div class="row" >
-                        <div class="col-9">
-                          <a class="thread-title bebasWhiteText" href="{{ submission.comments_url }}">{{ submission.title }}</a>
-                          <a href="/edit/{{submission.pk}}">
-            <img src="{% static 'img/editPost.png'%}" title="Редактировать" width="30px" height="30px" style="position:relative;left:5px;top:-10px">
-          </a> <a style="position:relative; left:10px; top:-8px;" href="/delete/{{submission.pk}}" class="bebasWhiteText confirmation">Удалить</a>
-                        </div>
-                      {% if flgPower %}
-                      <div class="col-3 bebasYellowText" style="font-size:30" align="right" >
-                         {{ submission.stoDate|date:"d M" }}
-                      </div>
-                      {%else%}
+  <div class="creativeListBody">
+      {% for submission in submissions %}
+        <div class="row creativePost" style="padding-bottom:60px;">
+          <div class="col-10 offset-1 ">
+            <div class="row" >
+              <div class="col-9">
+                <a class="thread-title" href="{{ submission.comments_url }}">
+                  {{ submission.title }}
+                </a>
+                <a href="/edit/{{submission.pk}}">
+                  <img class="editCreativeImg" src="{% static 'img/editPost.png'%}" title="Редактировать">
+                </a>
+                <a href="/delete/{{submission.pk}}" class="confirmation removeThreadBtn">Удалить</a>
+              </div>
+              {% if flgPower %}
+                <div class="col-3 bebasYellowText" style="font-size:30" align="right" >
+                  {{ submission.stoDate|date:"d M" }}
+                </div>
+              {%else%}
                        <div class="col-3 bebasWhiteText" style="font-size:30" align="right" >
                          {{ submission.timestamp|date:"d M" }}
                       </div>
@@ -80,7 +80,7 @@
                          <div class="row">
                             <div class="col-12"   style="background: rgba(59, 96,  110,0.2); position:relative; " >
                             <div style="opacity:1;color:#ffffff;line-height: 1.6em; font-size:15;text-align:justify;">
-                              <b>{{ submission.text_html|safe }}</b>
+                              <b class="readableText">{{ submission.text_html|safe }}</b>
                             </div>
                               <br>
                               <div style="text-align:right;">
@@ -173,7 +173,7 @@ $(document).ready(function(){
 <script>
  $(document).ready(function(){
 
- var elem = document.getElementById('creativeList');
+ var elem = document.getElementsByClassName('creativeListBody')[0];
 
  if (elem.addEventListener) {
   if ('onwheel' in document) {

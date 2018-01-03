@@ -18,7 +18,6 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^test/$', views.frontpage, name="test"),
     url(r'^comments/(?P<thread_id>[0-9]+)$', views.comments, name="thread"),
     url(r'^delete/(?P<thread_id>[0-9]+)$', views.delete, name="delete"),
     url(r'^delete/comment/(?P<thread_id>[0-9]+)$', views.deleteComment, name="deleteComment"),
@@ -28,5 +27,5 @@ urlpatterns = [
     url(r'^submit/power/$', views.submitPower, name="submitPower"),
     url(r'^post/comment/$', views.post_comment, name="post_comment"),
     url(r'^vote/$', views.vote, name="vote"),
-    url(r'^$', views.test, name="frontpage")
+    url(r'^$', views.frontPage, name="frontpage")
 ]

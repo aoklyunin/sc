@@ -64,8 +64,8 @@
     </div>
     <div class="row" style="padding-top:15px;" >
                             <div class="col-11"   style="background: rgba(59, 96,  110,0.2); position:relative; " >
-                            <div style="opacity:1;color:#ffffff;line-height: 1.6em; font-size:15;text-align:justify;">
-                              <b>{{ submission.text_html|safe }}</b>
+                            <div style="opacity:1;line-height: 1.6em; font-size:15;text-align:justify;">
+                              <b class="readableText">{{ submission.text_html|safe }}</b>
                             </div>
                               {% ifnotequal submission.link_type -1 %}
                               <br>
