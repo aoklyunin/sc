@@ -111,16 +111,20 @@ def comments(request, thread_id=None):
         except:
             pass
 
+    flgPower = False
+
     if this_submission.tp == Submission.TP_CREATIVE:
         linkPrefix = '/creative/'
     elif this_submission.tp == Submission.TP_CHALLENGE:
         linkPrefix = '/power/creative/'
+        flgPower = True
     elif this_submission.tp == Submission.TP_FAQ:
         linkPrefix = '/faq/'
 
     return render(request, 'public/comments.html',
                   {'submission': this_submission,
                    'linkPrefix': linkPrefix,
+                   'flgPower':flgPower,
                    'comments': thread_comments,
                    'comment_votes': comment_votes,
                    'sub_vote': sub_vote_value})
@@ -434,29 +438,34 @@ def ehandler500(request):
     return response
 
 
-def getCreativeByType(request, template, ct, sctp, username=""):
+def getCreativeByType(request, ct, sctp, username=""):
     flgPower = False
 
     if sctp == Submission.TP_CHALLENGE:
         titleText = 'Боевой Креатив'
         titleLink = '/power/creative'
         createLink = '/submit/power/'
+        prefix ='/power/creative'
         flgPower = True
 
     elif sctp == Submission.TP_CREATIVE:
         titleText = 'Креатив'
         titleLink = '/creative'
         createLink = '/submit/'
+        prefix = '/creative'
+
     elif sctp == Submission.TP_FAQ:
         titleText = 'О проекте'
         titleLink = '/faq/'
         createLink = '/submit/faq/'
+        prefix = '/faq'
 
     if sctp == Submission.TP_USER_CREATIVE:
         sctp = Submission.TP_CREATIVE
         titleText = username
         titleLink = '/user/' + username
         createLink = '/submit/'
+        prefix = '/user/' + username+'/creative'
 
         if ct != '':
             all_submissions = Submission.objects.filter(
@@ -508,11 +517,12 @@ def getCreativeByType(request, template, ct, sctp, username=""):
             except Vote.DoesNotExist:
                 pass
 
-    return render(request, template, {
+    return render(request, 'public/creative_list.html', {
         'submissions': submissions,
         'titleText': titleText,
         'titleLink': titleLink,
         'createLink': createLink,
+        'prefix':prefix,
         'ct': ct,
         'flgPower': flgPower,
         'submission_votes': submission_votes

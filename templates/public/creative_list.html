@@ -7,12 +7,12 @@
 {% load static %}
 
    {%block menu %}
-                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Видео' %} active {% endifequal %}" href="/creative/video/">Видео</a></div><br>
-                <div class="pageMenuItemSelected"><a class="pageMenuLink {% ifequal ct 'Дизайн'  %} active {% endifequal %}" href="/creative/design/"> Дизайн</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Концепция' %} active {% endifequal %}" href="/creative/conception/">Концепция</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Сюжет' %} active {% endifequal %}" href="/creative/story/">Сюжет</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Музыка' %} active {% endifequal %}" href="/creative/music/">Музыка</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Изобретения' %} active {% endifequal %}" href="/creative/invention/">Изобретения</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Видео' %} active {% endifequal %}" href="{{prefix}}/video/">Видео</a></div><br>
+                <div class="pageMenuItemSelected"><a class="pageMenuLink {% ifequal ct 'Дизайн'  %} active {% endifequal %}" href="{{prefix}}/design/"> Дизайн</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Концепция' %} active {% endifequal %}" href="{{prefix}}/conception/">Концепция</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Сюжет' %} active {% endifequal %}" href="{{prefix}}/story/">Сюжет</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Музыка' %} active {% endifequal %}" href="{{prefix}}/music/">Музыка</a></div><br>
+                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Изобретения' %} active {% endifequal %}" href="{{prefix}}/invention/">Изобретения</a></div><br>
 
     {%endblock%}
 

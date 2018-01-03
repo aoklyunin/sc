@@ -6,6 +6,6 @@ from sc.views import getCreativeByType
 
 
 def faq(request):
-    return getCreativeByType(request, 'creative_lists/faq.html', '', Submission.TP_FAQ)
+    return getCreativeByType(request, '', Submission.TP_FAQ)
 
 

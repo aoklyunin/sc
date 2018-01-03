@@ -25,14 +25,25 @@
           </a>
                            <a style="position:relative; left:10px; top:-8px;" href="/delete/{{submission.pk}}" class="bebasWhiteText confirmation">Удалить</a>
                         </div>
-                        <div class="col-6 bebasWhiteText" style="font-size:30" align="right" >
-                          {{ submission.timestamp|date:"H:i  d/m/y" }}
-                        </div>
+
+                      {% if flgPower %}
+                      <div class="col-6 bebasYellowText" style="font-size:30" align="right" >
+                         {{ submission.stoDate|date:"H:i  d/m/y" }}
+                      </div>
+                      {%else%}
+                       <div class="col-6 bebasWhiteText" style="font-size:30" align="right" >
+                         {{ submission.timestamp|date:"H:i  d/m/y" }}
+                      </div>
+                      {%endif%}
     </div>
     <div class="row" >
                     <a class="bebasYellowText " style="position:relative;left:15px;font-size:25" href ="\user\{{submission.author.user.username}}">
                       {{submission.author.user.username}}
                       </a>
+                    {% if flgPower %} <div  class="bebasYellowText" style="position:relative;left:80px;font-size:25" >
+                    {%ifequal submission.regard 0 %}FREE {%else%}{{submission.regard }}&#8381;{% endifequal %}
+                  </div>
+                    {%endif%}
                   </div>
     <div class="row" style="padding-top:15px;">
           <div class="info-container" style="width:100%;">

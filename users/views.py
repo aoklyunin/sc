@@ -29,31 +29,31 @@ def user_profile(request, username):
 
 
 def user_video(request, username):
-    return getCreativeByType(request, 'creative_lists/user.html', 'Видео', Submission.TP_USER_CREATIVE,username)
+    return getCreativeByType(request, 'Видео', Submission.TP_USER_CREATIVE,username)
 
 
 def user_design(request, username):
-    return getCreativeByType(request, 'creative_lists/user.html', 'Дизайн', Submission.TP_USER_CREATIVE,username)
+    return getCreativeByType(request, 'Дизайн', Submission.TP_USER_CREATIVE,username)
 
 
 def user_conception(request, username):
-    return getCreativeByType(request, 'creative_lists/user.html', 'Концепция', Submission.TP_USER_CREATIVE,username)
+    return getCreativeByType(request, 'Концепция', Submission.TP_USER_CREATIVE,username)
 
 
 def user_story(request, username):
-    return getCreativeByType(request, 'creative_lists/user.html', 'Сюжет', Submission.TP_USER_CREATIVE,username)
+    return getCreativeByType(request,  'Сюжет', Submission.TP_USER_CREATIVE,username)
 
 
 def user_music(request, username):
-    return getCreativeByType(request,  'creative_lists/user.html', 'Музыка', Submission.TP_USER_CREATIVE,username)
+    return getCreativeByType(request,  'Музыка', Submission.TP_USER_CREATIVE,username)
 
 
 def user_invention(request, username):
-    return getCreativeByType(request, 'creative_lists/user.html', 'Изобретения', Submission.TP_USER_CREATIVE,username)
+    return getCreativeByType(request, 'Изобретения', Submission.TP_USER_CREATIVE,username)
 
 
 def user_creative(request, username):
-    return getCreativeByType(request, 'creative_lists/user.html', '', Submission.TP_USER_CREATIVE,username)
+    return getCreativeByType(request, '', Submission.TP_USER_CREATIVE,username)
 
 
 @login_required
