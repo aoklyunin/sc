@@ -17,6 +17,7 @@ p {
 /* цвет ссылок */
 a{
     color: #dddd19;
+    font-size: 18;
 }
 
 /* Убираем нижние подчёркивания у ссылок*/
@@ -183,19 +184,20 @@ table a.menuLink:not(.btn) {
  font-size:25;
 }
 
-.pageMenuItemSelected{
+a.pagemenuLink {
+  color: #ffffff;
+  font-size:50;
   text-align:left;
-  padding-top: 0.3em;
+  padding: 6px;
+}
+
+a.active.pagemenuLink{
   color: #dddd19;
 }
 
-.pageMenuItem{
-  padding-top: 0.3em;
-  color: #ffffff;
-  text-align:left;
+a.pagemenuLink:hover{
+  color: #4444CC;
 }
-
-
 
 
 .captionTextRight{
@@ -232,13 +234,6 @@ table a.menuLink:not(.btn) {
 }
 
 
-a.pagemenuLink {
-  color: #ffffff;
-}
-
-a.active.pagemenuLink{
-  color: #dddd19;
-}
 
 .profileRightMenu{
   position: absolute;

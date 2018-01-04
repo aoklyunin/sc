@@ -7,12 +7,12 @@
 {% load static %}
 
    {%block menu %}
-                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Видео' %} active {% endifequal %}" href="{{prefix}}/video/">Видео</a></div><br>
-                <div class="pageMenuItemSelected"><a class="pageMenuLink {% ifequal ct 'Дизайн'  %} active {% endifequal %}" href="{{prefix}}/design/"> Дизайн</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Концепция' %} active {% endifequal %}" href="{{prefix}}/conception/">Концепция</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Сюжет' %} active {% endifequal %}" href="{{prefix}}/story/">Сюжет</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Музыка' %} active {% endifequal %}" href="{{prefix}}/music/">Музыка</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink {% ifequal ct 'Изобретения' %} active {% endifequal %}" href="{{prefix}}/invention/">Изобретения</a></div><br>
+                <div  align="left"><a class="pageMenuLink {% ifequal ct 'Видео' %} active {% endifequal %}" href="{{prefix}}/video/">Видео</a></div><br>
+                <div  align="left" ><a class="pageMenuLink {% ifequal ct 'Дизайн'  %} active {% endifequal %}" href="{{prefix}}/design/"> Дизайн</a></div><br>
+                <div  align="left" ><a class="pageMenuLink {% ifequal ct 'Концепция' %} active {% endifequal %}" href="{{prefix}}/conception/">Концепция</a></div><br>
+                <div  align="left" ><a class="pageMenuLink {% ifequal ct 'Сюжет' %} active {% endifequal %}" href="{{prefix}}/story/">Сюжет</a></div><br>
+                <div  align="left" ><a class="pageMenuLink {% ifequal ct 'Музыка' %} active {% endifequal %}" href="{{prefix}}/music/">Музыка</a></div><br>
+                <div  align="left" ><a class="pageMenuLink {% ifequal ct 'Изобретения' %} active {% endifequal %}" href="{{prefix}}/invention/">Изобретения</a></div><br>
     {%endblock%}
 
 
@@ -87,8 +87,8 @@
                   <div class="col-12 textBackground">
                       <b class="readableText">{{ submission.text_html|safe }}</b>
                     <br>
-                    <div style="text-align:right;">
-                      <a href="{{ submission.url }}" class="bebasYellowText" style="opacity:1;line-height: 1.6em; font-size:18;">
+                    <div align="right">
+                      <a href="{{ submission.url }}">
                                     Ссылка
                       </a>
                     </div>
@@ -148,8 +148,8 @@
           </div>
       {% endfor %}
 
-        </div>
   </div>
+  <div class="creativeListFooter">
   {% if submissions %}
     <div class="row" style="padding-bottom:30px;">
       <div class="col-2 offset-4">
@@ -160,7 +160,8 @@
       </div>
     </div>
   {%endif%}
-</div>
+  </div>
+
 
 {% endblock %}
 

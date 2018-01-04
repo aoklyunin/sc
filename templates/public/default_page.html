@@ -23,17 +23,17 @@ body {
 {% block content %}
 
 
-  <div class="row " style="width:100%" >
+  <div class="row " style="width:100%; line-height: 25px;"  >
 
             <div class="col-2 paddedPageMenu" style="position: fixed;top:1.5em; left: 0.2em;">
                {%block menu %}
-                <div class="menuPageCaption"><a class="pageMenuLink active" href="/user/{{ profile.user.username }}/creative/">Портфолио</a></div><br><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/video/">Видео</a></div><br>
-                <div class="pageMenuItemSelected"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/design/"> Дизайн</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/conception/">Концепция</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/story/">Сюжет</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/music/">Музыка</a></div><br>
-                <div class="pageMenuItem"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/invention/">Изобретения</a></div><br>
+                <div align="left"><a class="pageMenuLink active" href="/user/{{ profile.user.username }}/creative/">Портфолио</a></div><br><br>
+                <div align="left"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/video/">Видео</a></div><br>
+                <div align="left"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/design/"> Дизайн</a></div><br>
+                <div align="left"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/conception/">Концепция</a></div><br>
+                <div align="left"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/story/">Сюжет</a></div><br>
+                <div align="left"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/music/">Музыка</a></div><br>
+                <div align="left"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/invention/">Изобретения</a></div><br>
                 {%endblock%}
             </div>
 

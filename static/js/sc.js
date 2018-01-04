@@ -26,6 +26,8 @@ function vote(voteButton) {
         vote_value: vote_value
     });
 
+
+
     doPost.done(function (response) {
         if (response.error == null) {
             var voteDiff = response.voteDiff;
@@ -42,9 +44,7 @@ function vote(voteButton) {
                 $upvoteArrow = $votes.children('i.fa.fa-chevron-up');
                 $downArrow = $votes.children('i.fa.fa-chevron-down');
                 $score = $medaiDiv.find('div.media-left:first').find(".score:first");
-
             }
-
             // update vote elements
 
             if (vote_value == -1) {
@@ -67,10 +67,10 @@ function vote(voteButton) {
                     $upvoteArrow.addClass("upvoted")
                 }
             }
-
             // update score element
             var scoreInt = parseInt($score.text());
             $score.text(scoreInt += voteDiff);
+
         }
     });
 }
@@ -120,11 +120,13 @@ function submitEvent(event, form) {
 
 
     doPost.done(function (response) {
-        var errorLabel = $form.find("span#postResponse");
-        if (response.msg) {
-            errorLabel.text(response.msg);
-            errorLabel.removeAttr('style');
-        }
+        //var errorLabel = $form.find("span#postResponse");
+        //if (response.msg) {
+        //    errorLabel.text(response.msg);
+        //    errorLabel.removeAttr('style');
+        //}
+        location.reload();
+        alert('Комментарий оставлен');
     });
 }
 
