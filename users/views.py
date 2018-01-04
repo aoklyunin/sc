@@ -20,8 +20,8 @@ def user_profile(request, username):
         'profile': profile,
         'flgMainPage': False,
         'date': profile.getDate(),
-        'portfolio_karma_color': "e9df01",
-        'portfolio_karma_val': "12M",
+        'power_karma_color': "e9df01",
+        'power_karma_val': "12M",
         'creative_karma_color': "a3f001",
         'creative_karma_val': "150",
     })

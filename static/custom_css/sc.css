@@ -227,97 +227,99 @@ a.pagemenuLink:hover{
   color:#ffffff;
 }
 
-
-
-.captionTextRight{
-  top: 1.37em;
-  font-family: BebasNeue;
-  font-size: 55;
-  text-align:right;
-  color: #dddd19;
-  height: 100px;
+/* картинка редактирования профиля */
+.editProfileImg{
+  width:35px;
+  height:35px;
+  position:relative;
+  right:-18 px;
+  top:-12px;
 }
 
+/* текст заголовока профиля */
+.profileCaption{
+  font-size:50;
+  position:relative;
+  right:-18px;
+  top:0px;
+}
+
+/* меню слева */
 .paddedPageMenu{
-  top: -0.4em;
+  position: fixed;
+  top:1.5em;
+  left: 0.2em;
   font-family: BebasNeue;
   font-size: 55;
   text-align:right;
   color: #ffffff;
 }
 
-.menuPageCaption{
-  top: 2.1em;
-  font-family: BebasNeue;
-  font-size: 65;
-  text-align:left;
-  color: #dddd19;
+/* тело профиля */
+.profileBody{
+  padding-top:50px;
+  align: left;
+}
+/* заголовок профиля */
+.profileTitle{
+  font-size: 55;
+  padding-top: 35px;
+  align:right;
+  text-align:right;
 }
 
-
-.avatarProfileBig{
-  position: absolute;
-   top: 2.2em;
-   left : 5em;
-
-}
-
-
-
-.profileRightMenu{
-  position: absolute;
-  top: 9em;
-  right: 1em;
-  text-align : right;
-}
-
-.profileRightSocialMenu{
-  position: absolute;
-  top: 2.5em;
-  right: 1.6em;
-  text-align : right;
-  z-index: 0;
-}
-
+/* текст в профиле */
 .profileRightMenuText{
   font-size: 45;
-  position: absolute;
-  right: -0.3em;
-  top: 1.5em;
-}
-
-.karmaProfile{
-  position:relative;
-  top:5em;
-  right:-1.5em;
-}
-
-.portfolioKarma{
   position: relative;
-  top: -4.2em;
-  right:4em;
-  font-size: 20;
+  right: -20px;
+  padding-top:20px;
 }
 
-.creativeKarma{
-position: relative;
+/*  блок кармы */
+.karmaBlock{
+  position: relative;
+  right: -20px;
+  padding-top:10px;
+}
+/* картинка кармы */
+.karmaImg{
+  width:140px;
+  height:120px;
+}
+
+/* карма боевого креатива */
+.powerKarma{
+  position: relative;
+  top: -105px;
+  right:28px;
   font-size: 35;
-  top: -2.5em;
-  right:0.55em;
+}
+/* карма простого креатива */
+.creativeKarma{
+  position: relative;
+  font-size: 20;
+  top: -95px;
+  right:95px;
 }
 
-.descriptionProfile{
-  color: #b9e1da;
-  opacity: 0.1;
-  line-height: 75px;
+/* описание профиля */
+.profileDescription{
+  font-size:40;
+  color: #ffffff;
+  opacity:1;
+  line-height: 1.6em;
+  text-align:justify;
+}
+
+/* текст модального окна */
+.modal-body{
+  color: #111122;
+  font-size:18;
 }
 
 
-
-/**
-  Hamburger
-**/
-
+/** значок меню **/
 .hamburger {
   position: fixed;
   top: 4em;
@@ -328,7 +330,6 @@ position: relative;
   height: 45px;
   z-index: 5;
 }
-
 .hamburger div {
   position: relative;
   width: 3em;
@@ -342,8 +343,6 @@ position: relative;
 /**
 Nav Styles
 **/
-
-
 .nav-wrapper {
   position: relative;
   overflow: hidden;

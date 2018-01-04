@@ -1,19 +1,16 @@
 {% extends 'public/default_page.html' %}
 {% load humanize %}
-
-
 {% load staticfiles %}
-
 {% load static %}
 
-   {%block menu %}
-                <div  align="left"><a class="pageMenuLink {% ifequal ct 'Видео' %} active {% endifequal %}" href="{{prefix}}/video/">Видео</a></div><br>
-                <div  align="left" ><a class="pageMenuLink {% ifequal ct 'Дизайн'  %} active {% endifequal %}" href="{{prefix}}/design/"> Дизайн</a></div><br>
-                <div  align="left" ><a class="pageMenuLink {% ifequal ct 'Концепция' %} active {% endifequal %}" href="{{prefix}}/conception/">Концепция</a></div><br>
-                <div  align="left" ><a class="pageMenuLink {% ifequal ct 'Сюжет' %} active {% endifequal %}" href="{{prefix}}/story/">Сюжет</a></div><br>
-                <div  align="left" ><a class="pageMenuLink {% ifequal ct 'Музыка' %} active {% endifequal %}" href="{{prefix}}/music/">Музыка</a></div><br>
-                <div  align="left" ><a class="pageMenuLink {% ifequal ct 'Изобретения' %} active {% endifequal %}" href="{{prefix}}/invention/">Изобретения</a></div><br>
-    {%endblock%}
+{%block menu %}
+  <div  align="left"><a class="pageMenuLink {% ifequal ct 'Видео' %} active {% endifequal %}" href="{{prefix}}/video/">Видео</a></div><br>
+  <div  align="left"><a class="pageMenuLink {% ifequal ct 'Дизайн'  %} active {% endifequal %}" href="{{prefix}}/design/"> Дизайн</a></div><br>
+  <div  align="left"><a class="pageMenuLink {% ifequal ct 'Концепция' %} active {% endifequal %}" href="{{prefix}}/conception/">Концепция</a></div><br>
+  <div  align="left"><a class="pageMenuLink {% ifequal ct 'Сюжет' %} active {% endifequal %}" href="{{prefix}}/story/">Сюжет</a></div><br>
+  <div  align="left"><a class="pageMenuLink {% ifequal ct 'Музыка' %} active {% endifequal %}" href="{{prefix}}/music/">Музыка</a></div><br>
+  <div  align="left"><a class="pageMenuLink {% ifequal ct 'Изобретения' %} active {% endifequal %}" href="{{prefix}}/invention/">Изобретения</a></div><br>
+{%endblock%}
 
 
 
@@ -147,7 +144,6 @@
              </div>
           </div>
       {% endfor %}
-
   </div>
   {% if submissions %}
     <div class="row creativeListFooter">
@@ -159,9 +155,6 @@
       </div>
     </div>
   {%endif%}
-
-
-
 {% endblock %}
 
 
