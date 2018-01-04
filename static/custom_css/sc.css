@@ -169,7 +169,7 @@ table a.menuLink:not(.btn) {
   height:30px;
   position:relative;
   left:5px;
-  top:-10px;
+  top:-7px;
 }
 
 /* кнопка удаления поста */
@@ -224,7 +224,7 @@ a.active.pagemenuLink{
   color: #dddd19;
 }
 a.pagemenuLink:hover{
-  color: #4444CC;
+  color: #0f527f;
 }
 /* подвал поста в списке */
 .postFooter{

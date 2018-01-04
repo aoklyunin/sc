@@ -89,13 +89,16 @@ def comments(request, thread_id=None):
     return render(request, 'public/comments.html',
                   {'submission': this_submission,
                    'linkPrefix': linkPrefix,
-                   'flgPower':flgPower,
+                   'flgPower': flgPower,
                    'comments': thread_comments,
                    'comment_votes': comment_votes,
                    'sub_vote': sub_vote_value})
 
 
 def delete(request, thread_id=None):
+    if not is_moderator(request.user):
+        return HttpResponseRedirect('/permission/denied/')
+
     """
     Handles comment view when user opens the thread.
     On top of serving all comments in the thread it will
@@ -116,6 +119,7 @@ def delete(request, thread_id=None):
 
 
 def deleteCommentWithChildren(comment):
+
     for com in Comment.objects.filter(parent=comment):
         deleteCommentWithChildren(com)
 
@@ -125,6 +129,8 @@ def deleteCommentWithChildren(comment):
 
 
 def deleteComment(request, thread_id=None):
+    if not is_moderator(request.user):
+        return HttpResponseRedirect('/permission/denied/')
     """
     Handles comment view when user opens the thread.
     On top of serving all comments in the thread it will
@@ -327,8 +333,14 @@ def submit(request):
     return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Добавить пост'})
 
 
+def permissionDenied(request):
+    return render(request, 'permissionDenied.html', {})
+
+
 @login_required
 def submitFAQ(request):
+    if not is_moderator(request.user):
+        return HttpResponseRedirect('/permission/denied/')
     """
     Handles new submission.. submission.
     """
@@ -403,15 +415,22 @@ def ehandler500(request):
     return response
 
 
+def is_moderator(user):
+    return user.groups.filter(name='moderators').exists()
+
+
 def getCreativeByType(request, ct, sctp, username=""):
     flgPower = False
-    template ='public/creative_list.html'
+    template = 'public/creative_list.html'
+    canAdd = request.user.is_authenticated
+    canEdit = False
+    canDelete = is_moderator(request.user)
 
     if sctp == Submission.TP_CHALLENGE:
         titleText = 'Боевой Креатив'
         titleLink = '/power/creative'
         createLink = '/submit/power/'
-        prefix ='/power/creative'
+        prefix = '/power/creative'
         flgPower = True
 
     elif sctp == Submission.TP_CREATIVE:
@@ -426,13 +445,16 @@ def getCreativeByType(request, ct, sctp, username=""):
         createLink = '/submit/faq/'
         prefix = '/faq'
         template = 'public/faq_list.html'
+        canAdd = is_moderator(request.user)
 
     if sctp == Submission.TP_USER_CREATIVE:
+        canEdit = username == request.user.username
+        canDelete = canEdit
         sctp = Submission.TP_CREATIVE
         titleText = username
         titleLink = '/user/' + username
         createLink = '/submit/'
-        prefix = '/user/' + username+'/creative'
+        prefix = '/user/' + username + '/creative'
 
         if ct != '':
             all_submissions = Submission.objects.filter(
@@ -488,7 +510,10 @@ def getCreativeByType(request, ct, sctp, username=""):
         'titleText': titleText,
         'titleLink': titleLink,
         'createLink': createLink,
-        'prefix':prefix,
+        'prefix': prefix,
+        'canDelete':canDelete,
+        'canEdit':canEdit,
+        'canAdd': canAdd,
         'ct': ct,
         'flgPower': flgPower,
         'submission_votes': submission_votes

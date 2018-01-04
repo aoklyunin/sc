@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^submit/power/$', views.submitPower, name="submitPower"),
     url(r'^post/comment/$', views.post_comment, name="post_comment"),
     url(r'^vote/$', views.vote, name="vote"),
+    url(r'^permission/denied/$', views.permissionDenied, name="permissionDenied"),
     url(r'^$', views.frontPage, name="frontpage")
 ]

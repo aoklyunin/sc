@@ -17,9 +17,11 @@
 {%block page_content %}
   <div class="row creativeListHeader">
     <div  class="offset-1 col-2">
-      <a href="{{createLink}}" >
-        <img class="addPostImg" src="{% static 'img/plus.png' %}" title="Добавить пост" >
-      </a>
+      {% if canAdd %}
+        <a href="{{createLink}}" >
+          <img class="addPostImg" src="{% static 'img/plus.png' %}" title="Добавить пост" >
+        </a>
+      {% endif %}
     </div>
     <div align="right" class="offset-1 col-8" >
       <a href = {{titleLink}} class="creativeListTitle"> {{titleText}}</a>
@@ -31,16 +33,20 @@
         <div class="row creativePost">
           <div class="col-10 offset-1 ">
             <div class="row" >
-              <div class="col-9">
+              <div class="col-10">
                 <a class="thread-title" href="{{ submission.comments_url }}">
                   {{ submission.title }}
                 </a>
-                <a href="/edit/{{submission.pk}}">
-                  <img class="editCreativeImg" src="{% static 'img/editPost.png'%}" title="Редактировать">
-                </a>
-                <a href="/delete/{{submission.pk}}" class="confirmation removeThreadBtn">Удалить</a>
+                {% if canEdit %}
+                  <a href="/edit/{{submission.pk}}">
+                    <img class="editCreativeImg" src="{% static 'img/editPost.png'%}" title="Редактировать">
+                  </a>
+                {% endif %}
+                {% if canDelete %}
+                  <a href="/delete/{{submission.pk}}" class="confirmation removeThreadBtn">Удалить</a>
+                {% endif %}
               </div>
-              <div class="col-3 postDate">
+              <div class="col-2 postDate">
                 {% if flgPower %}
                   <div class="powerDate" align="right" >
                     {{ submission.stoDate|date:"d M" }}
