@@ -3,36 +3,32 @@
 {% load static %}
 
 
-
-
 {% block content %}
-   <!-- container -->
-<div class="container centered">
+  <div class="container centered">
+    <div class="panel panel-default" valign="center" >
+      <div align="center" class="panel-body">
+        <form class="form-signin" method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.GET.next }}"/>
 
-            <div class="panel panel-default" valign="center" >
-                <div align="center" class="panel-body">
-
-      <form class="form-signin" method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.GET.next }}"/>
-
-        <h1 class="form-signin-heading bebasWhiteText">Вход</h1>
-        <div  style="padding-bottom:5px">
-        <label for="inputUsername" class="sr-only">Логин</label>
-        <input  type="text" name="username" id="inputUsername" class="form-control has-error" placeholder="Логин"
-               required autofocus style="opacity:0.7">
-          </div>
-        <div  style="padding-top:5px;padding-bottom:10px;">
-        <label for="inputPassword" class="sr-only">Пароль</label>
-        <input style="opacity:0.7" type="password" name="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
-        </div>
-        {% if login_error %}
+          <h1 class="form-signin-heading bebasWhiteText">Вход</h1>
+          <label for="inputUsername" class="sr-only">Логин</label>
+          <div class="padded10">
+          <input  type="text" name="username" id="inputUsername" class="form-control has-error" placeholder="Логин"
+                  required autofocus>
+            </div>
+          <label for="inputPassword" class="sr-only">Пароль</label>
+           <div class="padded10">
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
+           </div>
+          {% if login_error %}
             <p class="text-danger">{{ login_error }}</p>
-        {% endif %}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-
-      </form>
-                </div>
-</div>    <!-- /container -->
-</div>
+          {% endif %}
+           <div class="padded10">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+           </div>
+        </form>
+      </div>
+    </div>    <!-- /container -->
+  </div>
 {% endblock %}

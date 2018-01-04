@@ -2,81 +2,67 @@
 
 {% block content %}
 <div class="container" style="width=100%">
-    <form class="form-horizontal" action="" method="post"  style="width=100%">
+    <form class="form-horizontal" action="" method="post">
         {% csrf_token %}
         <fieldset>
-            <h1 style="padding-top:140px;" class="bebasWhiteText" align="center">{{caption}}</h1>
-
-            <div class="row" style="padding:10px;">
-                       <label for="title" align="right" class="col-2 control-label bebasWhiteText" style="position:relative; top:10px; font-size:30;">Заголовок</label>
-
-                        <div class="col-9" align="left"  style="opacity:0.7">
-                            {{ form.title }}
-                            {% for error in form.first_name.errors %}
-                                <p class="text-danger">{{ error }}</p>
-                            {% endfor %}
-                        </div>
+            <h1 class="submitHeader" align="center">{{caption}}</h1>
+            <div class="row padded10">
+              <label for="title" align="right" class="col-2 control-label regularField" >Заголовок</label>
+              <div class="col-9" align="left">
+                {{ form.title }}
+                {% for error in form.first_name.errors %}
+                  <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+              </div>
             </div>
-
-            <div class="row" style="padding:10px;">
-                       <label for="url" align="right" class="col-2 control-label bebasWhiteText" style="position:relative; top:10px; font-size:30;">Ссылка</label>
-
-                        <div class="col-9" align="left"  style="opacity:0.7">
-                            {{ form.url }}
-                            {% for error in form.first_name.errors %}
-                                <p class="text-danger">{{ error }}</p>
-                            {% endfor %}
-                        </div>
+            <div class="row padded10">
+              <label for="url" align="right" class="col-2 control-label regularField">Ссылка</label>
+              <div class="col-9" align="left">
+                {{ form.url }}
+                {% for error in form.first_name.errors %}
+                  <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+              </div>
             </div>
-
-
-            <div class="row" style="padding:10px;">
-                       <label for="text" align="right" class="col-2 control-label bebasWhiteText" style="position:relative; top:25px; font-size:30;">Текст</label>
-
-                        <div class="col-6" align="left"  style="opacity:0.7">
-                            {{ form.text }}
-                            {% for error in form.first_name.errors %}
-                                <p class="text-danger">{{ error }}</p>
-                            {% endfor %}
-                        </div>
-                       <label for="ctp" align="right" class="col-1 control-label bebasWhiteText" style="position:relative; top:25px; font-size:30;">Раздел</label>
-
-                        <div class="col-2" align="left"  style="opacity:0.7">
-                            {{ form.ctp }}
-                            {% for error in form.first_name.errors %}
-                                <p class="text-danger">{{ error }}</p>
-                            {% endfor %}
-                        </div>
+            <div class="row padded10">
+              <label for="text" align="right" class="col-2 control-label submitTextField" >Текст</label>
+              <div class="col-6" align="left"  style="opacity:0.7">
+                {{ form.text }}
+                {% for error in form.first_name.errors %}
+                  <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+              </div>
+              <label for="ctp" align="right" class="col-1 control-label submitTextField">Раздел</label>
+              <div class="col-2" align="left"  style="opacity:0.7">
+                {{ form.ctp }}
+                {% for error in form.first_name.errors %}
+                  <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+              </div>
             </div>
             {% if flgPower %}
-
-            <div class="row" style="padding:10px;">
-                       <label for="regard" align="right" class="offset-1 col-2 control-label bebasWhiteText" style="position:relative; top:15px; font-size:30;">Премия</label>
-
-                        <div class="col-2" align="left"  style="opacity:0.7">
-                            {{ form.regard }}
-                            {% for error in form.first_name.errors %}
-                                <p class="text-danger">{{ error }}</p>
-                            {% endfor %}
-                        </div>
-                       <label for="stoDate" align="right" class="col-2 control-label bebasWhiteText" style="position:relative; top:25px; font-size:30;">Дедлайн</label>
-
-                        <div class="col-2" align="left"  style="opacity:0.7">
-                            {{ form.stoDate }}
-                            {% for error in form.first_name.errors %}
-                                <p class="text-danger">{{ error }}</p>
-                            {% endfor %}
-                        </div>
+              <div class="row padded10">
+                <label for="regard" align="right" class="offset-1 col-2 control-label powerRegularField">Премия</label>
+                <div class="col-2" align="left">
+                  {{ form.regard }}
+                  {% for error in form.first_name.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                  {% endfor %}
+                </div>
+                <label for="stoDate" align="right" class="col-2 control-label powerRegularField">Дедлайн</label>
+                <div class="col-2" align="left">
+                  {{ form.stoDate }}
+                  {% for error in form.first_name.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                  {% endfor %}
+                </div>
+              </div>
+            {%endif%}
+            <div class="row padded10">
+              <div class="col-12"  align="center">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+              </div>
             </div>
-
-          {%endif%}
-
-            <div class="row" style="padding:10px;">
-                <div class="col-12"  align="center">
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
-</div>
-            </div>
-
         </fieldset>
     </form>
 </div>
