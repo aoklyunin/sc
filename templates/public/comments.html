@@ -17,89 +17,86 @@
 <div class="row" style="padding-top:80px;">
   <div class="col-12">
     <div class="row" >
-                        <div class="col-6">
-                          <a class="thread-title bebasWhiteText" href="{{ submission.comments_url }}">{{ submission.title }}</a>
-                          <a href="/edit/{{submission.pk}}">
-            <img src="{% static 'img/editPost.png'%}" title="Редактировать" width="30px" height="30px" style="position:relative;left:5px;top:-10px">
-          </a>
-                           <a style="position:relative; left:10px; top:-8px;" href="/delete/{{submission.pk}}" class="bebasWhiteText confirmation">Удалить</a>
-                        </div>
-
-                      {% if flgPower %}
-                      <div class="col-6 bebasYellowText" style="font-size:30" align="right" >
-                         {{ submission.stoDate|date:"H:i  d/m/y" }}
-                      </div>
-                      {%else%}
-                       <div class="col-6 bebasWhiteText" style="font-size:30" align="right" >
-                         {{ submission.timestamp|date:"H:i  d/m/y" }}
-                      </div>
-                      {%endif%}
+      <div class="col-6">
+        <a class="thread-title bebasWhiteText" href="{{ submission.comments_url }}">{{ submission.title }}</a>
+        <a href="/edit/{{submission.pk}}">
+          <img src="{% static 'img/editPost.png'%}" title="Редактировать" width="30px" height="30px" style="position:relative;left:5px;top:-10px">
+        </a>
+        <a style="position:relative; left:10px; top:-8px;" href="/delete/{{submission.pk}}" class="bebasWhiteText confirmation">Удалить</a>
+      </div>
+      {% if flgPower %}
+        <div class="col-6 bebasYellowText" style="font-size:30" align="right" >
+          {{ submission.stoDate|date:"H:i  d/m/y" }}
+        </div>
+      {%else%}
+        <div class="col-6 bebasWhiteText" style="font-size:30" align="right" >
+          {{ submission.timestamp|date:"H:i  d/m/y" }}
+        </div>
+      {%endif%}
     </div>
     <div class="row" >
-                    <a class="bebasYellowText " style="position:relative;left:15px;font-size:25" href ="\user\{{submission.author.user.username}}">
-                      {{submission.author.user.username}}
-                      </a>
-                    {% if flgPower %} <div  class="bebasYellowText" style="position:relative;left:80px;font-size:25" >
-                    {%ifequal submission.regard 0 %}FREE {%else%}{{submission.regard }}&#8381;{% endifequal %}
-                  </div>
-                    {%endif%}
-                  </div>
+      <a class="bebasYellowText " style="position:relative;left:15px;font-size:25" href ="\user\{{submission.author.user.username}}">
+        {{submission.author.user.username}}
+      </a>
+      {% if flgPower %}
+        <div  class="bebasYellowText" style="position:relative;left:80px;font-size:25" >
+          {%ifequal submission.regard 0 %}FREE {%else%}{{submission.regard }}&#8381;{% endifequal %}
+        </div>
+      {%endif%}
+    </div>
     <div class="row" style="padding-top:15px;">
-          <div class="info-container" style="width:100%;">
-
-                    <br>
-
-                      {% if submission.link_type == 2 %}
-                        <iframe class = "ytframe" width="100%" height="100"
+      <div class="info-container" style="width:100%;">
+        <br>
+        {% if submission.link_type == 2 %}
+          <iframe class = "ytframe" width="100%" height="100"
                               src="{{ submission.url }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-                      {% endif %}
-                      {% if submission.link_type == 1 %}
-                           <img src="{{ submission.url }}" width="100%" >
-                      {% endif %}
-                      {% if submission.link_type == 3 %}
-                        <iframe width="100%" height="180" scrolling="no" frameborder="no" src="{{ submission.url }}"></iframe>
-                      {% endif %}
-          </div>
+        {% endif %}
+        {% if submission.link_type == 1 %}
+          <img src="{{ submission.url }}" width="100%" >
+        {% endif %}
+        {% if submission.link_type == 3 %}
+          <iframe width="100%" height="180" scrolling="no" frameborder="no" src="{{ submission.url }}"></iframe>
+        {% endif %}
+      </div>
     </div>
     <div class="row" style="padding-top:15px;" >
-                            <div class="col-11"   style="background: rgba(59, 96,  110,0.2); position:relative; " >
-                            <div style="opacity:1;line-height: 1.6em; font-size:15;text-align:justify;">
-                              <b class="readableText">{{ submission.text_html|safe }}</b>
-                            </div>
-                              {% ifnotequal submission.link_type -1 %}
-                              <br>
-
-                              <div style="text-align:left;">
-                                <a href="{{ submission.url }}" class="bebasYellowText" style="opacity:1;line-height: 1.6em; font-size:18;">
-                                    Ссылка
-                                </a>
-                              </div>
-                              {% endifnotequal %}
-                            </div>
-                    <div class="col-1" align="right">
-                      <div class="vote" style="position:relative; top:10px"
-                         data-what-type="submission"
-                         data-what-id="{{ submission.id }}">
-                        {% with vote_value=submission.id %}
-                            <div><i class="fa fa-chevron-up {% if  vote_value == 1 %} upvoted {% endif %}"
+      <div class="col-11"   style="background: rgba(59, 96,  110,0.2); position:relative; " >
+        <div style="opacity:1;line-height: 1.6em; font-size:15;text-align:justify;">
+          <b class="readableText">{{ submission.text_html|safe }}</b>
+        </div>
+        {% ifnotequal submission.link_type -1 %}
+        <br>
+        <div style="text-align:left;">
+          <a href="{{ submission.url }}" class="bebasYellowText" style="opacity:1;line-height: 1.6em; font-size:18;">
+            Ссылка
+          </a>
+        </div>
+        {% endifnotequal %}
+      </div>
+      <div class="col-1" align="right">
+        <div class="vote" style="position:relative; top:10px"
+             data-what-type="submission"
+             data-what-id="{{ submission.id }}">
+          {% with vote_value=submission.id %}
+            <div><i class="fa fa-chevron-up {% if  vote_value == 1 %} upvoted {% endif %}"
                                     title="upvote" onclick="vote(this)"></i>
-                            </div>
-                            <div class="score" title="score">{{ submission.score }}</div>
-                            <div><i class="fa fa-chevron-down{% if  vote_value == -1 %} downvoted {% endif %}"
+            </div>
+            <div class="score" title="score">{{ submission.score }}</div>
+            <div><i class="fa fa-chevron-down{% if  vote_value == -1 %} downvoted {% endif %}"
                                     title="downvote"
                                     onclick="vote(this)"></i></div>
-                        {% endwith %}
-                      </div>
-                    </div>
+          {% endwith %}
+        </div>
+      </div>
     </div>
     <div class="row"  style="padding-top:50px; "  >
       <div class="col-6 offset-3">
-      <h1 align="center" class="bebasYellowText"> Комментарии</h1>
-        </div>
+        <h1 align="center" class="bebasYellowText"> Комментарии</h1>
+      </div>
     </div>
     <div class="row">
-        <div class="col-10 offset-1">
-          <form id="commentForm" class="form-horizontal"
+      <div class="col-10 offset-1">
+        <form id="commentForm" class="form-horizontal"
               action="/post/comment/"
               data-parent-type="submission"
               data-parent-id="{{ submission.id }}">
@@ -114,12 +111,11 @@
                     </div>
               </div>
             </fieldset>
-          </form>
+        </form>
       </div>
     </div>
-       {% include '__items/comment.html' %}
+    {% include '__items/comment.html' %}
     <div class="row" style="padding-top:40px">
-
     </div>
   </div>
 </div>
