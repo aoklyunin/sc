@@ -97,18 +97,18 @@
               {% endif %}
               {% if submission.link_type == -1 %}
                 <div class="row">
-                  <div class="col-12"   style="background: rgba(59, 96,  110,0.2);" >
-                    <div style="opacity:1;color:#ffffff;line-height: 1.6em; font-size:15;text-align:justify;">
+                  <div class="col-12 textBackground" >
+                    <div>
                       <b class="readableText">{{ submission.text_html|safe }}</b>
                     </div>
                   </div>
                 </div>
               {% endif %}
             </div>
-            <div class="row" style="padding-top:30px;">
+            <div class="row postFooter">
               <div class="col-6" align="left">
-                <a href="{{ submission.comments_url }}" class="bebasYellowText" style="font-size:20px; position:relative; top:-20px;">{{ submission.comment_count }} comments</a><br>
-                <a href="{{ submission.comments_url }}" class="bebasYellowText" style="font-size:20px; position:relative; top:-20px;">{{ submission.viewCnt }} views</a></li>
+                <a href="{{ submission.comments_url }}">{{ submission.comment_count }} comments</a><br>
+                <a href="{{ submission.comments_url }}">{{ submission.viewCnt }} views</a>
               </div>
               <div class="col-6" align="right">
                 <div class="vote" data-what-type="submission"
@@ -133,95 +133,40 @@
           </div>
         </div>
         <div class="row delimeterRow">
-          <div class="col-6 " align="left" style="padding:0">
-              <img style="opacity:0.5" class="delimeterListImg" src="{% static 'img/delimeter.png' %}"  width="20px" height="20px">
+          <div class="col-6 " align="left">
+              <img class="delimeterListImg" src="{% static 'img/delimeter.png' %}">
           </div>
-          <div class="col-6" align="right" style="padding:0">
-              <img style="opacity:0.5"  class="delimeterListImg"  src="{% static 'img/delimeterR.png' %}" width="20px" height="20px">
+          <div class="col-6" align="right" >
+              <img class="delimeterListImg"  src="{% static 'img/delimeterR.png' %}">
           </div>
         </div>
       {% empty %}
-          <div class="row" width="100%">
+          <div class="row">
             <div class="col-12" align="center">
-              <img src="{% static 'img/notFound.gif' %}"  width="1000px" height="600px">
+              <img class="notFoundImg" src="{% static 'img/notFound.gif' %}"  >
              </div>
           </div>
       {% endfor %}
 
   </div>
-  <div class="creativeListFooter">
   {% if submissions %}
-    <div class="row" style="padding-bottom:30px;">
+    <div class="row creativeListFooter">
       <div class="col-2 offset-4">
-        <a style="color:#ffffff" href="{% if submissions.has_previous %}?page={{ submissions.previous_page_number }} {%else%} # {%endif%}"><i class="fa fa-chevron-left"></i>Вперёд</a>
+        <a class="whiteText" href="{% if submissions.has_previous %}?page={{ submissions.previous_page_number }} {%else%} # {%endif%}"><i class="fa fa-chevron-left"></i>Назад</a>
       </div>
       <div class="col-2">
-        <a style="color:#ffffff"  href="{% if submissions.has_next %}?page={{ submissions.next_page_number }} {%else%} # {%endif%}">Назад <i class="fa fa-chevron-right"></i>  </a>
+        <a class="whiteText"  href="{% if submissions.has_next %}?page={{ submissions.next_page_number }} {%else%} # {%endif%}">Вперёд <i class="fa fa-chevron-right"></i>  </a>
       </div>
     </div>
   {%endif%}
-  </div>
+
 
 
 {% endblock %}
 
 
 {% block footer_script %}
-<script>
-$(document).ready(function(){
-  $( ".ytframe" ).each(function( index ) {
-     $( this ).height( $( this ).width()*9/16 );
-  });
-});
-
- </script>
-
-<script>
- $(document).ready(function(){
-
- var elem = document.getElementsByClassName('creativeListBody')[0];
-
- if (elem.addEventListener) {
-  if ('onwheel' in document) {
-    // IE9+, FF17+, Ch31+
-    elem.addEventListener("wheel", onWheel);
-  } else if ('onmousewheel' in document) {
-    // устаревший вариант события
-    elem.addEventListener("mousewheel", onWheel);
-  } else {
-    // Firefox < 17
-    elem.addEventListener("MozMousePixelScroll", onWheel);
-  }
-} else { // IE8-
-  elem.attachEvent("onmousewheel", onWheel);
-}
-});
-
-function onWheel(e) {
-     $('.delimeterRow').each(function(){
-        var pos = $(this).offset(),
-            wY = $(window).scrollTop(),
-            wH = $(window).height(),
-            oH = $(this).outerHeight();
-
-        cDiv =  $(this).find($('.delimeterListImg'));
-        var delta=20;
-        if (pos.top >= wY+delta && oH + pos.top <= wY + wH-delta ){
-             for (var i = 0; i < cDiv.length; i++) {
-                  cDiv[i].style.opacity = '1';  //do styling here
-             }
-        }else{
-             for (var i = 0; i < cDiv.length; i++) {
-                  cDiv[i].style.opacity = '0.5';  //do styling here
-             }
-        }
-    });
-}
-
-
-
-</script>
-
+  <script src="{% static 'js/creative_list.js' %} "></script>
 {%endblock %}
 
 

@@ -82,11 +82,12 @@ table a.menuLink:not(.btn) {
 /* блок голосования */
 .vote {
   position:relative;
-  top: -20px;
-    width:50px;
-    font-size:14pt;
-    text-align:center;
+  top: 0px;
+  width:50px;
+  font-size:14pt;
+  text-align:center;
 }
+
 
 /* заголовок поста */
 .thread-title{
@@ -117,7 +118,6 @@ table a.menuLink:not(.btn) {
 /* подложка для текста */
 .textBackground{
   background: rgba(59, 96,  110,0.2);
-  position:relative;
 }
 /* заголовок списка креатива */
 .creativeListHeader{
@@ -157,8 +157,13 @@ table a.menuLink:not(.btn) {
 
 /* пост в списке */
 .creativePost{
- padding-bottom:60px;
+ padding-bottom:20px;
 }
+/* разделители постов */
+.delimeterRow{
+  padding-bottom:20px;
+}
+
 
 /* дата публикации */
 .postDate{
@@ -184,20 +189,44 @@ table a.menuLink:not(.btn) {
  font-size:25;
 }
 
+/* меню ссылок слева */
 a.pagemenuLink {
   color: #ffffff;
   font-size:50;
   text-align:left;
   padding: 6px;
 }
-
 a.active.pagemenuLink{
   color: #dddd19;
 }
-
 a.pagemenuLink:hover{
   color: #4444CC;
 }
+/* подвал поста в списке */
+.postFooter{
+ padding-top:10px;
+}
+/* картинка разделителей */
+.delimeterListImg{
+  opacity:0.5;
+  width:20px;
+  height:20px;
+}
+/* картинка для не найдено */
+.notFoundImg{
+  width:1000px;
+  height:600px;
+}
+/* подвал списка креатива */
+.creativeListFooter{
+  padding-bottom:30px;
+}
+
+/* белый текст */
+.whiteText{
+  color:#ffffff;
+}
+
 
 
 .captionTextRight{
