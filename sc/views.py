@@ -405,6 +405,7 @@ def ehandler500(request):
 
 def getCreativeByType(request, ct, sctp, username=""):
     flgPower = False
+    template ='public/creative_list.html'
 
     if sctp == Submission.TP_CHALLENGE:
         titleText = 'Боевой Креатив'
@@ -424,6 +425,7 @@ def getCreativeByType(request, ct, sctp, username=""):
         titleLink = '/faq/'
         createLink = '/submit/faq/'
         prefix = '/faq'
+        template = 'public/faq_list.html'
 
     if sctp == Submission.TP_USER_CREATIVE:
         sctp = Submission.TP_CREATIVE
@@ -452,7 +454,6 @@ def getCreativeByType(request, ct, sctp, username=""):
         else:
             all_submissions = Submission.objects.filter(tp=sctp,
                                                         ).order_by('-score').all()
-
     """
       Serves frontpage and all additional submission listings
       with maximum of 25 submissions per page.
@@ -482,7 +483,7 @@ def getCreativeByType(request, ct, sctp, username=""):
             except Vote.DoesNotExist:
                 pass
 
-    return render(request, 'public/creative_list.html', {
+    return render(request, template, {
         'submissions': submissions,
         'titleText': titleText,
         'titleLink': titleLink,
