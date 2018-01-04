@@ -19,9 +19,11 @@
 {%block page_content %}
     <div class="row ">
       <div class="offset-5 col-6 profileTitle" >
-        <a  href="/profile/edit/">
-          <img class="editProfileImg" src="{% static 'img/editProfile.png'%}" title="Редактировать">
-        </a>
+        {% if canEdit %}
+          <a  href="/profile/edit/">
+            <img class="editProfileImg" src="{% static 'img/editProfile.png'%}" title="Редактировать">
+          </a>
+        {% endif %}
         <a class="profileCaption" id="editProfile" title="Нажмите для выхода">
             {% if profile.first_name %}
               {{ profile.first_name }}

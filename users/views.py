@@ -19,6 +19,7 @@ def user_profile(request, username):
     return render(request, 'public/profile.html', {
         'profile': profile,
         'flgMainPage': False,
+        'canEdit': request.user==user,
         'date': profile.getDate(),
         'power_karma_color': "e9df01",
         'power_karma_val': "12M",

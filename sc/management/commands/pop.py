@@ -2,7 +2,7 @@ from datetime import timedelta, datetime
 from random import choice, randint, randrange, getrandbits
 from string import ascii_letters as letters
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.core.management.base import BaseCommand
 from pandas.util.testing import randbool
 
@@ -25,20 +25,10 @@ class Command(BaseCommand):
         return CreativeType.objects.get(pk=rid)
 
     def handle(self, *args, **options):
-        CreativeType.objects.get_or_create(name='Видео'),
-        CreativeType.objects.get_or_create(name='Дизайн'),
-        CreativeType.objects.get_or_create(name='Концепция'),
-        CreativeType.objects.get_or_create(name='Сюжет'),
-        CreativeType.objects.get_or_create(name='Музыка'),
-        CreativeType.objects.get_or_create(name='Изобретения'),
+        self.regular()
+        # self.populateContent()
 
-        admin = self.get_or_create_author('admin', '027ae9e272ad001b3542b880d47d67b9')
-        admin.user.is_staff = True
-        admin.user.is_superuser = True
-        admin.user.save()
-        self.get_or_create_author('moderator', 'c4989a3ad5c100c33a4fdaf0493f4c2b')
-        self.get_or_create_author('aoklyunin', 'aoklyunin1990')
-
+    def populateContent(self):
         self.links = [
             '', '', '', '', '', '', '',
             'https://www.youtube.com/watch?v=qbfv7fehp0c',
@@ -168,6 +158,26 @@ class Command(BaseCommand):
                 while another_child:
                     self.add_replies(new_comment)
                     another_child = choice([True, False])
+
+    def regular(self):
+        CreativeType.objects.get_or_create(name='Видео'),
+        CreativeType.objects.get_or_create(name='Дизайн'),
+        CreativeType.objects.get_or_create(name='Концепция'),
+        CreativeType.objects.get_or_create(name='Сюжет'),
+        CreativeType.objects.get_or_create(name='Музыка'),
+        CreativeType.objects.get_or_create(name='Изобретения'),
+
+        admin = self.get_or_create_author('admin', '027ae9e272ad001b3542b880d47d67b9')
+        admin.user.is_staff = True
+        admin.user.is_superuser = True
+        admin.user.save()
+        moderator = self.get_or_create_author('moderator', 'c4989a3ad5c100c33a4fdaf0493f4c2b')
+        new_group, created = Group.objects.get_or_create(name='moderators')
+        new_group.user_set.add(moderator.user)
+
+        self.get_or_create_author('aoklyunin', 'aoklyunin1990')
+
+
 
     def random_date(self):
         """
