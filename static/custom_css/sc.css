@@ -216,7 +216,7 @@ table a.menuLink:not(.btn) {
 /* меню ссылок слева */
 a.pagemenuLink {
   color: #ffffff;
-  font-size:50;
+  font-size:40;
   text-align:left;
   padding: 6px;
 }
