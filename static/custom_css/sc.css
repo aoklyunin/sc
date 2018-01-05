@@ -159,7 +159,9 @@ table a.menuLink:not(.btn) {
 
 /* стиль заголовка в странице-списке */
 .creativeListTitle{
-  font-size:50;
+  position: relative;
+  top: -5px;
+  font-size:40;
 }
 
 
@@ -630,5 +632,4 @@ a.not-active {
 .newBestMenu{
   position: relative;
   top: -5px;
-
 }
