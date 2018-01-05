@@ -533,3 +533,66 @@ def getCreativeByType(request, ct, sctp, username=""):
         'flgPower': flgPower,
         'submission_votes': submission_votes
     })
+
+
+def powerCreative(request):
+    return getCreativeByType(request, '', Submission.TP_CHALLENGE)
+
+
+def designP(request):
+    return getCreativeByType(request, 'Дизайн', Submission.TP_CHALLENGE)
+
+
+def conceptionP(request):
+    return getCreativeByType(request, 'Концепция', Submission.TP_CHALLENGE)
+
+
+def storyP(request):
+    return getCreativeByType(request,  'Сюжет', Submission.TP_CHALLENGE)
+
+
+def inventionP(request):
+    return getCreativeByType(request,  'Изобретения',Submission.TP_CHALLENGE)
+
+
+def musicP(request):
+    return getCreativeByType(request,  'Музыка',Submission.TP_CHALLENGE)
+
+
+def videoP(request):
+    return getCreativeByType(request, 'Видео',Submission.TP_CHALLENGE)
+
+
+
+def creative(request):
+    return getCreativeByType(request, '',Submission.TP_CREATIVE)
+
+
+def design(request):
+    return getCreativeByType(request,  'Дизайн',Submission.TP_CREATIVE)
+
+
+def conception(request):
+    return getCreativeByType(request, 'Концепция',Submission.TP_CREATIVE)
+
+
+def story(request):
+    return getCreativeByType(request,  'Сюжет',Submission.TP_CREATIVE)
+
+
+def invention(request):
+    return getCreativeByType(request,  'Изобретения',Submission.TP_CREATIVE)
+
+
+def music(request):
+    return getCreativeByType(request, 'Музыка',Submission.TP_CREATIVE)
+
+
+def video(request):
+    return getCreativeByType(request, 'Видео',Submission.TP_CREATIVE)
+
+
+def faq(request):
+    return getCreativeByType(request, '', Submission.TP_FAQ)
+
+

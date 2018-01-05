@@ -40,9 +40,6 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'users',
     'sc',
-    'faq',
-    'creative',
-    'challenge',
     # Your stuff: custom apps go here
 )
 
