@@ -216,7 +216,7 @@ table a.menuLink:not(.btn) {
 /* меню ссылок слева */
 a.pagemenuLink {
   color: #ffffff;
-  font-size:40;
+  font-size:30;
   text-align:left;
   padding: 6px;
 }
@@ -248,7 +248,7 @@ a.pagemenuLink:hover{
     bottom: 0;
 }
 .notFoundCaption{
-  padding-top:230px;
+  padding-top:100px;
   padding-right:50px;
   font-size:60;
   color: #dddd19;
