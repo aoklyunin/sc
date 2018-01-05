@@ -146,6 +146,7 @@ table a.menuLink:not(.btn) {
   background: rgba(59, 96,  110,0.45);
  border-radius: 5px 5px;
 }
+
 /* заголовок списка креатива */
 .creativeListHeader{
    height:100px;
