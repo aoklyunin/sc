@@ -2,9 +2,9 @@
 {% load mptt_tags %}
 
 {% recursetree comments %}
-    <div class="media" style="padding-top:20px;">
+    <div class="media">
         <div class="media-left col-1">
-            <div class="vote comment-votes"
+            <div class="vote comment-votes" style="top:-25px;"
                  data-what-type="comment"
                  data-what-id="{{ node.id }}">
                 {% with vote_value=comment_votes|get_item:node.id %}
@@ -18,8 +18,7 @@
                 {% endwith %}
             </div>
         </div>
-        <div class="media-body col-11"
-             >
+        <div class="media-body col-11">
           <div class="row" >
             <div class="col-1" align="left">
                  {% if profile.display_picture %}
@@ -31,27 +30,29 @@
             {% endif %}
             </div>
             <div class="col-11" style="padding-left:30px;" data-parent-id="{{ node.id }}"
-             data-parent-type="comment">
-            <h5 class="media-heading"  style="color:#ffffff;"><a href="/user/{{ node.author_name }}" class="bebasYellowText">{{ node.author_name }}</a>
+               data-parent-type="comment">
+               <h5 class="media-heading"><a href="/user/{{ node.author_name }}" class="bebasYellowText">{{ node.author_name }}</a>
                   {{ node.timestamp|date:"H:i d/m/y" }}</h5>
-            <div class="readableText" style="background: rgba(59, 96,  110,0.3);" width="100%">{{ node.html_comment|safe }}</div>
-            <div class="reply-container" style="opacity:1;">
+              <div class="readableText" style="background: rgba(59, 96,  110,0.3);" width="100%">{{ node.html_comment|safe }}</div>
+              <div class="reply-container" style="opacity:1;">
                 <ul class="buttons">
-                    <li><a href="javascript:void(0)" name="replyButton"
-                    style="color: #0176d3;">Ответить</a></li>
-                     <li><a class="confirmation" href="/delete/comment/{{node.pk}}" name="deleteButton"
-                    style="color: #0176d3;">Удалить</a></li>
+                  {% if user.is_authenticated %}
+                    <li><a class="blueText" href="javascript:void(0)" name="replyButton">Ответить</a></li>
+                  {% endif %}
+                    {% if canDeleteComments %}
+                     <li><a class="confirmation blueText" href="/delete/comment/{{node.pk}}" name="deleteButton">Удалить</a></li>
+                    {% endif %}
                 </ul>
-            </div>
+              </div>
             </div>
           </div>
-
-        <div class="col-12">
+          <div class="row">
+            <div class="col-12">
             {% if not node.is_leaf_node %}
                 {{ children }}
             {% endif %}
+            </div>
           </div>
-    </div>
-
         </div>
+    </div>
 {% endrecursetree %}

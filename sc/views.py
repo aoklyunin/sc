@@ -86,10 +86,25 @@ def comments(request, thread_id=None):
     elif this_submission.tp == Submission.TP_FAQ:
         linkPrefix = '/faq/'
 
+    canEdit = False
+    canDelete = False
+    canDeleteComments = False
+
+    if this_submission.author.user==request.user:
+        canEdit = True
+        canDelete = True
+
+    if is_moderator(request.user):
+        canDeleteComments = True
+        canDelete = True
+
     return render(request, 'public/comments.html',
                   {'submission': this_submission,
                    'linkPrefix': linkPrefix,
                    'flgPower': flgPower,
+                   'canDelete': canDelete,
+                   'canDeleteComments': canDeleteComments,
+                   'canEdit': canEdit,
                    'comments': thread_comments,
                    'comment_votes': comment_votes,
                    'sub_vote': sub_vote_value})

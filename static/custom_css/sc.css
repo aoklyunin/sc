@@ -343,6 +343,7 @@ a.pagemenuLink:hover{
 /* для комментариев в дереве */
 .media-left{
   position: relative;
+  left:10px;
   top: 20px;
 }
 /* убираем горизонтальную прокрутку у поля ввода обо мне*/
@@ -562,3 +563,18 @@ nav {
   padding-top:140px;
 }
 
+/* блок комментариев */
+.commentRow{
+  padding-top:50px;
+}
+
+/* кнопка комментариев */
+.commentSubmit{
+ position: relative;
+ top:20px;
+}
+
+/* синий текст */
+.blueText{
+  color: #0176d3;
+}
