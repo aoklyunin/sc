@@ -50,22 +50,25 @@
 
 <div class="nav">
   <div class="nav-wrapper">
-    <nav class="menuBackground" style="opacity: {% if flgMainPage %} 0 {%else%} 0.9 {%endif%};">
-    <div class="container menu_container">
-      <div class="row">
-        <div class="col-12" >
-
-          <a align="left" class="nav-link creativeLink " href="\creative\">Креатив</a>
- {% if user.is_authenticated %}
-          <a align="left" class="nav-link profileLink " href="\user\{{user.username}}\">Профиль</a>
-                  {% else %}
-                  <a align="left" class="nav-link profileLink " href="\signin\">Войти</a>
-                  {% endif %}
+    <nav  style="background: rgba(200, 200,  200, {% if flgMainPage %} 0 {%else%} 0.9 {%endif%});">
+    <div class="container menu_container" >
+      {% if flgMainPage %}
+      {% else %}
+        <div class="bigLogo">
+          <a href="/">
+            <img class="bigLogoImg" src="{%static 'img/logoBig.png'%}">
+            </a>
         </div>
-      </div>
+          {% endif %}
+         <a align="left" class="nav-link creativeLink " href="\creative\">Креатив</a>
+            {% if user.is_authenticated %}
+              <a align="left" class="nav-link profileLink " href="\user\{{user.username}}\">Профиль</a>
+            {% else %}
+              <a align="left" class="nav-link signInLink " href="\signin\">Войти</a>
+            {% endif %}
+        <a align="left" class="nav-link challengeLink" href="\power\creative\">Боевой креатив</a>
+        <a class="nav-link faqLink" href="\faq\">О Проекте</a>
 
-        <a align="left" class="nav-link challengeLink" href="\power\creative\">Боевой креатив</a><br>
-        <a class="nav-link faqLink" href="\faq\">О Проекте</a><br>
     </div>
     </nav>
   </div>
