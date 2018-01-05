@@ -91,7 +91,12 @@ def edit_profile(request):
     user = ScUser.objects.get(user=request.user)
 
     if request.method == 'GET':
-        profile_form = ProfileForm(instance=user,initial={'date':user.date.strftime(DATE_INPUT_FORMATS[0])})
+        if user.date is None:
+            udate = ""
+        else:
+            udate = user.date.strftime(DATE_INPUT_FORMATS[0])
+
+        profile_form = ProfileForm(instance=user,initial={'date':udate})
 
     elif request.method == 'POST':
         profile_form = ProfileForm(request.POST, instance=user)
