@@ -48,12 +48,36 @@
       </div>
       <div class="col-6">
         <div class="row">
-          <div class="col-1 offset-6" ><a class="socialImg" href="{{profile.instagram}}" ><img title=" Instagram" width="40px" height="50px" src="{%static 'img/insta1.png' %}"></a></div>
-          <div class="col-1"><a class="socialImg" href="{{profile.fb}}"><img  title="FaceBook" width="40px" height="50px" src="{%static 'img/fb1.png' %}"></a></div>
-          <div class="col-1"><a class="socialImg" href="{{profile.vk}}"><img  title="VK" width="40px" height="50px" src="{%static 'img/vk1.png' %}"></a></div>
-          <div class="col-1" ><a class="socialImg" href="{{profile.telegram}}"><img  title="Telegram"  width="40px" height="50px" src="{%static 'img/teleg1.png' %}"></a></div>
-          <div class="col-1"><a class="socialImg" href="{{profile.email}}"><img   title="E-mail" width="40px" height="50px" src="{%static 'img/mail1.png' %}"></a></div>
-          <div class="col-1"><a class="socialImg" href="{{profile.youtube}}"><img   title="Youtube" width="40px" height="50px" src="{%static 'img/yt1.png' %}"></a></div>
+          <div class="col-1 offset-6" >
+            <a class="socialImg {% if not profile.instagram %}not-active {%endif%}" href="{{profile.instagram}}" >
+              <img class="socialImg" title="Instagram" src="{%static 'img/insta1.png' %}">
+            </a>
+          </div>
+          <div class="col-1">
+            <a class="socialImg {% if not profile.fb %}not-active {%endif%}" href="{{profile.fb}}">
+              <img  class="socialImg" title="FaceBook" src="{%static 'img/fb1.png' %}">
+            </a>
+          </div>
+          <div class="col-1">
+            <a class="socialImg {% if not profile.vk %}not-active {%endif%}" href="{{profile.vk}}">
+              <img  class="socialImg"  title="VK" src="{%static 'img/vk1.png' %}">
+            </a>
+          </div>
+          <div class="col-1">
+            <a class="socialImg {% if not profile.telegram %}not-active {%endif%}" href="{{profile.telegram}}">
+              <img class="socialImg"   title="Telegram" src="{%static 'img/teleg1.png' %}">
+            </a>
+          </div>
+          <div class="col-1">
+            <a class="socialImg  {% if not profile.email %}not-active {%endif%}" href="{{profile.email}}">
+              <img class="socialImg"   title="E-mail"  src="{%static 'img/mail1.png' %}">
+            </a>
+          </div>
+          <div class="col-1">
+            <a class="socialImg {% if not profile.youtube %}not-active {%endif%}" href="{{profile.youtube}}">
+              <img  class="socialImg"  title="Youtube" src="{%static 'img/yt1.png' %}">
+            </a>
+          </div>
         </div>
         <div class="row">
           <div class="col-12" align="right">
