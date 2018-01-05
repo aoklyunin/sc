@@ -239,8 +239,8 @@ a.pagemenuLink:hover{
 /* картинка для не найдено */
 .notFoundImg{
    position: relative;
-    height: 350px;
-    width: 400px;
+    height: 400px;
+    width: 470px;
 }
 .notFoundImgWrapper  img{
     position: absolute;
