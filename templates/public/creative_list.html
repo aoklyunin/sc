@@ -23,14 +23,13 @@
         </a>
       {% endif %}
     </div>
-    <div class="col-2">
+    <div class="col-5">
         <a class="pageMenuLink {%if flgNew %}{%else%} active {%endif%}" href="{{common_prefix}}">Лучшее</a>
-    </div>
-    <div class="col-2">
+        <a class="pageMenuLink">|</a>
         <a class="pageMenuLink {%if flgNew %} active {%else%}{%endif%}" href="{{new_prefix}}" >Новое</a>
     </div>
 
-    <div align="right" class="offset-1 col-4" >
+    <div align="right" class="col-3" >
       <a href = {{titleLink}} class="creativeListTitle"> {{titleText}}</a>
     </div>
   </div>
