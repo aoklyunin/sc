@@ -33,7 +33,9 @@
                data-parent-type="comment">
                <h5 class="media-heading"><a href="/user/{{ node.author_name }}" class="bebasYellowText">{{ node.author_name }}</a>
                   {{ node.timestamp|date:"H:i d/m/y" }}</h5>
-              <div class="readableText" style="background: rgba(59, 96,  110,0.3);" width="100%">{{ node.html_comment|safe }}</div>
+              <div class="textBackground" width="100%">
+                <div class="readableText" width="100%">{{ node.html_comment|safe }}</div>
+              </div>
               <div class="reply-container" style="opacity:1;">
                 <ul class="buttons">
                   {% if user.is_authenticated %}
