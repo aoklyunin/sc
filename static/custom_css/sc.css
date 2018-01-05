@@ -181,7 +181,7 @@ table a.menuLink:not(.btn) {
 
 /* пост в списке */
 .creativePost{
- padding-bottom:20px;
+  padding-bottom:20px;
 }
 /* разделители постов */
 .delimeterRow{
@@ -216,7 +216,7 @@ table a.menuLink:not(.btn) {
 /* меню ссылок слева */
 a.pagemenuLink {
   color: #ffffff;
-  font-size:30;
+  font-size:35;
   text-align:left;
   padding: 6px;
 }
@@ -239,8 +239,8 @@ a.pagemenuLink:hover{
 /* картинка для не найдено */
 .notFoundImg{
    position: relative;
-    height: 250px;
-    width: 300px;
+    height: 300px;
+    width: 400px;
 }
 .notFoundImgWrapper  img{
     position: absolute;
