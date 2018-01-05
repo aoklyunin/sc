@@ -271,8 +271,8 @@ a.pagemenuLink:hover{
   width:35px;
   height:35px;
   position:relative;
-  right:-18 px;
-  top:-12px;
+  right:-18px;
+  top:-7px;
 }
 
 /* текст заголовока профиля */
@@ -457,8 +457,8 @@ nav {
 .faqLink{
   position: absolute;
   font-size: 100;
-  bottom: 0.8em;
-  left:1.4em;
+  bottom: 0.3em;
+  left:1.0em;
   color: #feed00;
 }
 /* Вход */
@@ -474,7 +474,7 @@ nav {
 .profileLink{
   position: absolute;
   color: #3b606e;
-  top: 0.87em;
+  top: 0.35em;
   right: 1.7em;
   font-size: 55;
   opacity:1;
@@ -483,7 +483,7 @@ nav {
 .creativeLink{
   position: absolute;
   font-size: 128;
-  left: 1.05em;
+  left: 0.5em;
   top: 0.2em;
   color: #feed00;
 }
