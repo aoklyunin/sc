@@ -238,9 +238,22 @@ a.pagemenuLink:hover{
 }
 /* картинка для не найдено */
 .notFoundImg{
-  width:1000px;
-  height:600px;
+   position: relative;
+    height: 400px;
+    width: 450px;
 }
+.notFoundImgWrapper  img{
+    position: absolute;
+    right:300px;
+    bottom: 0;
+}
+.notFoundCaption{
+  padding-top:230px;
+  padding-right:50px;
+  font-size:80;
+  color: #dddd19;
+}
+
 /* подвал списка креатива */
 .creativeListFooter{
   padding-bottom:30px;

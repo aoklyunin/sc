@@ -151,11 +151,7 @@
           </div>
         </div>
       {% empty %}
-          <div class="row">
-            <div class="col-12" align="center">
-              <img class="notFoundImg" src="{% static 'img/notFound.gif' %}"  >
-             </div>
-          </div>
+
       {% endfor %}
   </div>
   {% if submissions %}
@@ -167,6 +163,13 @@
         <a class="whiteText"  href="{% if submissions.has_next %}?page={{ submissions.next_page_number }} {%else%} # {%endif%}">Вперёд <i class="fa fa-chevron-right"></i>  </a>
       </div>
     </div>
+  {% else %}
+  <div align="center" class="notFoundCaption"> Тут пока что пусто</div>
+</div></div></div>
+       <div class="notFoundImgWrapper">
+         <img class="notFoundImg" src="{% static 'img/notFound.gif' %}"  ></a>
+       </div>
+<div><div><div>
   {%endif%}
 {% endblock %}
 

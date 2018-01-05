@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>a</title>
-</head>
-<body>
-   Такой страницы у нас нет
-</body>
-</html>
+{% extends 'public/default_page.html' %}
+{% load humanize %}
+{% load staticfiles %}
+{% load static %}
+
+{%block menu %}
+{%endblock%}
+
+
+
+{%block page_content %}
+ <div align="center" class="notFoundCaption"> Такой страницы не существует</div>
+  </div></div></div>
+       <div class="notFoundImgWrapper">
+         <img class="notFoundImg" src="{% static 'img/notFound.gif' %}"  ></a>
+       </div>
+  <div><div><div>
+
+{% endblock %}
+
+
+{% block footer_script %}
+  <script src="{% static 'js/creative_list.js' %} "></script>
+{%endblock %}
+
+
