@@ -87,15 +87,14 @@
         <div class="vote"
              data-what-type="submission"
              data-what-id="{{ submission.id }}">
-          {% with vote_value=submission.id %}
-            <div><i class="fa fa-chevron-up {% if  vote_value == 1 %} upvoted {% endif %}"
+            <div><i class="fa fa-chevron-up {% if  vote_s_val == 1 %} upvoted {% endif %}"
                                     title="upvote" onclick="vote(this)"></i>
             </div>
             <div class="score" title="score">{{ submission.score }}</div>
-            <div><i class="fa fa-chevron-down{% if  vote_value == -1 %} downvoted {% endif %}"
+            <div><i class="fa fa-chevron-down{% if  vote_s_val == -1 %} downvoted {% endif %}"
                                     title="downvote"
                                     onclick="vote(this)"></i></div>
-          {% endwith %}
+
         </div>
       </div>
     </div>

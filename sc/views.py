@@ -59,7 +59,6 @@ def comments(request, thread_id=None):
     comment_votes = {}
 
     if reddit_user:
-
         try:
             vote = Vote.objects.get(
                 vote_object_type=this_submission.get_content_type(),
@@ -100,6 +99,16 @@ def comments(request, thread_id=None):
         canDeleteComments = True
         canDelete = True
 
+    vote_s_val = 0
+    try:
+        voteS = Vote.objects.get(
+                vote_object_type=this_submission.get_content_type(),
+                vote_object_id=this_submission.id,
+                user=ScUser.objects.get(user=request.user))
+        vote_s_val = voteS.value
+    except Vote.DoesNotExist:
+        pass
+
     return render(request, 'public/comments.html',
                   {'submission': this_submission,
                    'linkPrefix': linkPrefix,
@@ -109,7 +118,8 @@ def comments(request, thread_id=None):
                    'canEdit': canEdit,
                    'comments': thread_comments,
                    'comment_votes': comment_votes,
-                   'sub_vote': sub_vote_value})
+                   'sub_vote': sub_vote_value,
+                   'vote_s_val':vote_s_val})
 
 
 @login_required
