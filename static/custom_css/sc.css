@@ -239,8 +239,8 @@ a.pagemenuLink:hover{
 /* картинка для не найдено */
 .notFoundImg{
    position: relative;
-    height: 400px;
-    width: 450px;
+    height: 250px;
+    width: 300px;
 }
 .notFoundImgWrapper  img{
     position: absolute;
@@ -620,4 +620,9 @@ img.socialImg{
 a.not-active {
   pointer-events: none;
   cursor: default;
+}
+
+
+.menuBackground{
+  background: rgb(200, 200,  200);
 }
