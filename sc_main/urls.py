@@ -40,4 +40,6 @@ if settings.DEBUG:
     import debug_toolbar
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),
+        url(r'^500/$', ehandler500),
+        url(r'^404/$', ehandler404),
     ]
