@@ -33,11 +33,11 @@
       <div class="col-2 postDate">
         {% if flgPower %}
           <div class="powerDate" align="right" >
-            {{ submission.stoDate|date:"d M" }}
+            {{ submission.stoDate|date:"d/m/y" }}
           </div>
         {%else%}
           <div align="right" >
-            {{ submission.timestamp|date:"d M" }}
+            {{ submission.timestamp|date:"H:i d/m/y" }}
           </div>
         {%endif%}
       </div>

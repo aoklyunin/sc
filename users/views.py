@@ -32,32 +32,59 @@ def user_profile(request, username):
 
 
 def user_video(request, username):
-    return getCreativeByType(request, 'Видео', Submission.TP_USER_CREATIVE, username)
+    return getCreativeByType(request, 'Видео', Submission.TP_USER_CREATIVE, False, username)
 
 
 def user_design(request, username):
-    return getCreativeByType(request, 'Дизайн', Submission.TP_USER_CREATIVE, username)
+    return getCreativeByType(request, 'Дизайн', Submission.TP_USER_CREATIVE,False, username)
 
 
 def user_conception(request, username):
-    return getCreativeByType(request, 'Концепция', Submission.TP_USER_CREATIVE, username)
+    return getCreativeByType(request, 'Концепция', Submission.TP_USER_CREATIVE, False,username)
 
 
 def user_story(request, username):
-    return getCreativeByType(request, 'Сюжет', Submission.TP_USER_CREATIVE, username)
+    return getCreativeByType(request, 'Сюжет', Submission.TP_USER_CREATIVE, False,username)
 
 
 def user_music(request, username):
-    return getCreativeByType(request, 'Музыка', Submission.TP_USER_CREATIVE, username)
+    return getCreativeByType(request, 'Музыка', Submission.TP_USER_CREATIVE,False, username)
 
 
 def user_invention(request, username):
-    return getCreativeByType(request, 'Изобретения', Submission.TP_USER_CREATIVE, username)
+    return getCreativeByType(request, 'Изобретения', Submission.TP_USER_CREATIVE, False,username)
 
 
 def user_creative(request, username):
-    return getCreativeByType(request, '', Submission.TP_USER_CREATIVE, username)
+    return getCreativeByType(request, '', Submission.TP_USER_CREATIVE, False,username)
 
+
+def new_user_video(request, username):
+    return getCreativeByType(request, 'Видео', Submission.TP_USER_CREATIVE,True, username)
+
+
+def new_user_design(request, username):
+    return getCreativeByType(request, 'Дизайн', Submission.TP_USER_CREATIVE,True, username)
+
+
+def new_user_conception(request, username):
+    return getCreativeByType(request, 'Концепция', Submission.TP_USER_CREATIVE,True, username)
+
+
+def new_user_story(request, username):
+    return getCreativeByType(request, 'Сюжет', Submission.TP_USER_CREATIVE,True, username)
+
+
+def new_user_music(request, username):
+    return getCreativeByType(request, 'Музыка', Submission.TP_USER_CREATIVE,True, username)
+
+
+def new_user_invention(request, username):
+    return getCreativeByType(request, 'Изобретения', Submission.TP_USER_CREATIVE,True, username)
+
+
+def new_user_creative(request, username):
+    return getCreativeByType(request, '', Submission.TP_USER_CREATIVE,True, username)
 
 @login_required
 def edit_profile(request):

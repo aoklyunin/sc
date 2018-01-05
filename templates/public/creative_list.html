@@ -16,14 +16,21 @@
 
 {%block page_content %}
   <div class="row creativeListHeader">
-    <div  class="offset-1 col-2">
+    <div  class="offset-1 col-1">
       {% if canAdd %}
         <a href="{{createLink}}" >
           <img class="addPostImg" src="{% static 'img/plus.png' %}" title="Добавить пост" >
         </a>
       {% endif %}
     </div>
-    <div align="right" class="offset-1 col-8" >
+    <div class="col-2">
+        <a class="pageMenuLink {%if flgNew %}{%else%} active {%endif%}" href="{{common_prefix}}">Лучшее</a>
+    </div>
+    <div class="col-2">
+        <a class="pageMenuLink {%if flgNew %} active {%else%}{%endif%}" href="{{new_prefix}}" >Новое</a>
+    </div>
+
+    <div align="right" class="offset-1 col-4" >
       <a href = {{titleLink}} class="creativeListTitle"> {{titleText}}</a>
     </div>
   </div>
@@ -47,7 +54,7 @@
                 {% endif %}
               </div>
               <div class="col-2 postDate">
-                {% if flgPower %}
+                {% if submission.tp == 1 %}
                   <div class="powerDate" align="right" >
                     {{ submission.stoDate|date:"d M" }}
                   </div>
@@ -63,7 +70,7 @@
                  href ="\user\{{submission.author.user.username}}">
                   {{submission.author.user.username}}
               </a>
-              {% if flgPower %}
+              {% if submission.tp == 1 %}
                 <div class="postListRegard">
                   {%ifequal submission.regard 0 %}
                     FREE
