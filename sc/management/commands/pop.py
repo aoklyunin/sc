@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
+
 from datetime import timedelta, datetime
 from random import choice, randint, randrange, getrandbits
 from string import ascii_letters as letters
 
 from django.contrib.auth.models import User, Group
 from django.core.management.base import BaseCommand
-from pandas.util.testing import randbool
 
 from sc.models import Comment, CreativeType
 from sc.models import Submission

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 Django settings for django_reddit project.
 
@@ -205,3 +206,21 @@ ADMIN_URL = r'^admin/'
 LOGIN_URL = '/login/'
 
 # Your common stuff: Below this line define 3rd party library settings
+
+# пароль для регистрации
+REG_PASSWORD = env('REG_PASSWORD', default='123qwe123')
+
+# красная граница
+KARMA_RED_LIMIT = int(env('KARMA_RED_LIMIT', default='-50'))
+# красный цвет кармы
+KARMA_RED_COLOR = env('KARMA_RED_COLOR', default="ed1210")
+
+# жёлтая граница
+KARMA_YELLOW_LIMIT = int(env('KARMA_RED_LIMIT', default='0'))
+# жёлтый цвет кармы
+KARMA_YELLOW_COLOR = env('KARMA_YELLOW_COLOR', default="e9df01")
+
+# зелёная граница
+KARMA_GREEN_LIMIT = int(env('KARMA_RED_LIMIT', default='100'))
+# зелёный цвет кармы
+KARMA_GREEN_COLOR = env('KARMA_GREEN_COLOR', default="a3f001")

@@ -314,17 +314,11 @@ a.pagemenuLink:hover{
 
 /* карма боевого креатива */
 .powerKarma{
-  position: relative;
-  top: -105px;
-  right:28px;
   font-size: 35;
 }
 /* карма простого креатива */
 .creativeKarma{
-  position: relative;
   font-size: 20;
-  top: -95px;
-  right:95px;
 }
 
 /* описание профиля */
@@ -577,4 +571,28 @@ nav {
 /* синий текст */
 .blueText{
   color: #0176d3;
+}
+
+/* блок для кармы креатива */
+.creativeKarmaVal{
+  position: relative;
+  width:50px;
+  height:50px;
+  top:-118px;
+  right: 7px;
+   text-align: center;
+    display:table-cell;
+    vertical-align:middle;
+}
+
+/* блок для кармы боевого креатива */
+.powerKarmaVal{
+  position: relative;
+  width:70px;
+  height:70px;
+  top:-80px;
+  right: 13px;
+  text-align: center;
+  display:table-cell;
+  vertical-align:middle;
 }

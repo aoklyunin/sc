@@ -1,9 +1,14 @@
+# -*- coding: utf-8 -*-
+
+import collections
 import datetime
 from hashlib import md5
 
 import mistune
 from django.contrib.auth.models import User
 from django.db import models
+from sc_main.settings.common import KARMA_RED_LIMIT, KARMA_RED_COLOR, KARMA_GREEN_LIMIT, KARMA_YELLOW_COLOR, \
+    KARMA_GREEN_COLOR
 
 
 class ScUser(models.Model):
@@ -13,7 +18,7 @@ class ScUser(models.Model):
     last_name = models.CharField(max_length=35, null=True, default=None,
                                  blank=True)
     date = models.DateField(null=True, default=None,
-                                 blank=True)
+                            blank=True)
 
     email = models.EmailField(null=True, blank=True, default=None)
     about_text = models.TextField(blank=True, null=True, max_length=500,
@@ -37,8 +42,8 @@ class ScUser(models.Model):
     youtube = models.CharField(null=True, blank=True, max_length=39,
                                default=None)
 
-    comment_karma = models.IntegerField(default=0)
-    link_karma = models.IntegerField(default=0)
+    creativeKarma = models.IntegerField(default=0)
+    powerKarma = models.IntegerField(default=0)
 
     def getDate(self):
         if self.date == None:
@@ -52,3 +57,38 @@ class ScUser(models.Model):
 
     def __unicode__(self):
         return "<ScUser:{}>".format(self.user.username)
+
+    def __str__(self):
+        return "<ScUser:{}>".format(self.user.username)
+
+    def getColorKarma(self, val):
+        if val < KARMA_RED_LIMIT:
+            return KARMA_RED_COLOR
+        elif val < KARMA_GREEN_LIMIT:
+            return KARMA_YELLOW_COLOR
+        else:
+            return KARMA_GREEN_COLOR
+
+    def getCreativeKarmaColor(self):
+        return self.getColorKarma(self.creativeKarma)
+
+    def getPowerKarmaColor(self):
+        return self.getColorKarma(self.powerKarma)
+
+    def getShortCreativeKarma(self):
+        return self.getShortKarmaVal(self.creativeKarma)
+
+    def getShortPowerKarma(self):
+        return self.getShortKarmaVal(self.powerKarma)
+
+    def getShortKarmaVal(self, val):
+        if val == 0:
+            return "0"
+        si = {1: "",
+              1E3: "k",
+              1E6: "M",
+              1E9: "G"}
+        for i in reversed(range(0, 9, 3)):
+            curVal = 10 ** i
+            if (abs(val) >= curVal):
+                return str(int(val / curVal)) + si[curVal]

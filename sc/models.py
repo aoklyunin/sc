@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from random import randint
 
 import mistune
@@ -194,10 +196,14 @@ class Vote(models.Model):
 
         if isinstance(vote_object, Submission):
             submission = vote_object
-            vote_object.author.link_karma += vote_value
         else:
             submission = vote_object.submission
-            vote_object.author.comment_karma += vote_value
+
+        if submission.tp == Submission.TP_CREATIVE:
+            vote_object.author.creativeKarma += vote_value
+
+        if submission.tp == Submission.TP_CHALLENGE:
+            vote_object.author.powerKarma += vote_value
 
         vote = cls(user=user,
                    vote_object=vote_object,
@@ -240,9 +246,15 @@ class Vote(models.Model):
             return None
 
         if isinstance(self.vote_object, Submission):
-            self.vote_object.author.link_karma += vote_diff
+            submission = self.vote_object
         else:
-            self.vote_object.author.comment_karma += vote_diff
+            submission = self.vote_object.submission
+
+        if submission.tp == Submission.TP_CREATIVE:
+            self.vote_object.author.creativeKarma += vote_diff
+
+        if submission.tp == Submission.TP_CHALLENGE:
+            self.vote_object.author.powerKarma += vote_diff
 
         self.value = new_vote_value
         self.vote_object.save()
@@ -264,9 +276,15 @@ class Vote(models.Model):
             return None
 
         if isinstance(self.vote_object, Submission):
-            self.vote_object.author.link_karma += vote_diff
+            submission = self.vote_object
         else:
-            self.vote_object.author.comment_karma += vote_diff
+            submission = self.vote_object.submission
+
+        if submission.tp == Submission.TP_CREATIVE:
+            self.vote_object.author.creativeKarma += vote_diff
+
+        if submission.tp == Submission.TP_CHALLENGE:
+            self.vote_object.author.powerKarma += vote_diff
 
         self.value = 0
         self.save()

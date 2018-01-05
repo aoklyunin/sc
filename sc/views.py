@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -90,7 +92,7 @@ def comments(request, thread_id=None):
     canDelete = False
     canDeleteComments = False
 
-    if this_submission.author.user==request.user:
+    if this_submission.author.user == request.user:
         canEdit = True
         canDelete = True
 
@@ -110,10 +112,8 @@ def comments(request, thread_id=None):
                    'sub_vote': sub_vote_value})
 
 
+@login_required
 def delete(request, thread_id=None):
-    if not is_moderator(request.user):
-        return HttpResponseRedirect('/permission/denied/')
-
     """
     Handles comment view when user opens the thread.
     On top of serving all comments in the thread it will
@@ -126,6 +126,9 @@ def delete(request, thread_id=None):
     """
 
     this_submission = get_object_or_404(Submission, id=thread_id)
+    if not (is_moderator(request.user) or request.user == this_submission.author.user):
+        return HttpResponseRedirect('/permission/denied/')
+
     # удаляем комментарии
     Comment.objects.filter(submission=this_submission).delete()
     Vote.objects.filter(submission=this_submission).delete()
@@ -133,8 +136,12 @@ def delete(request, thread_id=None):
     return HttpResponseRedirect('/creative/')
 
 
-def deleteCommentWithChildren(comment):
+"""
+Рекурентное удаление комментариев с потомками
+"""
 
+
+def deleteCommentWithChildren(comment):
     for com in Comment.objects.filter(parent=comment):
         deleteCommentWithChildren(com)
 
@@ -143,6 +150,8 @@ def deleteCommentWithChildren(comment):
     comment.delete()
 
 
+# удалить комментарий по его id (и его потомков)
+@login_required
 def deleteComment(request, thread_id=None):
     if not is_moderator(request.user):
         return HttpResponseRedirect('/permission/denied/')
@@ -169,6 +178,9 @@ def edit(request, thread_id=None):
       Handles new submission.. submission.
       """
     this_submission = get_object_or_404(Submission, id=thread_id)
+    if request.user != this_submission.author.user:
+        return HttpResponseRedirect('/permission/denied/')
+
     url = this_submission.url
     if this_submission.link_type == Submission.LINK_TYPE_FLICKR:
         url = '<img src="' + this_submission.url + '">'
@@ -412,28 +424,6 @@ def submitPower(request):
     return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Добавить', 'flgPower': True})
 
 
-def frontPage(request):
-    return render(request, 'public/front_page.html', {'flgMainPage': True})
-
-
-def ehandler404(request):
-    response = render_to_response('404.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 404
-    return response
-
-
-def ehandler500(request):
-    response = render_to_response('500.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 500
-    return response
-
-
-def is_moderator(user):
-    return user.groups.filter(name='moderators').exists()
-
-
 def getCreativeByType(request, ct, sctp, username=""):
     flgPower = False
     template = 'public/creative_list.html'
@@ -526,13 +516,36 @@ def getCreativeByType(request, ct, sctp, username=""):
         'titleLink': titleLink,
         'createLink': createLink,
         'prefix': prefix,
-        'canDelete':canDelete,
-        'canEdit':canEdit,
+        'canDelete': canDelete,
+        'canEdit': canEdit,
         'canAdd': canAdd,
         'ct': ct,
         'flgPower': flgPower,
         'submission_votes': submission_votes
     })
+
+
+
+def frontPage(request):
+    return render(request, 'public/front_page.html', {'flgMainPage': True})
+
+
+def ehandler404(request):
+    response = render_to_response('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
+
+def ehandler500(request):
+    response = render_to_response('500.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 500
+    return response
+
+
+def is_moderator(user):
+    return user.groups.filter(name='moderators').exists()
 
 
 def powerCreative(request):
@@ -548,51 +561,48 @@ def conceptionP(request):
 
 
 def storyP(request):
-    return getCreativeByType(request,  'Сюжет', Submission.TP_CHALLENGE)
+    return getCreativeByType(request, 'Сюжет', Submission.TP_CHALLENGE)
 
 
 def inventionP(request):
-    return getCreativeByType(request,  'Изобретения',Submission.TP_CHALLENGE)
+    return getCreativeByType(request, 'Изобретения', Submission.TP_CHALLENGE)
 
 
 def musicP(request):
-    return getCreativeByType(request,  'Музыка',Submission.TP_CHALLENGE)
+    return getCreativeByType(request, 'Музыка', Submission.TP_CHALLENGE)
 
 
 def videoP(request):
-    return getCreativeByType(request, 'Видео',Submission.TP_CHALLENGE)
-
+    return getCreativeByType(request, 'Видео', Submission.TP_CHALLENGE)
 
 
 def creative(request):
-    return getCreativeByType(request, '',Submission.TP_CREATIVE)
+    return getCreativeByType(request, '', Submission.TP_CREATIVE)
 
 
 def design(request):
-    return getCreativeByType(request,  'Дизайн',Submission.TP_CREATIVE)
+    return getCreativeByType(request, 'Дизайн', Submission.TP_CREATIVE)
 
 
 def conception(request):
-    return getCreativeByType(request, 'Концепция',Submission.TP_CREATIVE)
+    return getCreativeByType(request, 'Концепция', Submission.TP_CREATIVE)
 
 
 def story(request):
-    return getCreativeByType(request,  'Сюжет',Submission.TP_CREATIVE)
+    return getCreativeByType(request, 'Сюжет', Submission.TP_CREATIVE)
 
 
 def invention(request):
-    return getCreativeByType(request,  'Изобретения',Submission.TP_CREATIVE)
+    return getCreativeByType(request, 'Изобретения', Submission.TP_CREATIVE)
 
 
 def music(request):
-    return getCreativeByType(request, 'Музыка',Submission.TP_CREATIVE)
+    return getCreativeByType(request, 'Музыка', Submission.TP_CREATIVE)
 
 
 def video(request):
-    return getCreativeByType(request, 'Видео',Submission.TP_CREATIVE)
+    return getCreativeByType(request, 'Видео', Submission.TP_CREATIVE)
 
 
 def faq(request):
     return getCreativeByType(request, '', Submission.TP_FAQ)
-
-
