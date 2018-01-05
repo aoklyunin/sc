@@ -96,6 +96,11 @@ DATABASES = {
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
+DATE_INPUT_FORMATS = [
+    '%d/%m/%Y'
+]
+
+DATE_FORMAT = 'd/m/Y'
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------

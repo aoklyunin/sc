@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from sc.forms import UserForm, ProfileForm
 from sc.models import Submission
 from sc.views import getCreativeByType
-from sc_main.settings.common import REG_PASSWORD
+from sc_main.settings.common import REG_PASSWORD, DATE_INPUT_FORMATS
 from users.models import ScUser
 
 
@@ -91,7 +91,7 @@ def edit_profile(request):
     user = ScUser.objects.get(user=request.user)
 
     if request.method == 'GET':
-        profile_form = ProfileForm(instance=user)
+        profile_form = ProfileForm(instance=user,initial={'date':user.date.strftime(DATE_INPUT_FORMATS[0])})
 
     elif request.method == 'POST':
         profile_form = ProfileForm(request.POST, instance=user)
@@ -99,7 +99,7 @@ def edit_profile(request):
             profile = profile_form.save(commit=False)
             profile.update_profile_data()
             profile.save()
-            # messages.success(request, "Profile settings saved")
+            messages.success(request, "Настройки профиля сохранены")
     else:
         raise Http404
 
@@ -113,7 +113,7 @@ def user_login(request):
     """
 
     if request.user.is_authenticated():
-        # messages.warning(request, "You are already logged in.")
+        messages.warning(request, "Вы уже вошли")
         return render(request, 'public/login.html')
 
     if request.method == "POST":
@@ -131,7 +131,7 @@ def user_login(request):
                 redirect_url = request.POST.get('next') or 'frontpage'
                 return redirect('/user/' + username + '/')
             else:
-                # messages.error("Доступ запрещён")
+                messages.error("Доступ запрещён")
                 return render(request, 'public/login.html',
                               {'login_error': "Аккаунт запрещён"})
         else:
@@ -149,7 +149,7 @@ def user_logout(request):
     if request.user.is_authenticated():
         redirect_page = request.POST.get('current_page', '/')
         logout(request)
-        # messages.success(request, 'Logged out!')
+        messages.success(request, 'Вы вышли')
         return redirect(redirect_page)
 
     return redirect('frontpage')
@@ -165,8 +165,7 @@ def register(request):
     """
     user_form = UserForm()
     if request.user.is_authenticated():
-        # messages.warning(request,
-        #                 'Вы уже зарегистрированы и вошли')
+        messages.warning(request,'Вы уже зарегистрированы и вошли')
         return render(request, 'public/register.html', {'form': user_form})
 
     if request.method == "POST":
@@ -187,7 +186,7 @@ def register(request):
                 login(request, user)
                 return redirect('frontpage')
             else:
-                # messages.error(request,'Неправильный ключ')
+                messages.warning(request,'Неправильный ключ')
                 pass
 
     return render(request, 'public/register.html', {'form': user_form})

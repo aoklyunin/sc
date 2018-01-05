@@ -9,14 +9,12 @@
         <h1 align="center" class="form-signin-heading bebasWhiteText">Регистрация</h1>
 
         {% for field in form %}
-      <div class="padded10">
-
+          <div class="padded10">
             {{ field }}
             {% for error in field.errors %}
                 <p class="text-danger">{{ error }}</p>
-
             {% endfor %}
-        </div>
+          </div>
         {% endfor %}
 
         {% if username_exists %}
@@ -31,4 +29,11 @@
          </div>
     </form>
   </div>
+<div class="row" style="width:100%">
+      <div class="offset-3 col-6">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    </div>
 {% endblock %}

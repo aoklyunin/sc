@@ -126,7 +126,6 @@ function submitEvent(event, form) {
         //    errorLabel.removeAttr('style');
         //}
         location.reload();
-        alert('Комментарий оставлен');
     });
 }
 

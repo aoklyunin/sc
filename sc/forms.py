@@ -140,8 +140,9 @@ class ProfileForm(forms.ModelForm):
     date = forms.DateField(widget=forms.DateInput(
         attrs={'class': "form-control",
                'id': "date",
-               "placeholder": "1995-12-14"}),
-        required=False
+               "placeholder": "14/12/1995"}),
+        required=False,
+        input_formats=["%d/%m/%Y"]
     )
 
 
@@ -181,11 +182,13 @@ class SubmissionForm(forms.ModelForm):
             "placeholder": "1000"}),
         required=False)
 
-    stoDate = forms.DateField(widget=forms.TextInput(
+    stoDate = forms.DateField(widget=forms.DateInput(
         attrs={
             'class': "form-control",
             "placeholder": "01/20/2018"}),
-        required=False)
+        required=False,
+        input_formats=["%d/%m/%Y"]
+    )
 
 
     def clean_url(self):

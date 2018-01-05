@@ -10,7 +10,7 @@
               <label for="title" align="right" class="col-2 control-label regularField" >Заголовок</label>
               <div class="col-9" align="left">
                 {{ form.title }}
-                {% for error in form.first_name.errors %}
+                {% for error in form.title.errors %}
                   <p class="text-danger">{{ error }}</p>
                 {% endfor %}
               </div>
@@ -19,7 +19,7 @@
               <label for="url" align="right" class="col-2 control-label regularField">Ссылка</label>
               <div class="col-9" align="left">
                 {{ form.url }}
-                {% for error in form.first_name.errors %}
+                {% for error in form.url.errors %}
                   <p class="text-danger">{{ error }}</p>
                 {% endfor %}
               </div>
@@ -28,14 +28,14 @@
               <label for="text" align="right" class="col-2 control-label submitTextField" >Текст</label>
               <div class="col-6" align="left"  style="opacity:0.7">
                 {{ form.text }}
-                {% for error in form.first_name.errors %}
+                {% for error in form.text.errors %}
                   <p class="text-danger">{{ error }}</p>
                 {% endfor %}
               </div>
               <label for="ctp" align="right" class="col-1 control-label submitTextField">Раздел</label>
               <div class="col-2" align="left"  style="opacity:0.7">
                 {{ form.ctp }}
-                {% for error in form.first_name.errors %}
+                {% for error in form.ctp.errors %}
                   <p class="text-danger">{{ error }}</p>
                 {% endfor %}
               </div>
@@ -45,14 +45,14 @@
                 <label for="regard" align="right" class="offset-1 col-2 control-label powerRegularField">Премия</label>
                 <div class="col-2" align="left">
                   {{ form.regard }}
-                  {% for error in form.first_name.errors %}
+                  {% for error in form.regard.errors %}
                     <p class="text-danger">{{ error }}</p>
                   {% endfor %}
                 </div>
                 <label for="stoDate" align="right" class="col-2 control-label powerRegularField">Дедлайн</label>
                 <div class="col-2" align="left">
                   {{ form.stoDate }}
-                  {% for error in form.first_name.errors %}
+                  {% for error in form.stoDate.errors %}
                     <p class="text-danger">{{ error }}</p>
                   {% endfor %}
                 </div>
@@ -65,5 +65,12 @@
             </div>
         </fieldset>
     </form>
+    <div class="row">
+      <div class="offset-3 col-6">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    </div>
 </div>
 {% endblock %}

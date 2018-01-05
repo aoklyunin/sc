@@ -97,7 +97,11 @@ width: 100%; // Add this
   opacity: .5;
 }
 
-
+.errorMessageBlock{
+  position:absolute;
+  bottom: 50px;
+  width:100%
+}
 
 
 
