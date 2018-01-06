@@ -161,12 +161,12 @@ class Command(BaseCommand):
                     another_child = choice([True, False])
 
     def regular(self):
-        CreativeType.objects.get_or_create(name='Видео'),
-        CreativeType.objects.get_or_create(name='Дизайн'),
-        CreativeType.objects.get_or_create(name='Концепция'),
-        CreativeType.objects.get_or_create(name='Сюжет'),
-        CreativeType.objects.get_or_create(name='Музыка'),
-        CreativeType.objects.get_or_create(name='Изобретения'),
+        CreativeType.objects.get_or_create(name='Видео', link='video/'),
+        CreativeType.objects.get_or_create(name='Дизайн', link='design/'),
+        CreativeType.objects.get_or_create(name='Концепция', link='conception/'),
+        CreativeType.objects.get_or_create(name='Сюжет', link='story/'),
+        CreativeType.objects.get_or_create(name='Музыка', link='music/'),
+        CreativeType.objects.get_or_create(name='Изобретения', link='invention/'),
 
         admin = self.get_or_create_author('admin', '027ae9e272ad001b3542b880d47d67b9')
         admin.user.is_staff = True
@@ -177,8 +177,6 @@ class Command(BaseCommand):
         new_group.user_set.add(moderator.user)
 
         self.get_or_create_author('aoklyunin', 'aoklyunin1990')
-
-
 
     def random_date(self):
         """
