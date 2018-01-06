@@ -1,0 +1,6 @@
+#!/bin/bash
+
+python manage.py makemigrations users;
+python manage.py makemigrations sc;
+python manage.py makemigrate;
+python manage.py pop;
