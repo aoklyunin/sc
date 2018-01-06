@@ -15,9 +15,12 @@ from sc_main.utils.model_utils import ContentTypeAware, MttpContentTypeAware
 
 
 class CreativeType(models.Model):
-    name = models.CharField(max_length=100)
-    link = models.CharField(max_length=100,default="")
+    TP_MENU_ITEM = 0
+    TP_MENU_HEADER = 1
 
+    name = models.CharField(max_length=100)
+    link = models.CharField(max_length=100,blank=True)
+    tp = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.name

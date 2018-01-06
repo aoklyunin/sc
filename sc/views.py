@@ -444,22 +444,29 @@ def getCreativeByType(request, ct, sctp, flgNew=False,username=""):
         titleText = 'Боевой Креатив'
         titleLink = '/power/creative'
         createLink = '/submit/power/'
-        prefix = '/power/creative'
+        prefix = '/power/creative/'
 
 
     elif sctp == Submission.TP_CREATIVE:
         titleText = 'Креатив'
-        titleLink = '/creative'
+        titleLink = '/creative/'
         createLink = '/submit/'
-        prefix = '/creative'
+        prefix = '/creative/'
 
     elif sctp == Submission.TP_FAQ:
         titleText = 'О проекте'
         titleLink = '/faq/'
         createLink = '/submit/faq/'
-        prefix = '/faq'
+        prefix = '/faq/'
         template = 'public/faq_list.html'
         canAdd = is_moderator(request.user)
+
+    if ct != '':
+        ctVal = CreativeType.objects.get(name=ct)
+        ctLink = ctVal.link
+    else:
+        ctVal = None
+        ctLink = ""
 
     if sctp == Submission.TP_USER_CREATIVE:
         canEdit = username == request.user.username
@@ -467,12 +474,12 @@ def getCreativeByType(request, ct, sctp, flgNew=False,username=""):
         titleText = username
         titleLink = '/user/' + username
         createLink = '/submit/'
-        prefix = '/user/' + username + '/creative'
+        prefix = '/user/' + username + '/creative/'
 
         if ct != '':
             all_submissions = Submission.objects.filter(
                 author=ScUser.objects.get(user=User.objects.get(username=username)),
-                creativeType=CreativeType.objects.get(name=ct)
+                creativeType=ctVal
             )
         else:
             all_submissions = Submission.objects.filter(
@@ -482,19 +489,23 @@ def getCreativeByType(request, ct, sctp, flgNew=False,username=""):
         if ct != '':
             all_submissions = Submission.objects.filter(
                 tp=sctp,
-                creativeType=CreativeType.objects.get(name=ct)
+                creativeType=ctVal
             )
         else:
             all_submissions = Submission.objects.filter(tp=sctp)
 
     common_prefix = prefix
-    new_prefix = prefix+'/new'
+    new_prefix = prefix+'new/'
 
     if flgNew:
         prefix = new_prefix
         all_submissions = all_submissions.order_by('-timestamp').all()
     else:
         all_submissions = all_submissions.order_by('-score').all()
+
+    common_prefix = common_prefix+ctLink
+    new_prefix = new_prefix+ctLink
+
     """
       Serves frontpage and all additional submission listings
       with maximum of 25 submissions per page.
@@ -533,7 +544,8 @@ def getCreativeByType(request, ct, sctp, flgNew=False,username=""):
         'canDelete': canDelete,
         'canEdit': canEdit,
         'canAdd': canAdd,
-        'ct': ct,
+        'ct': ctVal,
+        'cts': CreativeType.objects.filter(tp=CreativeType.TP_MENU_ITEM),
         'flgNew':flgNew,
         'new_prefix':new_prefix,
         'common_prefix':common_prefix,
