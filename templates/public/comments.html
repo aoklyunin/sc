@@ -2,7 +2,7 @@
 {% load humanize %}
 {% load staticfiles %}
 {% load static %}
-{% load tz %}
+
 
 {%block page_content %}
 <div class="row creativeListHeader">
@@ -19,17 +19,15 @@
         {% endif %}
       </div>
       <div class="col-2 postDate">
-        {% localtime on %}
         {% if flgPower %}
           <div class="powerDate" align="right" >
-            {{ submission.stoDate|localtime }}
+            {{ submission.stoDate|date:"d/m/y" }}
           </div>
         {%else%}
           <div align="right" >
-            {{ submission.timestamp|localtime }}
+            {{ submission.timestamp|date:"H:i d/m/y" }}
           </div>
         {%endif%}
-        {% endlocaltime %}
       </div>
     </div>
     <div class="row" style="width:100%">
@@ -95,13 +93,13 @@
         </div>
       </div>
     </div>
-    {% if canDelete %}
-      <div class="row">
-        <div class="col-11" align="right">
+    <div class="row">
+      <div class="col-12">
+         {% if canDelete %}
           <a href="/delete/{{submission.pk}}" class="confirmation removeThreadBtn">Удалить</a>
-        </div>
+        {% endif %}
       </div>
-    {% endif %}
+    </div>
     <div class="row commentRow">
       <div class="col-6 offset-3">
         <h1 align="center"> Комментарии</h1>

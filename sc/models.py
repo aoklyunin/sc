@@ -58,7 +58,7 @@ class Submission(ContentTypeAware):
     link_height = models.IntegerField(default=0)
     viewCnt = models.IntegerField(default=0)
     regard = models.IntegerField(default=0)
-    stoDate = models.DateTimeField(default=timezone.localtime(timezone.now()))
+    stoDate = models.DateTimeField(default=timezone.now())
 
 
     def processUrl(self):

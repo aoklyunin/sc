@@ -108,7 +108,6 @@ DATE_FORMAT = 'd/m/Y'
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'UTC'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = 'en-us'
@@ -124,6 +123,8 @@ USE_L10N = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
+
+TIME_ZONE = 'Europe/Moscow'
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------

@@ -99,14 +99,18 @@ def comments(request, thread_id=None):
         canDeleteComments = True
         canDelete = True
 
-    vote_s_val = 0
     try:
-        voteS = Vote.objects.get(
-            vote_object_type=this_submission.get_content_type(),
-            vote_object_id=this_submission.id,
-            user=ScUser.objects.get(user=request.user))
-        vote_s_val = voteS.value
-    except Vote.DoesNotExist:
+        vote_s_val = 0
+        scuser = ScUser.objects.get(user=request.user)
+        try:
+            voteS = Vote.objects.get(
+                vote_object_type=this_submission.get_content_type(),
+                vote_object_id=this_submission.id,
+                user=scuser)
+            vote_s_val = voteS.value
+        except Vote.DoesNotExist:
+            pass
+    except:
         pass
 
 
