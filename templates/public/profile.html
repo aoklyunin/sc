@@ -15,7 +15,7 @@
             <img class="editProfileImg" src="{% static 'img/editProfile.png'%}" title="Редактировать">
           </a>
         {% endif %}
-        <a class="profileCaption" id="editProfile" title="Нажмите для выхода">
+        <a class="profileCaption" {% if canEdit %}id="editProfile"{% endif %} title="Нажмите для выхода">
             {% if profile.first_name %}
               {{ profile.first_name }}
             {%else %}

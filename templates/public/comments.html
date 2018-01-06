@@ -3,15 +3,6 @@
 {% load staticfiles %}
 {% load static %}
 
-{%block menu %}
-  <div align="left"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/creative/">Креатив</a></div><br><br>
-  <div align="left"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/video/">Видео</a></div><br>
-  <div align="left"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/design/"> Дизайн</a></div><br>
-  <div align="left"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/conception/">Концепция</a></div><br>
-  <div align="left"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/story/">Сюжет</a></div><br>
-  <div align="left"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/music/">Музыка</a></div><br>
-  <div align="left"><a class="pageMenuLink" href="/user/{{ submission.author.user.username }}/invention/">Изобретения</a></div><br>
-{%endblock%}
 
 {%block page_content %}
 <div class="row creativeListHeader">
@@ -26,9 +17,6 @@
             <img class="editCreativeImg" src="{% static 'img/editPost.png'%}" title="Редактировать">
           </a>
         {% endif %}
-        {% if canDelete %}
-          <a href="/delete/{{submission.pk}}" class="confirmation removeThreadBtn">Удалить</a>
-        {% endif %}
       </div>
       <div class="col-2 postDate">
         {% if flgPower %}
@@ -40,6 +28,13 @@
             {{ submission.timestamp|date:"H:i d/m/y" }}
           </div>
         {%endif%}
+      </div>
+    </div>
+    <div class="row" style="width:100%">
+      <div class="offset-3 col-6">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
       </div>
     </div>
     <div class="row" >
@@ -72,7 +67,7 @@
       </div>
     </div>
     <div class="row padded15">
-      <div class="col-11 textBackground" >
+        <div class="col-11 textBackground" >
         <div class="readableText">{{ submission.text_html|safe }}</div>
         {% ifnotequal submission.link_type -1 %}
         <br>
@@ -98,6 +93,13 @@
         </div>
       </div>
     </div>
+    {% if canDelete %}
+      <div class="row">
+        <div class="col-11" align="right">
+          <a href="/delete/{{submission.pk}}" class="confirmation removeThreadBtn">Удалить</a>
+        </div>
+      </div>
+    {% endif %}
     <div class="row commentRow">
       <div class="col-6 offset-3">
         <h1 align="center"> Комментарии</h1>

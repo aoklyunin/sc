@@ -102,12 +102,29 @@ def comments(request, thread_id=None):
     vote_s_val = 0
     try:
         voteS = Vote.objects.get(
-                vote_object_type=this_submission.get_content_type(),
-                vote_object_id=this_submission.id,
-                user=ScUser.objects.get(user=request.user))
+            vote_object_type=this_submission.get_content_type(),
+            vote_object_id=this_submission.id,
+            user=ScUser.objects.get(user=request.user))
         vote_s_val = voteS.value
     except Vote.DoesNotExist:
         pass
+
+
+    if this_submission.tp == Submission.TP_CREATIVE:
+        titleText = 'Креатив'
+        titleLink = '/creative/'
+        prefix = '/creative/'
+        cts = CreativeType.objects.filter(tp=CreativeType.TP_MENU_ITEM)
+    elif this_submission.tp == Submission.TP_CHALLENGE:
+        titleText = 'Боевой креатив'
+        titleLink = '/power/creative/'
+        prefix = '/power/creative/'
+        cts = CreativeType.objects.filter(tp=CreativeType.TP_MENU_ITEM)
+    elif this_submission.tp == Submission.TP_FAQ:
+        titleText = 'FAQ'
+        titleLink = '/faq/'
+        prefix = '/faq/'
+        cts = None
 
     return render(request, 'public/comments.html',
                   {'submission': this_submission,
@@ -116,11 +133,15 @@ def comments(request, thread_id=None):
                    'canDelete': canDelete,
                    'canDeleteComments': canDeleteComments,
                    'canEdit': canEdit,
+                   'titleText': titleText,
+                   'titleLink': titleLink,
+                   'prefix': prefix,
+                   'ctVal': None,
                    'comments': thread_comments,
                    'comment_votes': comment_votes,
                    'sub_vote': sub_vote_value,
-                   'vote_s_val':vote_s_val})
-
+                   'vote_s_val': vote_s_val,
+                   'cts': cts})
 
 @login_required
 def delete(request, thread_id=None):
@@ -206,17 +227,18 @@ def edit(request, thread_id=None):
         if submission_form.is_valid():
             submission_form.save(commit=False)
             this_submission.link_type = submission_form.link_type
+            this_submission.text = submission_form.cleaned_data['text']
             this_submission.generate_html()
             this_submission.title = submission_form.cleaned_data["title"]
+            this_submission.url = submission_form.cleaned_data['url']
             this_submission.save()
 
             this_submission.creativeType.clear()
             for tp in submission_form.cleaned_data['ctp']:
                 #   print(tp)
                 this_submission.creativeType.add(tp)
-
+            messages.success(request, 'Пост сохранён')
             return redirect('/comments/{}'.format(this_submission.id))
-
 
     return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Редактирование'})
     # return render(request, 'public/submit.html', {'form': None})
@@ -344,10 +366,6 @@ def vote(request):
 
 @login_required
 def submit(request):
-    print('submit')
-    """
-    Handles new submission.. submission.
-    """
     submission_form = SubmissionForm()
 
     if request.method == 'POST':
@@ -366,7 +384,7 @@ def submit(request):
             for tp in submission_form.cleaned_data['ctp']:
                 #   print(tp)
                 submission.creativeType.add(tp)
-
+            messages.success(request, 'Пост создан')
             return redirect('/comments/{}'.format(submission.id))
 
     return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Добавить пост'})
@@ -401,7 +419,7 @@ def submitFAQ(request):
             for tp in submission_form.cleaned_data['ctp']:
                 #   print(tp)
                 submission.creativeType.add(tp)
-
+            messages.success(request, 'Пост создан')
             return redirect('/comments/{}'.format(submission.id))
 
     return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Добавить'})
@@ -436,7 +454,7 @@ def submitPower(request):
     return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Добавить', 'flgPower': True})
 
 
-def getCreativeByType(request, ct, sctp, flgNew=False,username=""):
+def getCreativeByType(request, ct, sctp, flgNew=False, username=""):
     template = 'public/creative_list.html'
     canAdd = request.user.is_authenticated
     canEdit = False
@@ -497,7 +515,7 @@ def getCreativeByType(request, ct, sctp, flgNew=False,username=""):
             all_submissions = Submission.objects.filter(tp=sctp)
 
     common_prefix = prefix
-    new_prefix = prefix+'new/'
+    new_prefix = prefix + 'new/'
 
     if flgNew:
         prefix = new_prefix
@@ -505,8 +523,8 @@ def getCreativeByType(request, ct, sctp, flgNew=False,username=""):
     else:
         all_submissions = all_submissions.order_by('-score').all()
 
-    common_prefix = common_prefix+ctLink
-    new_prefix = new_prefix+ctLink
+    common_prefix = common_prefix + ctLink
+    new_prefix = new_prefix + ctLink
 
     """
       Serves frontpage and all additional submission listings
@@ -542,19 +560,18 @@ def getCreativeByType(request, ct, sctp, flgNew=False,username=""):
         'titleText': titleText,
         'titleLink': titleLink,
         'createLink': createLink,
-        'username':username,
+        'username': username,
         'prefix': prefix,
         'canDelete': canDelete,
         'canEdit': canEdit,
         'canAdd': canAdd,
         'ctVal': ctVal,
         'cts': CreativeType.objects.filter(tp=CreativeType.TP_MENU_ITEM),
-        'flgNew':flgNew,
-        'new_prefix':new_prefix,
-        'common_prefix':common_prefix,
+        'flgNew': flgNew,
+        'new_prefix': new_prefix,
+        'common_prefix': common_prefix,
         'submission_votes': submission_votes
     })
-
 
 
 def frontPage(request):
@@ -639,59 +656,57 @@ def faq(request):
     return getCreativeByType(request, '', Submission.TP_FAQ)
 
 
-
 def newPowerCreative(request):
-    return getCreativeByType(request, '', Submission.TP_CHALLENGE,True)
+    return getCreativeByType(request, '', Submission.TP_CHALLENGE, True)
 
 
 def newDesignP(request):
-    return getCreativeByType(request, 'Дизайн', Submission.TP_CHALLENGE,True)
+    return getCreativeByType(request, 'Дизайн', Submission.TP_CHALLENGE, True)
 
 
 def newConceptionP(request):
-    return getCreativeByType(request, 'Концепция', Submission.TP_CHALLENGE,True)
+    return getCreativeByType(request, 'Концепция', Submission.TP_CHALLENGE, True)
 
 
 def newStoryP(request):
-    return getCreativeByType(request, 'Сюжет', Submission.TP_CHALLENGE,True)
+    return getCreativeByType(request, 'Сюжет', Submission.TP_CHALLENGE, True)
 
 
 def newInventionP(request):
-    return getCreativeByType(request, 'Изобретения', Submission.TP_CHALLENGE,True)
+    return getCreativeByType(request, 'Изобретения', Submission.TP_CHALLENGE, True)
 
 
 def newMusicP(request):
-    return getCreativeByType(request, 'Музыка', Submission.TP_CHALLENGE,True)
+    return getCreativeByType(request, 'Музыка', Submission.TP_CHALLENGE, True)
 
 
 def newVideoP(request):
-    return getCreativeByType(request, 'Видео', Submission.TP_CHALLENGE,True)
+    return getCreativeByType(request, 'Видео', Submission.TP_CHALLENGE, True)
 
 
 def newCreative(request):
-    return getCreativeByType(request, '', Submission.TP_CREATIVE,True)
+    return getCreativeByType(request, '', Submission.TP_CREATIVE, True)
 
 
 def newDesign(request):
-    return getCreativeByType(request, 'Дизайн', Submission.TP_CREATIVE,True)
+    return getCreativeByType(request, 'Дизайн', Submission.TP_CREATIVE, True)
 
 
 def newConception(request):
-    return getCreativeByType(request, 'Концепция', Submission.TP_CREATIVE,True)
+    return getCreativeByType(request, 'Концепция', Submission.TP_CREATIVE, True)
 
 
 def newStory(request):
-    return getCreativeByType(request, 'Сюжет', Submission.TP_CREATIVE,True)
+    return getCreativeByType(request, 'Сюжет', Submission.TP_CREATIVE, True)
 
 
 def newInvention(request):
-    return getCreativeByType(request, 'Изобретения', Submission.TP_CREATIVE,True)
+    return getCreativeByType(request, 'Изобретения', Submission.TP_CREATIVE, True)
 
 
 def newMusic(request):
-    return getCreativeByType(request, 'Музыка', Submission.TP_CREATIVE,True)
+    return getCreativeByType(request, 'Музыка', Submission.TP_CREATIVE, True)
 
 
 def newVideo(request):
-    return getCreativeByType(request, 'Видео', Submission.TP_CREATIVE,True)
-
+    return getCreativeByType(request, 'Видео', Submission.TP_CREATIVE, True)

@@ -669,3 +669,7 @@ a.not-active {
 .bigLogoImg:hover{
  opacity: 1 ;
 }
+
+#commentContent{
+  overflow-x: hidden;
+}

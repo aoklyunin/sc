@@ -40,7 +40,13 @@
       </div>
     {% endif %}
   </div>
-
+  <div class="row" style="width:100%">
+      <div class="offset-3 col-6">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+  </div>
   <div class="creativeListBody">
       {% for submission in submissions %}
         <div class="row creativePost">
@@ -50,14 +56,6 @@
                 <a class="thread-title" href="{{ submission.comments_url }}">
                   {{ submission.title }}
                 </a>
-                {% if canEdit %}
-                  <a href="/edit/{{submission.pk}}">
-                    <img class="editCreativeImg" src="{% static 'img/editPost.png'%}" title="Редактировать">
-                  </a>
-                {% endif %}
-                {% if canDelete %}
-                  <a href="/delete/{{submission.pk}}" class="confirmation removeThreadBtn">Удалить</a>
-                {% endif %}
               </div>
               <div class="col-2 postDate">
                 {% if submission.tp == 1 %}
