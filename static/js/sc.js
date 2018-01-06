@@ -96,59 +96,28 @@ function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
-function submitEvent(event, form) {
-    event.preventDefault();
-    var $form = form;
-    var data = $form.data();
-    url = $form.attr("action");
-    commentContent = $form.find("textarea#commentContent").val();
-    var csrftoken = getCookie('csrftoken');
-
-    $.ajaxSetup({
-        beforeSend: function (xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
-
-    var doPost = $.post(url, {
-        parentType: data.parentType,
-        parentId: data.parentId,
-        commentContent: commentContent
-    });
-
-
-    doPost.done(function (response) {
-        //var errorLabel = $form.find("span#postResponse");
-        //if (response.msg) {
-        //    errorLabel.text(response.msg);
-        //    errorLabel.removeAttr('style');
-        //}
-        location.reload();
-    });
-}
-
-
-$("#commentForm").submit(function (event) {
-    submitEvent(event, $(this));
-});
 
 var newCommentForm = '<form id="commentForm" class="form-horizontal"\
                             action="/post/comment/"\
                             data-parent-type="comment">\
                             <fieldset>\
                             <div class="form-group comment-group">\
-                                <label for="commentContent" class="col-lg-2 control-label">New comment</label>\
                                 <div class="col-lg-10">\
-                                    <textarea class="form-control" rows="3" id="commentContent"></textarea>\
-                                    <span id="postResponse" class="text-success" style="display: none"></span>\
+                                     <div class="ceFieldWrapper col-9">\
+                                        <div contentEditable="true" class="ceField commentContent">\
+                                        </div>\
+                                     </div>\
                                 </div>\
                             </div>\
                             <div class="form-group">\
-                                <div class="col-lg-10 col-lg-offset-2">\
-                                    <button type="submit" class="btn btn-primary">Submit</button>\
+                              <div class="row">\
+                                <div class="col-6">\
+                                    <button type="submit" class="btn btn-primary">Отправить</button>\
                                 </div>\
+                                <div class="col-2">\
+                                    <div align="right" class="addSmilesTree">Смайлы</div>\
+                                </div>\
+                              </div>\
                             </div>\
                         </fieldset>\
                     </form>';
@@ -157,6 +126,19 @@ $('a[name="replyButton"]').click(function () {
     var $mediaBody = $(this).parent().parent().parent();
     if ($mediaBody.find('#commentForm').length == 0) {
         $mediaBody.parent().find(".reply-container:first").append(newCommentForm);
+        cef = $mediaBody.find(".ceField:first");
+        $cefIdCnt = $cefIdCnt+1;
+        cef.attr('id','cef'+ $cefIdCnt);
+        ast = $mediaBody.find(".addSmilesTree:first");
+        ast.click(function(){
+            var pos = ast.position();
+            $mediaBody.parent().find(".reply-container:first").append($("#smilePanel"));
+            $("#smilePanel").css({ top: 200, left: 200});
+            $("#smilePanel").show();
+        });
+        alert(cef.attr('id'));
+        $(".smileImg").attr('target-id',cef.attr('id'));
+
         var $form = $mediaBody.find('#commentForm');
         $form.data('parent-id', $mediaBody.parent().data().parentId);
         $form.submit(function (event) {
@@ -169,10 +151,15 @@ $('a[name="replyButton"]').click(function () {
         } else {
             $commentForm.removeAttr('style')
         }
+        $(".addSmilesHolder").append($("#smilePanel"));
+
+        $(".smileImg").attr('target-id','commentContent');
+
     }
 
 });
 
+$cefIdCnt = 0;
 
 $(document).ready(function(){
     $( ".ytframe" ).each(function( index ) {
@@ -186,26 +173,4 @@ $(".alert").fadeTo(2000, 500).slideUp(500, function(){
 });
 
 
-$("#addSmiles").click(function(){
-  var pos = $(this).position();
-  $("#smilePanel").css({ top: pos.top, left: pos.left});
-  $("#smilePanel").show();
-});
-
-$("#closeSmilePanel").click(function(){
-  $("#smilePanel").hide();
-});
-
-$(".smileImg").click(function(){
-    targetId = $(this).attr('target-id');
-    //alert(targetId);
-    $("#"+targetId).focus();
-    //var tx ='<img src="'+$(this).attr('src')+'">';
-    //alert(typeof(tx));
-    //alert($("#"+targetId).text());
-    //alert(targetId);
-    //alert(typeof($("#"+targetId)));
-    $("#"+targetId).append('<img src="'+$(this).attr('src')+'">');
-});
-
-
+$

@@ -145,7 +145,8 @@ def comments(request, thread_id=None):
                    'comment_votes': comment_votes,
                    'sub_vote': sub_vote_value,
                    'vote_s_val': vote_s_val,
-                   'cts': cts})
+                   'cts': cts,
+                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(20)]})
 
 @login_required
 def delete(request, thread_id=None):
@@ -232,7 +233,9 @@ def edit(request, thread_id=None):
             submission_form.save(commit=False)
             this_submission.link_type = submission_form.link_type
             this_submission.text = submission_form.cleaned_data['text']
-            this_submission.generate_html()
+            # submission.generate_html()
+            this_submission.text_html = submission_form.cleaned_data["text"]
+            print(submission_form.cleaned_data["text"])
             this_submission.title = submission_form.cleaned_data["title"]
             this_submission.url = submission_form.cleaned_data['url']
             this_submission.save()
@@ -244,7 +247,10 @@ def edit(request, thread_id=None):
             messages.success(request, 'Пост сохранён')
             return redirect('/comments/{}'.format(this_submission.id))
 
-    return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Редактирование'})
+    return render(request, 'public/submit.html',
+                  {'form': submission_form,
+                   'caption': 'Редактирование',
+                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(20)]})
     # return render(request, 'public/submit.html', {'form': None})
 
 
@@ -378,7 +384,9 @@ def submit(request):
             submission = submission_form.save(commit=False)
             submission.link_type = submission_form.link_type
             submission.tp = Submission.TP_CREATIVE
-            submission.generate_html()
+            #submission.generate_html()
+            submission.text_html = submission_form.cleaned_data["text"]
+            print( submission_form.cleaned_data["text"])
             user = User.objects.get(username=request.user)
             redditUser = ScUser.objects.get(user=user)
             submission.author = redditUser
@@ -391,7 +399,10 @@ def submit(request):
             messages.success(request, 'Пост создан')
             return redirect('/comments/{}'.format(submission.id))
 
-    return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Добавить пост'})
+    return render(request, 'public/submit.html',
+                  {'form': submission_form,
+                   'caption': 'Добавить пост',
+                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(20)]})
 
 
 def permissionDenied(request):
@@ -426,7 +437,10 @@ def submitFAQ(request):
             messages.success(request, 'Пост создан')
             return redirect('/comments/{}'.format(submission.id))
 
-    return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Добавить'})
+    return render(request, 'public/submit.html',
+                  {'form': submission_form,
+                   'caption': 'Добавить',
+                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(20)]})
 
 
 @login_required
@@ -455,7 +469,11 @@ def submitPower(request):
 
             return redirect('/comments/{}'.format(submission.id))
 
-    return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Добавить', 'flgPower': True})
+    return render(request, 'public/submit.html',
+                  {'form': submission_form,
+                   'caption': 'Добавить',
+                   'flgPower': True,
+                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(20)]})
 
 
 def getCreativeByType(request, ct, sctp, flgNew=False, username=""):

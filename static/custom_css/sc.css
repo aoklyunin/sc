@@ -677,11 +677,11 @@ a.not-active {
 
 #smilePanel{
   position:absolute;
-  z-index:2;
+  z-index:3;
 }
 
 #smileBody{
-    height: 150px;
+    height: 120px;
     overflow-y: auto;
 }
 
@@ -695,8 +695,13 @@ a.not-active {
 
 .ceField{
   color:#000000;
+  padding:10px;
+  opacity:1;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  overflow-y: auto;
+  height:100%
 }
+
 .ceFieldWrapper{
   opacity:0.7;
   background: rgb(255, 255,  255);

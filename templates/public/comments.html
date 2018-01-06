@@ -118,13 +118,20 @@
               data-parent-id="{{ submission.id }}">
             <fieldset>
               <div class="row">
-                   <div class="col-10">
-                        <textarea class="form-control" rows="3" id="commentContent"></textarea>
-                        <span id="postResponse" class="text-success" style="display: none"></span>
+                  <div class="ceFieldWrapper col-9">
+                    <div contentEditable="true" class="ceField commentContent" id="commentContent" >
+
                     </div>
-                    <div class="col-2 commentSubmit">
+                  </div>
+                  <div class="col-2 commentSubmit">
                         <button type="submit" class="btn btn-primary">Отправить</button>
-                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="offset-7 col-2 addSmilesHolder">
+                  <div align="right" id="addSmiles">Смайлы</div>
+                  {% include '__layout/smile_panel.html' with target_id='commentContent'  %}
+                </div>
               </div>
             </fieldset>
           </form>

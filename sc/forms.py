@@ -172,6 +172,7 @@ class SubmissionForm(forms.ModelForm):
         attrs={
             'class': "form-control",
             'rows': "3",
+            'id': 'postField',
             'placeholder': "(Необязательно) текст"}),
         max_length=5000,
         required=False)
