@@ -4,7 +4,7 @@
 <br><br>
 <div class="row" style="width:100%;">
   <div class="col-10 offset-1">
-    <form class="form-horizontal" action="/profile/edit/" method="post">
+    <form class="form-horizontal" id="editProfileForm" action="/profile/edit/" method="post">
     {% csrf_token %}
     <fieldset>
       <h2 class="editProfileTitle" align="center">Редактирование профиля</h2>
@@ -82,17 +82,31 @@
             </div>
           </div>
           <div class="col-6">
-            <div class="form-group">
+            <div class="form-group" >
               <div class="row padded10">
                 <div class="col-9">
-                  <div style="width:100%; opacity:0.7">
-                    {{ form.about_text }}
+                    <div style="width:100%; display: none;" >
+                      {{ form.about_text }}
                     </div>
-                    {% for error in form.about_text.errors %}
-                        <p class="text-danger">{{ error }}</p>
-                    {% endfor %}
-                    <span class="help-block">У Вас не больше 500 символов.</span>
+                    <div class="ceFieldWrapper">
+                        <div contentEditable="true" class="ceField" id="ceAbout" >
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-9">
+                        <span class="help-block">У Вас не больше 500 символов.</span>
+                      </div>
+
+                      <div class="col-2">
+                        <div align="right" id="addSmiles">Смайлы</div>
+                        {% include '__layout/smile_panel.html' with target_id='ceAbout'  %}
+                      </div>
+
+                    </div>
                 </div>
+
                 <label  align="right" for="about_me" class="col-3 control-label editAboutField" >Обо Мне</label>
               </div>
               <div class="row padded10">
@@ -144,6 +158,7 @@
           </div>
         </div>
       </div>
+       <input type="checkbox" id="formChecked" style="opacity:0;">
     </fieldset>
     </form>
   </div>

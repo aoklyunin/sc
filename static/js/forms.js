@@ -30,8 +30,28 @@ function submitSubmitEvent(event, form) {
     }
 }
 
+function editProfileEvent(event, form) {
+    checked = $("#formChecked").is(':checked');
+    if (!checked){
+       $("#formChecked").prop('checked', true);
+       $("#aboutField").val($("#ceAbout").html());
+       //alert( form.about_text);
+       form.submit();
+    }
+}
+
+
+
 
 $("#submitForm").submit(function (event) {
     submitSubmitEvent(event, $(this));
 });
+
+$("#ceAbout").html($("#aboutField").val());
+$("#aboutField").val()
+
+$("#editProfileForm").submit(function (event) {
+    editProfileEvent(event, $(this));
+});
+
 

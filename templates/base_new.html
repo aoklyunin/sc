@@ -18,7 +18,8 @@
 <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
   <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css">
-   {% block link_block %}
+
+  {% block link_block %}
 
   {% endblock %}
 
@@ -85,8 +86,12 @@
 {% endblock %}
 
 <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+  <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+<script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
+
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/sc.js' %} "></script>
+<script src="{% static 'js/forms.js' %} "></script>
 
 <script type="text/javascript">
     var elems = document.getElementsByClassName('confirmation');

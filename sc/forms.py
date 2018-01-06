@@ -77,8 +77,8 @@ class ProfileForm(forms.ModelForm):
 
     about_text = forms.CharField(widget=forms.Textarea(
         attrs={'class': "form-control",
-               'id': "about_me",
                'rows': "4",
+               'id':'aboutField',
                }),
         required=False
     )

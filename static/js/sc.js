@@ -184,3 +184,28 @@ $(document).ready(function(){
 $(".alert").fadeTo(2000, 500).slideUp(500, function(){
     $(".alert").slideUp(500);
 });
+
+
+$("#addSmiles").click(function(){
+  var pos = $(this).position();
+  $("#smilePanel").css({ top: pos.top, left: pos.left});
+  $("#smilePanel").show();
+});
+
+$("#closeSmilePanel").click(function(){
+  $("#smilePanel").hide();
+});
+
+$(".smileImg").click(function(){
+    targetId = $(this).attr('target-id');
+    //alert(targetId);
+    $("#"+targetId).focus();
+    //var tx ='<img src="'+$(this).attr('src')+'">';
+    //alert(typeof(tx));
+    //alert($("#"+targetId).text());
+    //alert(targetId);
+    //alert(typeof($("#"+targetId)));
+    $("#"+targetId).append('<img src="'+$(this).attr('src')+'">');
+});
+
+

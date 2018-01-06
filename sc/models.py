@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from random import randint
 
 import mistune
 import re
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.db.models import Count
 from django.utils import timezone
 from mptt.models import MPTTModel, TreeForeignKey
 from sc_main.utils.model_utils import ContentTypeAware, MttpContentTypeAware
@@ -50,7 +47,7 @@ class Submission(ContentTypeAware):
     ups = models.IntegerField(default=0)
     downs = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
-    timestamp = models.DateTimeField(default=timezone.localtime(timezone.now()))
+    timestamp = models.DateTimeField(default=timezone.now())
     comment_count = models.IntegerField(default=0)
     tp = models.IntegerField(default=TP_CREATIVE)
     link_type = models.IntegerField(default=-1)
@@ -120,7 +117,7 @@ class Comment(MttpContentTypeAware):
     submission = models.ForeignKey(Submission)
     parent = TreeForeignKey('self', related_name='children',
                             null=True, blank=True, db_index=True)
-    timestamp = models.DateTimeField(default=timezone.localtime(timezone.now()))
+    timestamp = models.DateTimeField(default=timezone.now())
     ups = models.IntegerField(default=0)
     downs = models.IntegerField(default=0)
     score = models.IntegerField(default=0)

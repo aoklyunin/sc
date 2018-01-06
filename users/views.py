@@ -110,6 +110,7 @@ def edit_profile(request):
     elif request.method == 'POST':
         profile_form = ProfileForm(request.POST, instance=user)
         if profile_form.is_valid():
+            print(profile_form.cleaned_data["about_text"])
             profile = profile_form.save(commit=False)
             profile.update_profile_data()
             profile.save()
@@ -117,7 +118,11 @@ def edit_profile(request):
     else:
         raise Http404
 
-    return render(request, 'private/edit_profile.html', {'form': profile_form, 'caption': 'Добавить пост'})
+    return render(request, 'private/edit_profile.html',
+                  {'form': profile_form,
+                   'caption': 'Добавить пост',
+                   'smileLinks': ['img/smiles/smile%d.png'%x for x in range(20)]
+                   })
 
 
 def user_login(request):

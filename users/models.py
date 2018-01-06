@@ -50,7 +50,8 @@ class ScUser(models.Model):
         return self.date.strftime("%d/%m/%y")
 
     def update_profile_data(self):
-        self.about_html = mistune.markdown(self.about_text)
+        #self.about_html = mistune.markdown(self.about_text)
+        self.about_html = self.about_text
         if self.display_picture:
             self.gravatar_hash = md5(self.email.lower().encode('utf-8')).hexdigest()
 

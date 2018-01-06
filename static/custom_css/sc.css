@@ -674,3 +674,33 @@ a.not-active {
 #commentContent{
   overflow-x: hidden;
 }
+
+#smilePanel{
+  position:absolute;
+  z-index:2;
+}
+
+#smileBody{
+    height: 150px;
+    overflow-y: auto;
+}
+
+#smileDialog{
+  width: 250px;
+}
+
+.form-control{
+  overflow-x: hidden;
+}
+
+.ceField{
+  color:#000000;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.ceFieldWrapper{
+  opacity:0.7;
+  background: rgb(255, 255,  255);
+  border-radius: 10;
+  height:100px;
+  width: 100%;
+}

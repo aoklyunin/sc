@@ -1,0 +1,18 @@
+{% load staticfiles %}
+{% load static %}
+
+<div id="smilePanel" style="display: none; position: absolute; top:50px;left:-150px;">
+  <div class="modal-dialog" id="smileDialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="closeSmilePanel">&times;</button>
+        <div class="modal-body" id="smileBody">
+          {% for smile in smileLinks%}
+              <img class="smileImg" src="{% static smile %}" target-id="{{target_id}}">
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
