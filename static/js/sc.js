@@ -104,8 +104,7 @@ var newCommentForm = '<form id="commentForm" class="form-horizontal"\
                             <div class="form-group comment-group">\
                                 <div class="col-lg-10">\
                                      <div class="ceFieldWrapper col-9">\
-                                        <div contentEditable="true" class="ceField commentContent">\
-                                        </div>\
+                                        <div contentEditable="true" class="ceField commentContent"></div>\
                                      </div>\
                                 </div>\
                             </div>\
@@ -136,7 +135,6 @@ $('a[name="replyButton"]').click(function () {
             $("#smilePanel").css({ top: 200, left: 200});
             $("#smilePanel").show();
         });
-        alert(cef.attr('id'));
         $(".smileImg").attr('target-id',cef.attr('id'));
 
         var $form = $mediaBody.find('#commentForm');
@@ -173,4 +171,3 @@ $(".alert").fadeTo(2000, 500).slideUp(500, function(){
 });
 
 
-$
