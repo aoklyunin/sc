@@ -94,7 +94,11 @@
               {% if submission.link_type == 0 %}
                 <div class="row">
                   <div class="col-12 textBackground">
-                      <div class="readableText">{{ submission.text_html|safe }}</div>
+                      <div class="readableText">
+                        <div style="overflow:hidden;">
+                          {{ submission.text_html|safe }}
+                        </div>
+                      </div>
                     <br>
                     <div align="right">
                       <a href="{{ submission.url }}">
