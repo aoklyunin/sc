@@ -217,6 +217,7 @@ def edit(request, thread_id=None):
 
             return redirect('/comments/{}'.format(this_submission.id))
 
+
     return render(request, 'public/submit.html', {'form': submission_form, 'caption': 'Редактирование'})
     # return render(request, 'public/submit.html', {'form': None})
 
