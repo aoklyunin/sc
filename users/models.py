@@ -30,8 +30,6 @@ class ScUser(models.Model):
     homepage = models.URLField(null=True, blank=True, default=None)
     instagram = models.CharField(null=True, blank=True, max_length=39,
                                  default=None)
-    twitter = models.CharField(null=True, blank=True, max_length=39,
-                               default=None)
     fb = models.CharField(null=True, blank=True, max_length=39,
                           default=None)
     vk = models.CharField(null=True, blank=True, max_length=39,
@@ -41,7 +39,8 @@ class ScUser(models.Model):
 
     youtube = models.CharField(null=True, blank=True, max_length=39,
                                default=None)
-
+    tel = models.CharField(null=True, blank=True, max_length=39,
+                               default=None)
     creativeKarma = models.IntegerField(default=0)
     powerKarma = models.IntegerField(default=0)
 
