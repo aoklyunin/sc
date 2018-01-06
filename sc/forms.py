@@ -185,11 +185,10 @@ class SubmissionForm(forms.ModelForm):
     stoDate = forms.DateField(widget=forms.DateInput(
         attrs={
             'class': "form-control",
-            "placeholder": "01/20/2018"}),
+            "placeholder": "20/01/2018"}),
         required=False,
         input_formats=["%d/%m/%Y"]
     )
-
 
     def clean_url(self):
         url = self.cleaned_data['url']
