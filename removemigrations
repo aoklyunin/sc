@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm -r users/migrations;
+rm -r sc/migrations;
