@@ -2,7 +2,7 @@
 {% load humanize %}
 {% load staticfiles %}
 {% load static %}
-
+{% load tz %}
 
 {%block page_content %}
 <div class="row creativeListHeader">
@@ -19,15 +19,17 @@
         {% endif %}
       </div>
       <div class="col-2 postDate">
+        {% localtime on %}
         {% if flgPower %}
           <div class="powerDate" align="right" >
-            {{ submission.stoDate|date:"d/m/y" }}
+            {{ submission.stoDate|localtime }}
           </div>
         {%else%}
           <div align="right" >
-            {{ submission.timestamp|date:"H:i d/m/y" }}
+            {{ submission.timestamp|localtime }}
           </div>
         {%endif%}
+        {% endlocaltime %}
       </div>
     </div>
     <div class="row" style="width:100%">

@@ -50,7 +50,7 @@ class Submission(ContentTypeAware):
     ups = models.IntegerField(default=0)
     downs = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
-    timestamp = models.DateTimeField(default=timezone.now)
+    timestamp = models.DateTimeField(default=timezone.localtime(timezone.now()))
     comment_count = models.IntegerField(default=0)
     tp = models.IntegerField(default=TP_CREATIVE)
     link_type = models.IntegerField(default=-1)
@@ -58,7 +58,7 @@ class Submission(ContentTypeAware):
     link_height = models.IntegerField(default=0)
     viewCnt = models.IntegerField(default=0)
     regard = models.IntegerField(default=0)
-    stoDate = models.DateTimeField(default=timezone.now)
+    stoDate = models.DateTimeField(default=timezone.localtime(timezone.now()))
 
 
     def processUrl(self):
@@ -120,7 +120,7 @@ class Comment(MttpContentTypeAware):
     submission = models.ForeignKey(Submission)
     parent = TreeForeignKey('self', related_name='children',
                             null=True, blank=True, db_index=True)
-    timestamp = models.DateTimeField(default=timezone.now)
+    timestamp = models.DateTimeField(default=timezone.localtime(timezone.now()))
     ups = models.IntegerField(default=0)
     downs = models.IntegerField(default=0)
     score = models.IntegerField(default=0)

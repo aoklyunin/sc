@@ -2,7 +2,7 @@
 {% load humanize %}
 {% load staticfiles %}
 {% load static %}
-
+{% load tz %}
 {%block menu %}
   <div class="paddedPageMenuHeader" align="left">
     <a href = {{titleLink}} class="pageMenuLink {% if ctVal %}{%else%} active{%endif%}"> {{titleText}}</a><br>
@@ -58,15 +58,11 @@
                 </a>
               </div>
               <div class="col-2 postDate">
-                {% if submission.tp == 1 %}
-                  <div class="powerDate" align="right" >
-                    {{ submission.stoDate|date:"d M" }}
+{% localtime on %}
+                  <div  {% if submission.tp == 1 %}class="powerDate"{%endif%} align="right" >
+                   {{ submission.timestamp|date:"d M" }}
                   </div>
-                {%else%}
-                  <div align="right" >
-                    {{ submission.timestamp|date:"d M" }}
-                  </div>
-                {%endif%}
+{% endlocaltime %}
               </div>
             </div>
             <div class="row"  >
