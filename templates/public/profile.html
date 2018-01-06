@@ -39,9 +39,14 @@
       </div>
       <div class="col-6">
         <div class="row">
-          <div class="col-1 offset-6" >
+          <div class="col-1 offset-5" >
             <a class="socialImg {% if not profile.instagram %}not-active {%endif%}" href="{{profile.instagram}}" >
               <img class="socialImg" title="Instagram" src="{%static 'img/insta1.png' %}">
+            </a>
+          </div>
+            <div class="col-1">
+            <a class="socialImg {% if not profile.tel %}not-active {%endif%}" href="{{profile.tel}}">
+              <img  class="socialImg" title="Телефон" src="{%static 'img/mobile.png' %}">
             </a>
           </div>
           <div class="col-1">

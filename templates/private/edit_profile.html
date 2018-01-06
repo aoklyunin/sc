@@ -36,6 +36,15 @@
         <div class="row padded15" >
           <div class="col-6">
             <div class="row padded10">
+              <label for="tel" class="control-label bebasWhiteText col-3 editSocialField" >Телефон</label>
+              <div class="input-group col-8" >
+                {{ form.tel }}
+                {% for error in form.tel.errors %}
+                  <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="row padded10">
               <label for="instagram" class="control-label bebasWhiteText col-3 editSocialField" >Instagram</label>
               <div class="input-group col-8" >
                 {{ form.instagram }}

@@ -128,6 +128,13 @@ class ProfileForm(forms.ModelForm):
         required=False,
         max_length=39
     )
+    tel = forms.CharField(widget=forms.TextInput(
+        attrs={'class': "form-control",
+               'id': "tel",
+               'type': "text"}),
+        required=False,
+        max_length=39
+    )
 
     youtube = forms.CharField(widget=forms.TextInput(
         attrs={'class': "form-control",
@@ -150,7 +157,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = ScUser
         fields = ('first_name', 'last_name', 'email','date',
-                  'display_picture', 'about_text',
+                  'display_picture', 'about_text','tel',
                   'homepage', 'instagram', 'twitter','fb','vk','telegram','youtube')
 
 

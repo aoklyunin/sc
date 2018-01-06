@@ -51,7 +51,7 @@ function editPostEvent(event, form) {
 
 function submitEvent(event, form) {
     event.preventDefault();
-    if (form.find(".commentContent").text()!=''){
+    if (form.find(".commentContent").html()!=''){
     var $form = form;
     var data = $form.data();
     url = $form.attr("action");
