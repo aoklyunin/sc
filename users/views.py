@@ -9,7 +9,7 @@ from django.http import HttpResponseBadRequest, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 
 from sc.forms import UserForm, ProfileForm
-from sc.models import Submission
+from sc.models import Submission, CreativeType
 from sc.views import getCreativeByType
 from sc_main.settings.common import REG_PASSWORD, DATE_INPUT_FORMATS
 from users.models import ScUser
@@ -18,6 +18,10 @@ from users.models import ScUser
 def user_profile(request, username):
     user = get_object_or_404(User, username=username)
     profile = ScUser.objects.get(user=user)
+
+    titleText = 'Портфолио'
+    titleLink = '/user/' + username + '/creative/'
+    prefix = '/user/' + username + '/creative/'
 
     return render(request, 'public/profile.html', {
         'profile': profile,
@@ -28,6 +32,11 @@ def user_profile(request, username):
         'power_karma_val': profile.getShortPowerKarma(),
         'creative_karma_color': profile.getCreativeKarmaColor(),
         'creative_karma_val': profile.getShortCreativeKarma(),
+        'titleText': titleText,
+        'titleLink': titleLink,
+        'prefix' : prefix,
+        'ctVal': None,
+        'cts': CreativeType.objects.filter(tp=CreativeType.TP_MENU_ITEM),
     })
 
 

@@ -21,47 +21,33 @@ body {
 
 
 {% block content %}
-
-
   <div class="row " style="width:100%; line-height: 25px;"  >
-
-            <div class="col-2 paddedPageMenu">
-               {%block menu %}
-                <div align="left"><a class="pageMenuLink active" href="/user/{{ profile.user.username }}/creative/">Портфолио</a></div><br><br>
-                <div align="left"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/video/">Видео</a></div><br>
-                <div align="left"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/design/"> Дизайн</a></div><br>
-                <div align="left"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/conception/">Концепция</a></div><br>
-                <div align="left"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/story/">Сюжет</a></div><br>
-                <div align="left"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/music/">Музыка</a></div><br>
-                <div align="left"><a class="pageMenuLink" href="/user/{{ profile.user.username }}/invention/">Изобретения</a></div><br>
-                {%endblock%}
+    <div class="col-2 paddedPageMenu">
+      {%block menu %}
+        <div class="paddedPageMenuHeader" align="left">
+          <a href = {{titleLink}} class="pageMenuLink {% if ctVal %}{%else%} active{%endif%}"> {{titleText}}</a><br>
+        </div>
+        <div class="paddedPageMenuBody">
+          {% for c in cts %}
+            <div  align="left"><a class="pageMenuLink
+              {% if ctVal %}
+                {% ifequal ctVal.name c.name%} active {% endifequal %}
+              {%endif%}" href="{{prefix}}{{c.link}}">{{c.name}}</a>
             </div>
-
-
-     <div class="col-8 offset-3">
-       <div class="container defaultContainer">
-
-    {%block page_content %}
-
-    {% endblock %}
-       </div>
-     </div>
+            <br>
+          {% endfor %}
+        </div>
+      {%endblock%}
+    </div>
+    <div class="col-8 offset-3">
+      <div class="container defaultContainer">
+        {%block page_content %}
+        {% endblock %}
+      </div>
+    </div>
   </div>
-
-
 {% endblock %}
 
 
-{% block footer_script %}
-<script>
-$(document).ready(function(){
-  $( ".ytframe" ).each(function( index ) {
-     $( this ).height( $( this ).width()*9/16 );
-  });
-});
-
- </script>
-
-{%endblock %}
 
 

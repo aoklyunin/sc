@@ -1,8 +1,12 @@
 {% extends 'public/default_page.html' %}
 
+{% load staticfiles %}
+{% load static %}
+
+
 {% block content %}
 <div class="container" style="width=100%">
-    <form class="form-horizontal" action="" method="post">
+    <form class="form-horizontal" id="submitForm" action="" method="post">
         {% csrf_token %}
         <fieldset>
             <h1 class="submitHeader" align="center">{{caption}}</h1>
@@ -63,6 +67,7 @@
                 <button type="submit" class="btn btn-primary">Сохранить</button>
               </div>
             </div>
+            <input type="checkbox" id="formChecked" style="opacity:0;">
         </fieldset>
     </form>
     <div class="row">
@@ -73,4 +78,11 @@
       </div>
     </div>
 </div>
+
 {% endblock %}
+
+
+{% block footer_script %}
+  <script src="{% static 'js/forms.js' %} "></script>
+{%endblock %}
+

@@ -4,12 +4,18 @@
 {% load static %}
 
 {%block menu %}
-  {% for c in cts %}
-    <div  align="left"><a class="pageMenuLink
-      {% if ctVal %}
-        {% ifequal ctVal.name c.name%} active {% endifequal %}
-      {%endif%}" href="{{prefix}}{{c.link}}">{{c.name}}</a></div><br>
-  {% endfor %}
+  <div class="paddedPageMenuHeader" align="left">
+    <a href = {{titleLink}} class="pageMenuLink {% if ctVal %}{%else%} active{%endif%}"> {{titleText}}</a><br>
+  </div>
+  <div class="paddedPageMenuBody">
+    {% for c in cts %}
+      <div  align="left"><a class="pageMenuLink
+       {% if ctVal %}
+          {% ifequal ctVal.name c.name%} active {% endifequal %}
+        {%endif%}" href="{{prefix}}{{c.link}}">{{c.name}}</a>
+      </div><br>
+    {% endfor %}
+  </div>
 {%endblock%}
 
 
@@ -28,10 +34,11 @@
         <a class="pageMenuLink">|</a>
         <a class="pageMenuLink {%if flgNew %} active {%else%}{%endif%}" href="{{new_prefix}}" >Новое</a>
     </div>
-
-    <div align="right" class="col-5" >
-      <a href = {{titleLink}} class="creativeListTitle"> {{titleText}}</a>
-    </div>
+    {% if username %}
+      <div align="right" class="col-5" >
+        <a href = /user/{{username}}/ class="creativeListTitle"> {{username}}</a>
+      </div>
+    {% endif %}
   </div>
 
   <div class="creativeListBody">

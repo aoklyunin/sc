@@ -290,12 +290,21 @@ a.pagemenuLink:hover{
 /* меню слева */
 .paddedPageMenu{
   position: fixed;
-  top:1.5em;
   left: 0.2em;
   font-family: BebasNeue;
   font-size: 55;
   text-align:right;
   color: #ffffff;
+}
+/* заголовок меню */
+.paddedPageMenuHeader{
+  position:fixed;
+  top: 35px;
+}
+/* тело меню */
+.paddedPageMenuBody{
+  position:fixed;
+  top: 180px;
 }
 
 /* тело профиля */

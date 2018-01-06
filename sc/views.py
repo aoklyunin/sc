@@ -343,6 +343,7 @@ def vote(request):
 
 @login_required
 def submit(request):
+    print('submit')
     """
     Handles new submission.. submission.
     """
@@ -471,8 +472,8 @@ def getCreativeByType(request, ct, sctp, flgNew=False,username=""):
     if sctp == Submission.TP_USER_CREATIVE:
         canEdit = username == request.user.username
         canDelete = canEdit
-        titleText = username
-        titleLink = '/user/' + username
+        titleText = 'Портфолио'
+        titleLink = '/user/' + username + '/creative/'
         createLink = '/submit/'
         prefix = '/user/' + username + '/creative/'
 
@@ -540,11 +541,12 @@ def getCreativeByType(request, ct, sctp, flgNew=False,username=""):
         'titleText': titleText,
         'titleLink': titleLink,
         'createLink': createLink,
+        'username':username,
         'prefix': prefix,
         'canDelete': canDelete,
         'canEdit': canEdit,
         'canAdd': canAdd,
-        'ct': ctVal,
+        'ctVal': ctVal,
         'cts': CreativeType.objects.filter(tp=CreativeType.TP_MENU_ITEM),
         'flgNew':flgNew,
         'new_prefix':new_prefix,

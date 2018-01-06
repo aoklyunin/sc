@@ -174,4 +174,9 @@ $('a[name="replyButton"]').click(function () {
 });
 
 
+$(document).ready(function(){
+    $( ".ytframe" ).each(function( index ) {
+      $( this ).height( $( this ).width()*9/16 );
+    });
+});
 
