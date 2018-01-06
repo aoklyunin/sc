@@ -127,6 +127,7 @@ class Comment(MttpContentTypeAware):
     raw_comment = models.TextField(blank=True)
     html_comment = models.TextField(blank=True)
     markedBySubmissionOwner = models.BooleanField(default=False)
+    url = models.CharField(null=True, blank=True, max_length=1000)
 
     class MPTTMeta:
         order_insertion_by = ['-score']
