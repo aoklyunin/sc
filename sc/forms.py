@@ -50,12 +50,15 @@ class UserForm(forms.ModelForm):
         required=True,
         validators=[alphanumeric])
 
+
     class Meta:
         model = User
         fields = ('username', 'password')
 
 
 class ProfileForm(forms.ModelForm):
+
+
     first_name = forms.CharField(widget=forms.TextInput(
         attrs={'class': "form-control",
                'id': "first_name",
