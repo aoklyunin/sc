@@ -10,7 +10,7 @@
       <h2 class="editProfileTitle" align="center">Редактирование профиля</h2>
       <br>
       <div class="form-group">
-        <div class="row padded10">
+        <div class="row padded5">
           <label for="first_name" align="right" class="col-1 control-label bebasWhiteText" style="position:relative; top:10px; font-size:30;">Имя</label>
           <div class="col-2" align="left">
             {{ form.first_name }}
@@ -33,31 +33,31 @@
             {% endfor %}
           </div>
         </div>
-        <div class="row padded15" >
+        <div class="row padded10" >
           <div class="col-6">
             <div class="row padded10">
               <label for="tel" class="control-label bebasWhiteText col-3 editSocialField" >Телефон</label>
               <div class="input-group col-8" >
-                {{ form.tel }}
-                {% for error in form.tel.errors %}
-                  <p class="text-danger">{{ error }}</p>
-                {% endfor %}
+                  {{ form.tel }} <br>
+                  {% for error in form.tel.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                  {% endfor %}
               </div>
             </div>
             <div class="row padded10">
               <label for="instagram" class="control-label bebasWhiteText col-3 editSocialField" >Instagram</label>
               <div class="input-group col-8" >
-                {{ form.instagram }}
-                {% for error in form.instagram.errors %}
-                  <p class="text-danger">{{ error }}</p>
-                {% endfor %}
+                  {{ form.instagram }}<br>
+                  {% for error in form.instagram.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                  {% endfor %}
               </div>
             </div>
             <div class="row padded10" >
               <label for="fb" class="control-label col-3 editSocialField">FaceBook</label>
               <div class="input-group col-8">
-                {{ form.fb }}
-                {% for error in form.fb.errors %}
+                  {{ form.fb }}<br>
+                  {% for error in form.fb.errors %}
                  <p class="text-danger">{{ error }}</p>
                 {% endfor %}
               </div>
@@ -65,7 +65,7 @@
             <div class="row padded10" >
               <label for="vk" class="control-label col-3 editSocialField">VK</label>
               <div class="input-group col-8" >
-                {{ form.vk }}
+                {{ form.vk }}<br>
                 {% for error in form.vk.errors %}
                     <p class="text-danger">{{ error }}</p>
                 {% endfor %}
@@ -74,7 +74,7 @@
             <div class="row padded10">
               <label for="telegram" class="control-label col-3 editSocialField" >Telegram</label>
               <div class="input-group col-8" >
-                {{ form.telegram }}
+                {{ form.telegram }}<br>
                 {% for error in form.telegram.errors %}
                  <p class="text-danger">{{ error }}</p>
                 {% endfor %}
@@ -83,7 +83,7 @@
             <div class="row padded10">
               <label for="youtube" class="control-label bebasWhiteText col-3 editSocialField">YouTube</label>
               <div class="input-group col-8">
-                {{ form.youtube }}
+                {{ form.youtube }}<br>
                 {% for error in form.youtube.errors %}
                   <p class="text-danger">{{ error }}</p>
                 {% endfor %}
@@ -161,7 +161,7 @@
         <div class="row" style="padding-top:5px">
           <div class="col-12" align="center">
             <div class="form-group">
-              <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+              <button type="submit" class="btn btn-primary regular" >Сохранить изменения</button>
               <a class="btn btn-primary regular" href="/user/{{ user.username }}">Вернуться в профиль</a>
             </div>
           </div>
