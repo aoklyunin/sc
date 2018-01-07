@@ -16,7 +16,7 @@ class CreativeType(models.Model):
     TP_MENU_HEADER = 1
 
     name = models.CharField(max_length=100)
-    link = models.CharField(max_length=100,blank=True)
+    link = models.CharField(max_length=100, blank=True)
     tp = models.IntegerField(default=0)
 
     def __unicode__(self):
@@ -57,8 +57,7 @@ class Submission(ContentTypeAware):
     regard = models.IntegerField(default=0)
     stoDate = models.DateTimeField(default=timezone.now())
 
-
-    def processUrl(self,url):
+    def processUrl(self, url):
         # flickr
         match = re.search(r'<img src="[\'"]?([^\'" >]+)staticflickr([^\'" >]+)"', self.url)
         if match:
@@ -131,7 +130,7 @@ class Comment(MttpContentTypeAware):
         order_insertion_by = ['-score']
 
     @classmethod
-    def create(cls, author, raw_comment, parent, ltp,link):
+    def create(cls, author, raw_comment, parent, ltp, link):
         """
         Create a new comment instance. If the parent is submisison
         update comment_count field and save it.
@@ -295,3 +294,11 @@ class Vote(models.Model):
         self.vote_object.save()
         self.vote_object.author.save()
         return vote_diff
+
+
+class Analytic(models.Model):
+    user = models.ForeignKey('users.ScUser', blank=True)
+    val1 = models.IntegerField(default=0)
+    val2 = models.CharField(default=0, max_length=10000)
+    val3 = models.CharField(default=0, max_length=10000)
+    dt = models.DateTimeField(default=timezone.now())
