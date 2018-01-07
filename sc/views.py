@@ -147,7 +147,7 @@ def comments(request, thread_id=None):
                    'sub_vote': sub_vote_value,
                    'vote_s_val': vote_s_val,
                    'cts': cts,
-                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(20)]})
+                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(89)]})
 
 @login_required
 def delete(request, thread_id=None):
@@ -251,7 +251,7 @@ def edit(request, thread_id=None):
     return render(request, 'public/submit.html',
                   {'form': submission_form,
                    'caption': 'Редактирование',
-                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(20)]})
+                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(89)]})
     # return render(request, 'public/submit.html', {'form': None})
 
 
@@ -405,7 +405,7 @@ def submit(request):
     return render(request, 'public/submit.html',
                   {'form': submission_form,
                    'caption': 'Добавить пост',
-                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(20)]})
+                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(89)]})
 
 
 def permissionDenied(request):
@@ -443,7 +443,7 @@ def submitFAQ(request):
     return render(request, 'public/submit.html',
                   {'form': submission_form,
                    'caption': 'Добавить',
-                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(20)]})
+                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(89)]})
 
 
 @login_required
@@ -476,7 +476,7 @@ def submitPower(request):
                   {'form': submission_form,
                    'caption': 'Добавить',
                    'flgPower': True,
-                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(20)]})
+                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(89)]})
 
 
 def getCreativeByType(request, ct, sctp, flgNew=False, username=""):
