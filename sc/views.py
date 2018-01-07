@@ -13,6 +13,7 @@ from django.template.defaulttags import register
 from sc.forms import SubmissionForm
 from sc.models import Submission, Comment, Vote, CreativeType
 from sc.utils.helpers import post_only
+from sc_main.localCode import processUrl
 from users.models import ScUser
 
 
@@ -281,10 +282,12 @@ def post_comment(request):
     except (Comment.DoesNotExist, Submission.DoesNotExist):
         return HttpResponseBadRequest()
 
+    p = processUrl(raw_comment)
     comment = Comment.create(author=author,
-                             raw_comment=raw_comment,
+                             raw_comment=p['text'],
+                             ltp = p['link_type'],
+                             link = p['url'],
                              parent=parent_object)
-
     comment.save()
     return JsonResponse({'msg': "Your comment has been posted."})
 

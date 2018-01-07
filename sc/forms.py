@@ -78,7 +78,7 @@ class ProfileForm(forms.ModelForm):
     about_text = forms.CharField(widget=forms.Textarea(
         attrs={'class': "form-control",
                'rows': "4",
-               'id':'aboutField',
+               'id': 'aboutField',
                }),
         required=False
     )
@@ -152,13 +152,11 @@ class ProfileForm(forms.ModelForm):
         input_formats=["%d/%m/%Y"]
     )
 
-
-
     class Meta:
         model = ScUser
-        fields = ('first_name', 'last_name', 'email','date',
-                  'display_picture', 'about_text','tel',
-                  'homepage', 'instagram', 'twitter','fb','vk','telegram','youtube')
+        fields = ('first_name', 'last_name', 'email', 'date',
+                  'display_picture', 'about_text', 'tel',
+                  'homepage', 'instagram', 'twitter', 'fb', 'vk', 'telegram', 'youtube')
 
 
 class SubmissionForm(forms.ModelForm):
@@ -174,7 +172,7 @@ class SubmissionForm(forms.ModelForm):
                'placeholder': "(Необязательно) http:///www.example.com"}),
         required=False)
 
-    ctp = forms.ModelMultipleChoiceField(required=False,queryset=CreativeType.objects.all())
+    ctp = forms.ModelMultipleChoiceField(required=False, queryset=CreativeType.objects.all())
     text = forms.CharField(widget=forms.Textarea(
         attrs={
             'class': "form-control",
@@ -201,11 +199,12 @@ class SubmissionForm(forms.ModelForm):
     def clean_url(self):
         url = self.cleaned_data['url']
         # flickr
-        match = re.search(r'<img src="[\'"]?([^\'" >]+)staticflickr([^\'" >]+)"',url)
+        match = re.search(r'<img src="[\'"]?([^\'" >]+)staticflickr([^\'" >]+)"', url)
         if match:
             url = match.group(0)[10:-1]
             self.link_type = Submission.LINK_TYPE_FLICKR
         else:
+            print('validaion')
             # soundcloud
             match = re.search(r'src="https:\/\/w.soundcloud.com\/[\'"]?([^\'" >]+)"', url)
             if match:
@@ -215,7 +214,7 @@ class SubmissionForm(forms.ModelForm):
                 # youtube
                 match = re.search(r'[\'"]?([^\'" >]+)youtube([^\'" >]+)', url)
                 if match:
-                    url = match.group(0).replace("watch?v=","embed/")
+                    url = match.group(0).replace("watch?v=", "embed/")
                     self.link_type = Submission.LINK_TYPE_YOUTUBE
                 else:
                     match = re.search(r'[\'"]?([^\'" >]+).([^\'" >]+)', url)
@@ -223,10 +222,10 @@ class SubmissionForm(forms.ModelForm):
                         self.link_type = Submission.LINK_TYPE_NOT_PROCESSED
                         url = match.group(0)
                     else:
-                        pass
-                        #raise ValidationError("Не удалось расшифровать ссылку")
+                        if url != '':
+                            raise ValidationError("Не удалось расшифровать ссылку")
         return url
 
     class Meta:
         model = Submission
-        fields = ('title', 'url', 'text','ctp','regard','stoDate')
+        fields = ('title', 'url', 'text', 'ctp', 'regard', 'stoDate')

@@ -58,12 +58,12 @@ class Submission(ContentTypeAware):
     stoDate = models.DateTimeField(default=timezone.now())
 
 
-    def processUrl(self):
+    def processUrl(self,url):
         # flickr
         match = re.search(r'<img src="[\'"]?([^\'" >]+)staticflickr([^\'" >]+)"', self.url)
         if match:
-            self.url = match.group(0)[10:-1]
-            self.link_type = Submission.LINK_TYPE_FLICKR
+            url = match.group(0)[10:-1]
+            link_type = Submission.LINK_TYPE_FLICKR
         else:
             # soundcloud
             match = re.search(r'src="https:\/\/w.soundcloud.com\/[\'"]?([^\'" >]+)"', self.url)
@@ -125,12 +125,13 @@ class Comment(MttpContentTypeAware):
     html_comment = models.TextField(blank=True)
     markedBySubmissionOwner = models.BooleanField(default=False)
     url = models.CharField(null=True, blank=True, max_length=1000)
+    ltp = models.IntegerField(default=0)
 
     class MPTTMeta:
         order_insertion_by = ['-score']
 
     @classmethod
-    def create(cls, author, raw_comment, parent):
+    def create(cls, author, raw_comment, parent, ltp,link):
         """
         Create a new comment instance. If the parent is submisison
         update comment_count field and save it.
@@ -150,7 +151,9 @@ class Comment(MttpContentTypeAware):
         comment = cls(author=author,
                       author_name=author.user.username,
                       raw_comment=raw_comment,
-                      html_comment=html_comment)
+                      html_comment=html_comment,
+                      ltp=ltp,
+                      url=link)
 
         if isinstance(parent, Submission):
             submission = parent
