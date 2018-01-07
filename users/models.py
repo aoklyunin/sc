@@ -28,18 +28,18 @@ class ScUser(models.Model):
                                      default=None)
     display_picture = models.NullBooleanField(default=False)
     homepage = models.URLField(null=True, blank=True, default=None)
-    instagram = models.CharField(null=True, blank=True, max_length=39,
+    instagram = models.CharField(null=True, blank=True, max_length=100,
                                  default=None)
-    fb = models.CharField(null=True, blank=True, max_length=39,
+    fb = models.CharField(null=True, blank=True, max_length=100,
                           default=None)
-    vk = models.CharField(null=True, blank=True, max_length=39,
+    vk = models.CharField(null=True, blank=True, max_length=100,
                           default=None)
-    telegram = models.CharField(null=True, blank=True, max_length=39,
+    telegram = models.CharField(null=True, blank=True, max_length=100,
                                 default=None)
 
-    youtube = models.CharField(null=True, blank=True, max_length=39,
+    youtube = models.CharField(null=True, blank=True, max_length=100,
                                default=None)
-    tel = models.CharField(null=True, blank=True, max_length=39,
+    tel = models.CharField(null=True, blank=True, max_length=100,
                                default=None)
     creativeKarma = models.IntegerField(default=0)
     powerKarma = models.IntegerField(default=0)
