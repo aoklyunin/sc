@@ -11,18 +11,8 @@ from users.models import ScUser
 
 class UserForm(forms.ModelForm):
     alphanumeric = RegexValidator(r'^[0-9a-zA-Z_]*$',
-                                  'Это поле может содержать только буквы, '
+                                  'Это поле может содержать только латинские буквы, '
                                   'числа и символ _.')
-    keyWord = forms.CharField(widget=forms.TextInput(
-        attrs=
-        {'class': "form-control",
-         'placeholder': "Ключ для регистрации",
-         'required': '',
-         'autofocus': ''}),
-        max_length=12,
-        min_length=3,
-        required=True,
-        validators=[alphanumeric])
 
     username = forms.CharField(widget=forms.TextInput(
         attrs=
@@ -30,7 +20,7 @@ class UserForm(forms.ModelForm):
          'placeholder': "Логин",
          'required': '',
          'autofocus': ''}),
-        max_length=12,
+        max_length=20,
         min_length=3,
         required=True,
         validators=[alphanumeric])
@@ -41,6 +31,24 @@ class UserForm(forms.ModelForm):
          'required': ''}),
         min_length=4,
         required=True)
+    rep_password = forms.CharField(widget=forms.PasswordInput(
+        attrs=
+        {'class': "form-control",
+         'placeholder': "Повторите пароль",
+         'required': ''}),
+        min_length=4,
+        required=True)
+
+    keyWord = forms.CharField(widget=forms.TextInput(
+        attrs=
+        {'class': "form-control",
+         'placeholder': "Ключ для регистрации",
+         'required': '',
+         'autofocus': ''}),
+        max_length=12,
+        min_length=3,
+        required=True,
+        validators=[alphanumeric])
 
     class Meta:
         model = User
@@ -94,7 +102,7 @@ class ProfileForm(forms.ModelForm):
                'id': "instagram",
                'type': "text"}),
         required=False,
-        max_length=39
+        max_length=100
     )
 
     twitter = forms.CharField(widget=forms.TextInput(
@@ -102,7 +110,7 @@ class ProfileForm(forms.ModelForm):
                'id': "twitter",
                'type': "text"}),
         required=False,
-        max_length=39
+        max_length=100
     )
 
     fb = forms.CharField(widget=forms.TextInput(
@@ -110,7 +118,7 @@ class ProfileForm(forms.ModelForm):
                'id': "fb",
                'type': "text"}),
         required=False,
-        max_length=39
+        max_length=100
     )
 
     vk = forms.CharField(widget=forms.TextInput(
@@ -118,7 +126,7 @@ class ProfileForm(forms.ModelForm):
                'id': "vk",
                'type': "text"}),
         required=False,
-        max_length=39
+        max_length=100
     )
 
     telegram = forms.CharField(widget=forms.TextInput(
@@ -126,14 +134,14 @@ class ProfileForm(forms.ModelForm):
                'id': "telegram",
                'type': "text"}),
         required=False,
-        max_length=39
+        max_length=100
     )
     tel = forms.CharField(widget=forms.TextInput(
         attrs={'class': "form-control",
                'id': "tel",
                'type': "text"}),
         required=False,
-        max_length=39
+        max_length=100
     )
 
     youtube = forms.CharField(widget=forms.TextInput(
@@ -141,7 +149,7 @@ class ProfileForm(forms.ModelForm):
                'id': "youtube",
                'type': "text"}),
         required=False,
-        max_length=39
+        max_length=100
     )
 
     date = forms.DateField(widget=forms.DateInput(

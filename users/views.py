@@ -190,8 +190,12 @@ def register(request):
         user_form = UserForm(request.POST)
 
         if user_form.is_valid():
+          if user_form.cleaned_data["password"]!=user_form.cleaned_data["rep_password"]:
+            messages.error(request,'пароли не совпадают')
+          else:
             print(user_form.cleaned_data["keyWord"])
             if user_form.cleaned_data["keyWord"] == REG_PASSWORD:
+
                 print("complete")
                 user = user_form.save()
                 user.set_password(user.password)
