@@ -4,12 +4,14 @@
 <br><br>
 <div class="row" style="width:100%;">
   <div class="col-10 offset-1">
-    <form class="form-horizontal" id="editProfileForm" action="/profile/edit/" method="post">
+    <form class="form-horizontal" id="editProfileForm" action="/profile/edit/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <fieldset>
       <h2 class="editProfileTitle" align="center">Редактирование профиля</h2>
       <br>
+
       <div class="form-group">
+
         <div class="row padded5">
           <label for="first_name" align="right" class="col-1 control-label bebasWhiteText" style="position:relative; top:10px; font-size:30;">Имя</label>
           <div class="col-2" align="left">
@@ -129,51 +131,51 @@
 
               </div>
               <div class="row padded10">
-                <div class="col-12">
-                  <div class="form-group">
-                    <div align="left" class="checkbox" >
-                      <label>
-                        {{ form.display_picture }} Показывать граватар
-                      </label>
-                    </div>
+                <div class="col-9">
+                  <div class="imageFieldWrapper">
+                    {{form.avatar}}
                   </div>
                 </div>
+                <label for="avatar" class="control-label col-3 editSocialField" align="right" >Аватар</label>
               </div>
-              <div class="row birthdayRow">
-                <div class="col-4" align="right">
+              <div class="row birthdayRow padded10">
+                <div class="col-7" align="right">
                   {{ form.date }}
                   {% for error in form.date.errors %}
                     <p class="text-danger">{{ error }}</p>
                   {% endfor %}
                 </div>
-                <label align="left" for="date" class="col-5 control-label birthdayField">Дата рождения</label>
+                <label align="right" for="date" class="col-5 control-label birthdayField">Дата рождения</label>
               </div>
+              <div class="row"  style="width:100%;">
+                <div class="offset-3 col-6">
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+              </div>
+              <div class="row editProfileButtons">
+                <div class="col-12" align="center">
+                  <div class="form-group">
+                   <button type="submit" class="btn btn-primary regular" >Сохранить изменения</button>
+                    <a class="btn btn-primary regular" href="/user/{{ user.username }}">Вернуться в профиль</a>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
-        <div class="row"  style="width:100%;">
-      <div class="offset-3 col-6">
-        {% for message in messages %}
-          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-        {% endfor %}
+        <input type="checkbox" id="formChecked" style="opacity:0;">
       </div>
-    </div>
-        <div class="row" style="padding-top:5px">
-          <div class="col-12" align="center">
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary regular" >Сохранить изменения</button>
-              <a class="btn btn-primary regular" href="/user/{{ user.username }}">Вернуться в профиль</a>
-            </div>
-          </div>
-        </div>
-      </div>
-       <input type="checkbox" id="formChecked" style="opacity:0;">
     </fieldset>
     </form>
   </div>
 </div>
 
+<div class="tmpDiv">
 
+</div>
 
 {% endblock %}
 

@@ -56,6 +56,7 @@ class Submission(ContentTypeAware):
     viewCnt = models.IntegerField(default=0)
     regard = models.IntegerField(default=0)
     stoDate = models.DateTimeField(default=timezone.now())
+    image = models.ImageField(upload_to='submissions/', null=True)
 
     def processUrl(self, url):
         # flickr
@@ -125,6 +126,7 @@ class Comment(MttpContentTypeAware):
     markedBySubmissionOwner = models.BooleanField(default=False)
     url = models.CharField(null=True, blank=True, max_length=1000)
     ltp = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='comments/', null=True)
 
     class MPTTMeta:
         order_insertion_by = ['-score']

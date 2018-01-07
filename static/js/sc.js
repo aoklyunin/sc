@@ -163,6 +163,10 @@ $(document).ready(function(){
     $( ".ytframe" ).each(function( index ) {
       $( this ).height( $( this ).width()*9/16 );
     });
+    input = $(".imageFieldWrapper" ).find('input');
+    $(".tmpDiv").append(input);
+    $(".imageFieldWrapper" ).empty();
+    $(".imageFieldWrapper" ).append(input);
 });
 
 

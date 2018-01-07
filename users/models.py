@@ -24,9 +24,9 @@ class ScUser(models.Model):
     about_text = models.TextField(blank=True, null=True, max_length=500,
                                   default=None)
     about_html = models.TextField(blank=True, null=True, default=None)
-    gravatar_hash = models.CharField(max_length=32, null=True, blank=True,
-                                     default=None)
-    display_picture = models.NullBooleanField(default=False)
+
+    avatar = models.ImageField(upload_to='avatars/', null=True)
+
     homepage = models.URLField(null=True, blank=True, default=None)
     instagram = models.CharField(null=True, blank=True, max_length=100,
                                  default=None)
@@ -52,8 +52,8 @@ class ScUser(models.Model):
     def update_profile_data(self):
         #self.about_html = mistune.markdown(self.about_text)
         self.about_html = self.about_text
-        if self.display_picture:
-            self.gravatar_hash = md5(self.email.lower().encode('utf-8')).hexdigest()
+        #if self.display_picture:
+        #    self.gravatar_hash = md5(self.email.lower().encode('utf-8')).hexdigest()
 
     def __unicode__(self):
         return "<ScUser:{}>".format(self.user.username)

@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
+from django.forms import FileInput
 
 from sc.models import Submission, CreativeType
 from users.models import ScUser
@@ -50,15 +51,12 @@ class UserForm(forms.ModelForm):
         required=True,
         validators=[alphanumeric])
 
-
     class Meta:
         model = User
         fields = ('username', 'password')
 
 
 class ProfileForm(forms.ModelForm):
-
-
     first_name = forms.CharField(widget=forms.TextInput(
         attrs={'class': "form-control",
                'id': "first_name",
@@ -84,8 +82,6 @@ class ProfileForm(forms.ModelForm):
         required=False
     )
 
-    display_picture = forms.BooleanField(required=False)
-
     about_text = forms.CharField(widget=forms.Textarea(
         attrs={'class': "form-control",
                'rows': "4",
@@ -108,13 +104,6 @@ class ProfileForm(forms.ModelForm):
         max_length=100
     )
 
-    twitter = forms.CharField(widget=forms.TextInput(
-        attrs={'class': "form-control",
-               'id': "twitter",
-               'type': "text"}),
-        required=False,
-        max_length=100
-    )
 
     fb = forms.CharField(widget=forms.TextInput(
         attrs={'class': "form-control",
@@ -163,12 +152,20 @@ class ProfileForm(forms.ModelForm):
         input_formats=["%d/%m/%Y"]
     )
 
+    avatar = forms.FileInput(attrs={'required': False, 'class': 'form-control', 'enctype': 'multipart/form-data'}),
+
+
     class Meta:
         model = ScUser
         fields = ('first_name', 'last_name', 'email', 'date',
-                  'display_picture', 'about_text', 'tel',
-                  'homepage', 'instagram', 'twitter', 'fb', 'vk', 'telegram', 'youtube')
+                  'about_text', 'tel', 'avatar',
+                  'homepage', 'instagram', 'fb', 'vk', 'telegram', 'youtube')
 
+    def __init__(self, *args, **kwargs):
+        # first call parent's constructor
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        # there's a `fields` property now
+        self.fields['avatar'].required = False
 
 class SubmissionForm(forms.ModelForm):
     link_type = -1
@@ -207,6 +204,8 @@ class SubmissionForm(forms.ModelForm):
         input_formats=["%d/%m/%Y"]
     )
 
+    image = forms.FileInput(attrs={'required': False, 'class': 'form-control', 'enctype': 'multipart/form-data'}),
+
     def clean_url(self):
         url = self.cleaned_data['url']
         # flickr
@@ -239,4 +238,10 @@ class SubmissionForm(forms.ModelForm):
 
     class Meta:
         model = Submission
-        fields = ('title', 'url', 'text', 'ctp', 'regard', 'stoDate')
+        fields = ('title', 'url', 'text', 'ctp', 'regard', 'stoDate','image')
+
+    def __init__(self, *args, **kwargs):
+        # first call parent's constructor
+        super(SubmissionForm, self).__init__(*args, **kwargs)
+        # there's a `fields` property now
+        self.fields['image'].required = False

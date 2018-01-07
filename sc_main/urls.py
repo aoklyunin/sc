@@ -22,6 +22,7 @@ from django.template import RequestContext
 from django.views.generic import TemplateView
 
 from sc.views import ehandler404, ehandler500
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(settings.ADMIN_URL, include(admin.site.urls)),
@@ -32,6 +33,9 @@ urlpatterns = [
     url(r'^creative/', include("sc.creativeUrls")),
     url(r'^power/creative/', include("sc.powerUrls")),
 ]
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = ehandler404
 handler500 = ehandler500

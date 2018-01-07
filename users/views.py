@@ -108,11 +108,18 @@ def edit_profile(request):
         profile_form = ProfileForm(instance=user,initial={'date':udate})
 
     elif request.method == 'POST':
-        profile_form = ProfileForm(request.POST, instance=user)
+        profile_form = ProfileForm(request.POST,request.FILES)
+        #print(profile_form)
         if profile_form.is_valid():
-            profile = profile_form.save(commit=False)
-            profile.update_profile_data()
-            profile.save()
+            ScUser.objects.filter(pk=user.pk).update(**profile_form.cleaned_data)
+            #print(profile_form.cleaned_data['avatar'])
+
+            user.avatar = profile_form.cleaned_data['avatar']
+            user.save()
+            print(user.avatar)
+
+            #profile.update_profile_data()
+            #profile.save()
             messages.success(request, "Настройки профиля сохранены")
     else:
         raise Http404

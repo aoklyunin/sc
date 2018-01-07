@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="container" style="width=100%">
-    <form class="form-horizontal" id="editPostForm" action="" method="post">
+    <form class="form-horizontal" id="editPostForm" action="" method="post"  enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset>
             <h1 class="submitHeader" align="center">{{caption}}</h1>
@@ -30,17 +30,7 @@
             </div>
             <div class="row padded10">
               <label for="text" align="right" class="col-2 control-label submitTextField" >Текст</label>
-
-              <div class="col-6" align="left">
-                <div style="width:100%; display: none;" >
-                      {{ form.text }}
-                    </div>
-                    <div class="ceFieldWrapper">
-                        <div contentEditable="true" class="ceField" id="cePost" >
-
-                        </div>
-                    </div>
-
+              <div class="col-4" align="left">
                     <div class="row">
                       <div class="offset-9 col-2">
                         <div align="right" id="addSmiles">Смайлы</div>
@@ -48,14 +38,31 @@
                       </div>
 
                     </div>
-              </div>
+                    <div class="ceFieldWrapper" style="height:200px;">
+                        <div contentEditable="true" class="ceField" id="cePost" >
 
-              <label for="ctp" align="right" class="col-1 control-label submitTextField">Раздел</label>
-              <div class="col-2" align="left"  style="opacity:0.7">
-                {{ form.ctp }}
-                {% for error in form.ctp.errors %}
-                  <p class="text-danger">{{ error }}</p>
-                {% endfor %}
+                        </div>
+                    </div>
+                    <div style="width:100%; display: none;" >
+                        {{ form.text }}
+                    </div>
+              </div>
+              <div class="col-4" align="left">
+                <div class="row">
+                      <div class=" col-9 imageFieldWrapper submitImage">
+                      {{form.image}}
+                      </div>
+                      <label for="image" align="right" class="col-3 control-label submitTextField">Картинка</label>
+                </div>
+                <div class="row submitCategory">
+                  <div class=" col-9">
+                    {{ form.ctp }}
+                    {% for error in form.ctp.errors %}
+                      <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                  </div>
+                  <label for="ctp" align="right" class="col-3 control-label submitTextField">Раздел</label>
+                </div>
               </div>
             </div>
             {% if flgPower %}
@@ -92,6 +99,11 @@
       </div>
     </div>
 </div>
+
+<div class="tmpDiv">
+
+</div>
+
 {% endblock %}
 
 

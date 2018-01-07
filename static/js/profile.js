@@ -48,3 +48,7 @@ $('.goLink').click(function(e){
     var win = window.open($(this).attr('href'), '_blank');
     win.focus();
 });
+
+
+
+

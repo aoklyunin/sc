@@ -28,12 +28,10 @@
     <div class="row profileBody" >
       <div class="col-5">
             <figure>
-              {% if profile.display_picture %}
-                <img src="http://www.gravatar.com/avatar/{{ profile.gravatar_hash }}?s=250&d=mm"
-                                         alt="" class="img-circle img-responsive">
+              {% if profile.avatar %}
+                <img class="bigAvatar" src="{%static profile.avatar.url %}">
               {% else %}
-                <img src="http://www.gravatar.com/avatar/?s=250&d=mm"
-                                         alt="" class="img-circle img-responsive">
+                <img class="bigAvatar" src="{%static 'media/noneAvatar.png' %}">
               {% endif %}
             </figure>
       </div>

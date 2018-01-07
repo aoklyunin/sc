@@ -229,14 +229,15 @@ def edit(request, thread_id=None):
     submission_form = SubmissionForm(instance=this_submission, initial={'ctp': this_submission.getCtp(), 'url': url})
 
     if request.method == 'POST':
-        submission_form = SubmissionForm(request.POST)
+        submission_form = SubmissionForm(request.POST,request.FILES)
         if submission_form.is_valid():
             submission_form.save(commit=False)
             this_submission.link_type = submission_form.link_type
             this_submission.text = submission_form.cleaned_data['text']
             # submission.generate_html()
+            this_submission.image = submission_form.cleaned_data["image"]
             this_submission.text_html = submission_form.cleaned_data["text"]
-            print(submission_form.cleaned_data["text"])
+            print(submission_form.cleaned_data["image"])
             this_submission.title = submission_form.cleaned_data["title"]
             this_submission.url = submission_form.cleaned_data['url']
             this_submission.save()
@@ -382,13 +383,15 @@ def submit(request):
     submission_form = SubmissionForm()
 
     if request.method == 'POST':
-        submission_form = SubmissionForm(request.POST)
+        submission_form = SubmissionForm(request.POST,request.FILES)
         if submission_form.is_valid():
             submission = submission_form.save(commit=False)
             submission.link_type = submission_form.link_type
             submission.tp = Submission.TP_CREATIVE
             #submission.generate_html()
+            print(submission_form.cleaned_data["image"])
             submission.text_html = submission_form.cleaned_data["text"]
+            submission.image = submission_form.cleaned_data["image"]
             #print( submission_form.cleaned_data["text"])
             user = User.objects.get(username=request.user)
             redditUser = ScUser.objects.get(user=user)
@@ -422,12 +425,13 @@ def submitFAQ(request):
     submission_form = SubmissionForm()
 
     if request.method == 'POST':
-        submission_form = SubmissionForm(request.POST)
+        submission_form = SubmissionForm(request.POST,request.FILES)
         if submission_form.is_valid():
             submission = submission_form.save(commit=False)
             submission.link_type = submission_form.link_type
             submission.tp = Submission.TP_FAQ
             # submission.generate_html()
+            submission.image = submission_form.cleaned_data["image"]
             submission.text_html = submission_form.cleaned_data["text"]
             user = User.objects.get(username=request.user)
             redditUser = ScUser.objects.get(user=user)
@@ -455,11 +459,12 @@ def submitPower(request):
     submission_form = SubmissionForm()
 
     if request.method == 'POST':
-        submission_form = SubmissionForm(request.POST)
+        submission_form = SubmissionForm(request.POST,request.FILES)
         if submission_form.is_valid():
             submission = submission_form.save(commit=False)
             submission.link_type = submission_form.link_type
             submission.tp = Submission.TP_CHALLENGE
+            submission.image = submission_form.cleaned_data["image"]
             # submission.generate_html()
             submission.text_html = submission_form.cleaned_data["text"]
             user = User.objects.get(username=request.user)

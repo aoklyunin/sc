@@ -11,6 +11,7 @@ import os
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 3  # (/a/b/myfile.py - 3 = /)
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 env = environ.Env()
 
@@ -194,6 +195,10 @@ MEDIA_ROOT = str(ROOT_DIR('media'))
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
 
+MEDIA_ROOT = ROOT_DIR('static/media')
+
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+
 # URL Configuration
 # ------------------------------------------------------------------------------
 ROOT_URLCONF = 'sc_main.urls'
@@ -230,3 +235,4 @@ KARMA_YELLOW_COLOR = env('KARMA_YELLOW_COLOR', default="e9df01")
 KARMA_GREEN_LIMIT = int(env('KARMA_RED_LIMIT', default='100'))
 # зелёный цвет кармы
 KARMA_GREEN_COLOR = env('KARMA_GREEN_COLOR', default="a3f001")
+
