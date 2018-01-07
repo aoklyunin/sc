@@ -212,9 +212,9 @@ class SubmissionForm(forms.ModelForm):
                 self.link_type = Submission.LINK_TYPE_SOUNDCLOUND
             else:
                 # youtube
-                match = re.search(r'[\'"]?([^\'" >]+)youtube([^\'" >]+)', url)
+                match = re.search(r'<[\'"]?([^\'" >]+)youtube([^\'" >]+)>', url)
                 if match:
-                    url = match.group(0).replace("watch?v=", "embed/")
+                    url = match.group(0).replace("watch?v=", "embed/")[1:-1]
                     self.link_type = Submission.LINK_TYPE_YOUTUBE
                 else:
                     match = re.search(r'[\'"]?([^\'" >]+).([^\'" >]+)', url)
