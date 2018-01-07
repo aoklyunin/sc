@@ -389,7 +389,7 @@ def submit(request):
             submission.tp = Submission.TP_CREATIVE
             #submission.generate_html()
             submission.text_html = submission_form.cleaned_data["text"]
-            print( submission_form.cleaned_data["text"])
+            #print( submission_form.cleaned_data["text"])
             user = User.objects.get(username=request.user)
             redditUser = ScUser.objects.get(user=user)
             submission.author = redditUser
@@ -427,7 +427,8 @@ def submitFAQ(request):
             submission = submission_form.save(commit=False)
             submission.link_type = submission_form.link_type
             submission.tp = Submission.TP_FAQ
-            submission.generate_html()
+            # submission.generate_html()
+            submission.text_html = submission_form.cleaned_data["text"]
             user = User.objects.get(username=request.user)
             redditUser = ScUser.objects.get(user=user)
             submission.author = redditUser
@@ -459,7 +460,8 @@ def submitPower(request):
             submission = submission_form.save(commit=False)
             submission.link_type = submission_form.link_type
             submission.tp = Submission.TP_CHALLENGE
-            submission.generate_html()
+            # submission.generate_html()
+            submission.text_html = submission_form.cleaned_data["text"]
             user = User.objects.get(username=request.user)
             redditUser = ScUser.objects.get(user=user)
             submission.author = redditUser

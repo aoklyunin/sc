@@ -47,23 +47,31 @@
                       <iframe width="100%" height="180" scrolling="no" frameborder="no" src="{{ node.url }}"></iframe>
                     {% endif %}
                   </div>
+               {% if node.raw_comment %}
                <div class="textBackground" width="100%">
                 <div class="readableText" width="100%">
-                  <div class="readableText">
                         <div style="overflow:hidden;">
                           {{ node.raw_comment|safe }}
                         </div>
-                  </div>
                 </div>
                </div>
+              {% endif %}
               <div class="reply-container" style="opacity:1;">
                 <ul class="buttons">
                   {% if user.is_authenticated %}
                     <li><a class="blueText" href="javascript:void(0)" name="replyButton">Ответить</a></li>
                   {% endif %}
                     {% if canDeleteComments %}
-                     <li><a class="confirmation blueText" href="/delete/comment/{{node.pk}}" name="deleteButton">Удалить</a></li>
+                     <li>
+                       <a class="confirmation blueText" href="/delete/comment/{{node.pk}}" name="deleteButton">Удалить</a>
+
+                     </li>
                     {% endif %}
+                     {% if node.ltp == 0 %}
+                         {% if node.url %}
+                          <li><a href="{{node.url}}">Ссылка</a></li>
+                         {%endif%}
+                       {% endif %}
                 </ul>
               </div>
             </div>
