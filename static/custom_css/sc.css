@@ -467,48 +467,7 @@ nav {
     box-sizing: border-box;
 }
 
-/* О проекте */
-.faqLink{
-  position: absolute;
-  font-size: 100;
-  bottom: 20px;
-  left:30px;
-  color: #444444;
-}
-/* Вход */
-.signinLink{
-  position: absolute;
-  color: #444444;
-  top: 40px;
-  right: 40px;
-  font-size: 100;
-  opacity:1;
-}
-/* Профиль */
-.profileLink{
-  position: absolute;
-  color: #444444;
-  top: 40px;
-  right: 40px;
-  font-size: 100;
-  opacity:1;
-}
-/* креатив */
-.creativeLink{
-  position: absolute;
-  font-size: 100;
-  left: 40px;
-  top: 40px;
-  color: #444444;
-}
-/* вызовы */
-.challengeLink{
-  font-size: 100;
-  bottom: 20px;
-  right:30px;
-  color: #444444;
-  position: absolute;
-}
+
 /* контейнер для страницы по умолчанию */
 .defaultContainer{
  position:absolute;

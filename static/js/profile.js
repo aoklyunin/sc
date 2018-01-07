@@ -39,6 +39,7 @@ $('.copyLink').click(function (e) {
     }   catch (err) {
       console.log('Oops, unable to copy');
     }
+    $("#myModal").modal('hide');
 
 });
 
