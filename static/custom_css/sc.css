@@ -643,6 +643,7 @@ a.not-active {
 #smilePanel{
   position:absolute;
   z-index:3;
+
 }
 
 #smileBody{
@@ -741,4 +742,9 @@ a.not-active {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
 }

@@ -115,10 +115,10 @@ var newCommentForm = '<form id="commentForm" class="form-horizontal"\
                                     <button type="submit" class="btn btn-primary">Отправить</button>\
                                 </div>\
                                 <div class="col-3">\
-                                    <div align="right" class="addSmilesTree"></div>\
+                                    <div align="right" class="addSmilesTree" title="Смайлы"></div>\
                                 </div>\
                                 <div class"col-3">\
-                                    <div class="addCommentImage">Добавить картинку</div>\
+                                    <div class="addCommentImage" title="Добавить картинку"></div>\
                                     <input type="file" name="file" class="displayNone imageFileInput" >\
                                 </div>\
                               </div>\
@@ -146,8 +146,8 @@ $('a[name="replyButton"]').click(function () {
         ast = $mediaBody.find(".addSmilesTree:first");
         ast.click(function(){
             var pos = ast.position();
-            $mediaBody.parent().find(".reply-container:first").append($("#smilePanel"));
-            $("#smilePanel").css({ top: 200, left: 200});
+            $(this).parent().append($("#smilePanel"));
+            $("#smilePanel").css({ top: -22, left: 18});
             $("#smilePanel").show();
         });
         $(".smileImg").attr('target-id',cef.attr('id'));
