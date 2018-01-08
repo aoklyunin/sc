@@ -7,3 +7,4 @@ mistune==0.7.1
 django_mailgun==0.9.1
 whitenoise==3.2
 sqlparse==0.1.19
+pillow=5.0.0
