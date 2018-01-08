@@ -162,7 +162,7 @@ class Comment(MttpContentTypeAware):
             return
         submission.comment_count += 1
         submission.save()
-
+        comment.timestamp = timezone.now()
         return comment
 
     def __unicode__(self):
