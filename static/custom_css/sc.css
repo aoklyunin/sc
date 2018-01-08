@@ -699,3 +699,7 @@ a.not-active {
   position:relative;
   top:60px;
 }
+
+.displayNone{
+  display: none;
+}

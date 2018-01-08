@@ -110,11 +110,15 @@ var newCommentForm = '<form id="commentForm" class="form-horizontal"\
                             </div>\
                             <div class="form-group">\
                               <div class="row">\
-                                <div class="col-6">\
+                                <div class="col-3">\
                                     <button type="submit" class="btn btn-primary">Отправить</button>\
                                 </div>\
-                                <div class="col-2">\
+                                <div class="col-3">\
                                     <div align="right" class="addSmilesTree">Смайлы</div>\
+                                </div>\
+                                <div class"col-3">\
+                                    <div class="addCommentImage">Добавить картинку</div>\
+                                    <input type="file" name="file" class="displayNone imageFileInput" >\
                                 </div>\
                               </div>\
                             </div>\
@@ -127,7 +131,17 @@ $('a[name="replyButton"]').click(function () {
         $mediaBody.parent().find(".reply-container:first").append(newCommentForm);
         cef = $mediaBody.find(".ceField:first");
         $cefIdCnt = $cefIdCnt+1;
+        aci = $mediaBody.find(".addCommentImage:first");
+        ifi = $mediaBody.find(".imageFileInput:first");
         cef.attr('id','cef'+ $cefIdCnt);
+        ifi.attr('id','ifi'+ $cefIdCnt);
+        aci.attr('target-id',ifi.attr('id'));
+        aci.click(function(){
+            targetId = $(this).attr('target-id');
+            $('#'+targetId).css({"display":"block"});
+            $(this).css({"display":"none"})
+        })
+
         ast = $mediaBody.find(".addSmilesTree:first");
         ast.click(function(){
             var pos = ast.position();
@@ -174,4 +188,9 @@ $(".alert").fadeTo(2000, 500).slideUp(500, function(){
     $(".alert").slideUp(500);
 });
 
-
+$('.addCommentImage').click(function(){
+    //restoreSelection(true);
+    targetId = $(this).attr('target-id');
+    $('#'+targetId).css({"display":"block"});
+    $(this).css({"display":"none"})
+})

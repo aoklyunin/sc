@@ -129,7 +129,9 @@
                   </div>
               </div>
               <div class="row">
-                <div class="offset-7 col-2 addSmilesHolder">
+                <div class="addCommentImage"  target-id="mainImageField">Добавить картинку</div>
+                <input type="file" id="mainImageField" name="file" class="displayNone" >
+                <div class="col-2 addSmilesHolder">
                   <div align="right" id="addSmiles">Смайлы</div>
                   {% include '__layout/smile_panel.html' with target_id='commentContent'  %}
                 </div>
