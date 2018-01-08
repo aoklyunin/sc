@@ -96,7 +96,7 @@ class ProfileForm(forms.ModelForm):
         required=False
     )
 
-    instagram = forms.CharField(widget=forms.TextInput(
+    instagram = forms.CharField(widget=forms.URLInput(
         attrs={'class': "form-control",
                'id': "instagram",
                'type': "text"}),
@@ -104,8 +104,7 @@ class ProfileForm(forms.ModelForm):
         max_length=100
     )
 
-
-    fb = forms.CharField(widget=forms.TextInput(
+    fb = forms.CharField(widget=forms.URLInput(
         attrs={'class': "form-control",
                'id': "fb",
                'type': "text"}),
@@ -113,7 +112,7 @@ class ProfileForm(forms.ModelForm):
         max_length=100
     )
 
-    vk = forms.CharField(widget=forms.TextInput(
+    vk = forms.CharField(widget=forms.URLInput(
         attrs={'class': "form-control",
                'id': "vk",
                'type': "text"}),
@@ -121,7 +120,7 @@ class ProfileForm(forms.ModelForm):
         max_length=100
     )
 
-    telegram = forms.CharField(widget=forms.TextInput(
+    telegram = forms.CharField(widget=forms.URLInput(
         attrs={'class': "form-control",
                'id': "telegram",
                'type': "text"}),
@@ -136,7 +135,7 @@ class ProfileForm(forms.ModelForm):
         max_length=100
     )
 
-    youtube = forms.CharField(widget=forms.TextInput(
+    youtube = forms.CharField(widget=forms.URLInput(
         attrs={'class': "form-control",
                'id': "youtube",
                'type': "text"}),
@@ -154,7 +153,6 @@ class ProfileForm(forms.ModelForm):
 
     avatar = forms.FileInput(attrs={'required': False, 'class': 'form-control', 'enctype': 'multipart/form-data'}),
 
-
     class Meta:
         model = ScUser
         fields = ('first_name', 'last_name', 'email', 'date',
@@ -166,6 +164,7 @@ class ProfileForm(forms.ModelForm):
         super(ProfileForm, self).__init__(*args, **kwargs)
         # there's a `fields` property now
         self.fields['avatar'].required = False
+
 
 class SubmissionForm(forms.ModelForm):
     link_type = -1
@@ -208,44 +207,36 @@ class SubmissionForm(forms.ModelForm):
 
     def clean_url(self):
         url = self.cleaned_data['url']
-        # flickr
-        match = re.search(r'<img src="[\'"]?([^\'" >]+)staticflickr([^\'" >]+)"', url)
+        # soundcloud
+        match = re.search(r'src="https:\/\/w.soundcloud.com\/[\'"]?([^\'" >]+)"', url)
         if match:
-            url = match.group(0)[10:-1]
-            self.link_type = Submission.LINK_TYPE_FLICKR
+            url = match.group(0)[5:-1]
+            self.link_type = Submission.LINK_TYPE_SOUNDCLOUND
         else:
-            print('validaion')
-            # soundcloud
-            match = re.search(r'src="https:\/\/w.soundcloud.com\/[\'"]?([^\'" >]+)"', url)
+            # youtube
+            match = re.search(r'<[\'"]?([^\'" >]+)youtube([^\'" >]+)>', url)
             if match:
-                url = match.group(0)[5:-1]
-                self.link_type = Submission.LINK_TYPE_SOUNDCLOUND
+                url = match.group(0).replace("watch?v=", "embed/")[1:-1]
+                self.link_type = Submission.LINK_TYPE_YOUTUBE
             else:
-                # youtube
-                match = re.search(r'<[\'"]?([^\'" >]+)youtube([^\'" >]+)>', url)
+                match = re.search(r'[\'"]?([^\'" >]+).([^\'" >]+)', url)
                 if match:
-                    url = match.group(0).replace("watch?v=", "embed/")[1:-1]
-                    self.link_type = Submission.LINK_TYPE_YOUTUBE
+                    self.link_type = Submission.LINK_TYPE_NOT_PROCESSED
+                    url = match.group(0)
                 else:
-                    match = re.search(r'[\'"]?([^\'" >]+).([^\'" >]+)', url)
-                    if match:
-                        self.link_type = Submission.LINK_TYPE_NOT_PROCESSED
-                        url = match.group(0)
-                    else:
-                        if url != '':
-                            raise ValidationError("Не удалось расшифровать ссылку")
+                    if url != '':
+                        raise ValidationError("Не удалось расшифровать ссылку")
         return url
 
     class Meta:
         model = Submission
-        fields = ('title', 'url', 'text', 'ctp', 'regard', 'stoDate','image')
+        fields = ('title', 'url', 'text', 'ctp', 'regard', 'stoDate', 'image')
 
     def __init__(self, *args, **kwargs):
         # first call parent's constructor
         super(SubmissionForm, self).__init__(*args, **kwargs)
         # there's a `fields` property now
         self.fields['image'].required = False
-
 
 
 class ImageForm(forms.Form):

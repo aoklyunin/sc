@@ -30,6 +30,7 @@
         {%endif%}
       </div>
     </div>
+    {% if messages %}
     <div class="row" style="width:100%">
       <div class="offset-3 col-6">
         {% for message in messages %}
@@ -37,6 +38,7 @@
         {% endfor %}
       </div>
     </div>
+    {%endif%}
     <div class="row" >
       <a class="postListUserName" href ="\user\{{submission.author.user.username}}">
         {{submission.author.user.username}}
@@ -51,21 +53,18 @@
                 </div>
       {%endif%}
     </div>
-    <div class="row padded15">
+    <div class="row">
       <div class="info-container" style="width:100%;">
-        <br>
         {% if submission.image %}
-                <img src="{%static submission.image.url%}" width="100%" ><br>
+                <img class="padded15" src="{%static submission.image.url%}" width="100%" ><br>
         {% endif %}
         {% if submission.link_type == 2 %}
-          <iframe class = "ytframe" width="100%" height="100"
+          <iframe class = "ytframe padded15" width="100%" height="100"
                               src="{{ submission.url }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
         {% endif %}
-        {% if submission.link_type == 1 %}
-          <img src="{{ submission.url }}" width="100%" >
-        {% endif %}
+
         {% if submission.link_type == 3 %}
-          <iframe width="100%" height="180" scrolling="no" frameborder="no" src="{{ submission.url }}"></iframe>
+          <iframe class="padded15" width="100%" height="180" scrolling="no" frameborder="no" src="{{ submission.url }}"></iframe>
         {% endif %}
       </div>
     </div>
@@ -78,7 +77,7 @@
         </div>
         {% ifnotequal submission.link_type -1 %}
         <br>
-        <div style="text-align:left;">
+        <div style="text-align:right;">
           <a href="{{ submission.url }}">
             Ссылка
           </a>
@@ -101,12 +100,13 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-12" align="right">
          {% if canDelete %}
-          <a href="/delete/{{submission.pk}}" class="confirmation removeThreadBtn">Удалить</a>
+          <a align="right" href="/delete/{{submission.pk}}" class="confirmation removeThreadBtn">Удалить</a>
         {% endif %}
       </div>
     </div>
+    {% if flgFAQ%}{%else%}
     <div class="row commentRow">
       <div class="col-6 offset-3">
         <h1 align="center"> Комментарии</h1>
@@ -129,10 +129,10 @@
                   </div>
               </div>
               <div class="row">
-                <div class="addCommentImage"  target-id="mainImageField">Добавить картинку</div>
+                <div class="addCommentImage"  target-id="mainImageField"></div>
                 <input type="file" id="mainImageField" name="file" class="displayNone imageFileInput" >
                 <div class="col-2 addSmilesHolder">
-                  <div align="right" id="addSmiles">Смайлы</div>
+                  <div align="right" id="addSmiles" class="addSmilesTree"></div>
                   {% include '__layout/smile_panel.html' with target_id='commentContent'  %}
                 </div>
               </div>
@@ -142,6 +142,7 @@
       </div>
     {% endif %}
     {% include '__items/comment.html' %}
+    {% endif %}
     <div class="row" style="padding-top:40px">
     </div>
   </div>

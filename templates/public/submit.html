@@ -49,19 +49,19 @@
               </div>
               <div class="col-4" align="left">
                 <div class="row">
-                      <div class=" col-9 imageFieldWrapper submitImage">
-                      {{form.image}}
-                      </div>
-                      <label for="image" align="right" class="col-3 control-label submitTextField">Картинка</label>
+                  <label for="ctp" align="center" class="col-5 control-label submitTextField">Раздел</label>
+                  <label for="image" align="center" class="col-7 control-label submitTextField">Картинка</label>
                 </div>
                 <div class="row submitCategory">
-                  <div class=" col-9">
+                  <div class=" col-5">
                     {{ form.ctp }}
                     {% for error in form.ctp.errors %}
                       <p class="text-danger">{{ error }}</p>
                     {% endfor %}
                   </div>
-                  <label for="ctp" align="right" class="col-3 control-label submitTextField">Раздел</label>
+                  <div class=" col-7 imageFieldWrapper submitImage">
+                      {{form.image}}
+                      </div>
                 </div>
               </div>
             </div>

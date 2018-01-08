@@ -120,16 +120,24 @@ def comments(request, thread_id=None):
         titleLink = '/creative/'
         prefix = '/creative/'
         cts = CreativeType.objects.filter(tp=CreativeType.TP_MENU_ITEM)
+        leftAction = '/power/creative/'
+        rightAction = '/faq/'
+
     elif this_submission.tp == Submission.TP_CHALLENGE:
         titleText = 'Боевой креатив'
         titleLink = '/power/creative/'
         prefix = '/power/creative/'
+        leftAction ='/faq/'
+        rightAction = '/creative/'
         cts = CreativeType.objects.filter(tp=CreativeType.TP_MENU_ITEM)
+
     elif this_submission.tp == Submission.TP_FAQ:
         titleText = 'FAQ'
         titleLink = '/faq/'
         prefix = '/faq/'
         cts = None
+        leftAction = '/creative/'
+        rightAction = '/power/creative/'
 
     return render(request, 'public/comments.html',
                   {'submission': this_submission,
@@ -147,7 +155,11 @@ def comments(request, thread_id=None):
                    'sub_vote': sub_vote_value,
                    'vote_s_val': vote_s_val,
                    'cts': cts,
-                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(89)]})
+                   'smileLinks': ['img/smiles/smile%d.png' % x for x in range(89)],
+                   'flgFAQ': this_submission.tp == Submission.TP_FAQ,
+                   'leftAction': leftAction,
+                   'rightAction': rightAction,
+                   })
 
 @login_required
 def delete(request, thread_id=None):
@@ -224,7 +236,7 @@ def edit(request, thread_id=None):
     elif this_submission.link_type == Submission.LINK_TYPE_SOUNDCLOUND:
         url = 'src="' + this_submission.url + '">'
     elif this_submission.link_type == Submission.LINK_TYPE_YOUTUBE:
-        url = this_submission.url.replace("embed/", "watch?v=")
+        url = "<"+this_submission.url.replace("embed/", "watch?v=")+">"
 
     submission_form = SubmissionForm(instance=this_submission, initial={'ctp': this_submission.getCtp(), 'url': url})
 
@@ -258,9 +270,6 @@ def edit(request, thread_id=None):
 
 @post_only
 def post_comment(request):
-    print(request.POST)
-    print(request.FILES)
-
     if not request.user.is_authenticated():
         return JsonResponse({'msg': "You need to log in to post new comments."})
 
@@ -505,11 +514,15 @@ def getCreativeByType(request, ct, sctp, flgNew=False, username=""):
     canEdit = False
     canDelete = is_moderator(request.user)
 
+    cts = CreativeType.objects.filter(tp=CreativeType.TP_MENU_ITEM)
+
     if sctp == Submission.TP_CHALLENGE:
         titleText = 'Боевой Креатив'
         titleLink = '/power/creative'
         createLink = '/submit/power/'
         prefix = '/power/creative/'
+        leftAction ='/faq/'
+        rightAction = '/creative/'
 
 
     elif sctp == Submission.TP_CREATIVE:
@@ -517,14 +530,18 @@ def getCreativeByType(request, ct, sctp, flgNew=False, username=""):
         titleLink = '/creative/'
         createLink = '/submit/'
         prefix = '/creative/'
+        leftAction = '/power/creative/'
+        rightAction = '/faq/'
 
     elif sctp == Submission.TP_FAQ:
-        titleText = 'О проекте'
+        titleText = 'FAQ'
         titleLink = '/faq/'
         createLink = '/submit/faq/'
         prefix = '/faq/'
-        template = 'public/faq_list.html'
         canAdd = is_moderator(request.user)
+        cts = None
+        leftAction = '/creative/'
+        rightAction = '/power/creative/'
 
     if ct != '':
         ctVal = CreativeType.objects.get(name=ct)
@@ -536,6 +553,8 @@ def getCreativeByType(request, ct, sctp, flgNew=False, username=""):
     if sctp == Submission.TP_USER_CREATIVE:
         canEdit = username == request.user.username
         canDelete = canEdit
+        leftAction = None
+        rightAction = None
         titleText = 'Портфолио'
         titleLink = '/user/' + username + '/creative/'
         createLink = '/submit/'
@@ -600,6 +619,11 @@ def getCreativeByType(request, ct, sctp, flgNew=False, username=""):
             except Vote.DoesNotExist:
                 pass
 
+    if flgNew and leftAction is not None and rightAction is not None:
+        leftAction+='new/'
+        rightAction+='new/'
+
+
     return render(request, template, {
         'submissions': submissions,
         'titleText': titleText,
@@ -611,11 +635,14 @@ def getCreativeByType(request, ct, sctp, flgNew=False, username=""):
         'canEdit': canEdit,
         'canAdd': canAdd,
         'ctVal': ctVal,
-        'cts': CreativeType.objects.filter(tp=CreativeType.TP_MENU_ITEM),
+        'cts': cts,
         'flgNew': flgNew,
         'new_prefix': new_prefix,
         'common_prefix': common_prefix,
-        'submission_votes': submission_votes
+        'submission_votes': submission_votes,
+        'flgFAQ':sctp == Submission.TP_FAQ,
+        'leftAction': leftAction,
+        'rightAction':rightAction,
     })
 
 

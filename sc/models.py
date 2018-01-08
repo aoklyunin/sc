@@ -59,31 +59,25 @@ class Submission(ContentTypeAware):
     image = models.ImageField(upload_to='submissions/', null=True)
 
     def processUrl(self, url):
-        # flickr
-        match = re.search(r'<img src="[\'"]?([^\'" >]+)staticflickr([^\'" >]+)"', self.url)
+        # soundcloud
+        match = re.search(r'src="https:\/\/w.soundcloud.com\/[\'"]?([^\'" >]+)"', self.url)
         if match:
-            url = match.group(0)[10:-1]
-            link_type = Submission.LINK_TYPE_FLICKR
+            self.url = match.group(0)[5:-1]
+            self.link_type = Submission.LINK_TYPE_SOUNDCLOUND
         else:
-            # soundcloud
-            match = re.search(r'src="https:\/\/w.soundcloud.com\/[\'"]?([^\'" >]+)"', self.url)
+            # youtube
+            match = re.search(r'[\'"]?([^\'" >]+)youtube([^\'" >]+)', self.url)
             if match:
-                self.url = match.group(0)[5:-1]
-                self.link_type = Submission.LINK_TYPE_SOUNDCLOUND
+                self.url = match.group(0).replace("watch?v=", "embed/")
+                self.link_type = Submission.LINK_TYPE_YOUTUBE
             else:
-                # youtube
-                match = re.search(r'[\'"]?([^\'" >]+)youtube([^\'" >]+)', self.url)
+                match = re.search(r'[\'"]?([^\'" >]+).([^\'" >]+)', self.url)
                 if match:
-                    self.url = match.group(0).replace("watch?v=", "embed/")
-                    self.link_type = Submission.LINK_TYPE_YOUTUBE
+                    self.link_type = Submission.LINK_TYPE_NOT_PROCESSED
+                    self.url = match.group(0)
                 else:
-                    match = re.search(r'[\'"]?([^\'" >]+).([^\'" >]+)', self.url)
-                    if match:
-                        self.link_type = Submission.LINK_TYPE_NOT_PROCESSED
-                        self.url = match.group(0)
-                    else:
-                        pass
-                        # raise ValidationError("Не удалось расшифровать ссылку")
+                    pass
+                    # raise ValidationError("Не удалось расшифровать ссылку")
 
     def getCtp(self):
         lst = []
@@ -132,7 +126,7 @@ class Comment(MttpContentTypeAware):
         order_insertion_by = ['-score']
 
     @classmethod
-    def create(cls, author, raw_comment, parent, ltp, link,image):
+    def create(cls, author, raw_comment, parent, ltp, link, image):
         """
         Create a new comment instance. If the parent is submisison
         update comment_count field and save it.

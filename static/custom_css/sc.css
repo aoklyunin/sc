@@ -156,9 +156,9 @@ table a.menuLink:not(.btn) {
 /* картинка добаления поста */
 .addPostImg{
  position:relative;
- top:-15px;
- width:40px;
- height:40px;
+ top:-8px;
+ width:25px;
+ height:25px;
 }
 
 /* стиль заголовка в странице-списке */
@@ -181,7 +181,7 @@ table a.menuLink:not(.btn) {
 /* кнопка удаления поста */
 .removeThreadBtn{
   position:relative;
-  left:10px;
+  text-align:right;
   top:-8px;
 }
 
@@ -702,4 +702,43 @@ a.not-active {
 
 .displayNone{
   display: none;
+}
+
+.leftAction{
+ font-size:35;
+}
+
+.rightAction{
+ font-size:35;
+}
+
+.addSmilesTree{
+  width:30px;
+  height:30px;
+  background: url("../img/smile.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+.addSmilesTree{
+  width:30px;
+  height:30px;
+  background: url("../img/smile.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.addCommentImage{
+    width:30px;
+  height:30px;
+  background: url("../img/img_ico.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }

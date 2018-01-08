@@ -115,7 +115,7 @@ var newCommentForm = '<form id="commentForm" class="form-horizontal"\
                                     <button type="submit" class="btn btn-primary">Отправить</button>\
                                 </div>\
                                 <div class="col-3">\
-                                    <div align="right" class="addSmilesTree">Смайлы</div>\
+                                    <div align="right" class="addSmilesTree"></div>\
                                 </div>\
                                 <div class"col-3">\
                                     <div class="addCommentImage">Добавить картинку</div>\

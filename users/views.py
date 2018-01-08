@@ -105,7 +105,7 @@ def edit_profile(request):
         else:
             udate = user.date.strftime(DATE_INPUT_FORMATS[0])
 
-        profile_form = ProfileForm(instance=user,initial={'date':udate})
+        profile_form = ProfileForm(instance=user,initial={'date':udate,'about_text':user.about_html})
 
     elif request.method == 'POST':
         profile_form = ProfileForm(request.POST,request.FILES)
@@ -113,10 +113,12 @@ def edit_profile(request):
         if profile_form.is_valid():
             ScUser.objects.filter(pk=user.pk).update(**profile_form.cleaned_data)
             #print(profile_form.cleaned_data['avatar'])
-
-            user.avatar = profile_form.cleaned_data['avatar']
+            user.homepage = profile_form.cleaned_data["homepage"]
+            user.about_html = profile_form.cleaned_data["about_text"]
+            av = profile_form.cleaned_data['avatar']
+            if av is not None:
+                user.avatar = av
             user.save()
-            print(user.avatar)
 
             #profile.update_profile_data()
             #profile.save()

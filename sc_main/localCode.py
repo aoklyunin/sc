@@ -9,7 +9,6 @@ def processUrl(text):
     text = text.replace('&gt;', '>')
     link_type = Submission.LINK_TYPE_NOT_PROCESSED
     regExps = [
-        [r'<a data-flickr-embed="true".*<\/script>', Submission.LINK_TYPE_FLICKR],
         [r'<iframe.*src="https:\/\/w.soundcloud.com\/[\'"]?([^\'" >]+)".*><\/iframe>', Submission.LINK_TYPE_SOUNDCLOUND],
         [r'<[\'"]?([^\'" >]+)youtube([^\'" >]+)>', Submission.LINK_TYPE_YOUTUBE],
         [r'<a href=[\'"]?([^\'" >]+)[\'"]>', Submission.LINK_TYPE_NOT_PROCESSED],
@@ -26,12 +25,6 @@ def processUrl(text):
                 m = re.search(r'https:\/\/w.soundcloud.com\/[\'"]?([^\'" >]+)', url)
                 if m:
                     url = m.group(0)
-                else:
-                    url = ''
-            elif link_type == Submission.LINK_TYPE_FLICKR:
-                m = re.search(r'<img src="[\'"]?([^\'" >]+)staticflickr([^\'" >]+)"', url)
-                if m:
-                    url = m.group(0)[10: -1]
                 else:
                     url = ''
             elif link_type == Submission.LINK_TYPE_NOT_PROCESSED:

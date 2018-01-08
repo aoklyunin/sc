@@ -25,7 +25,13 @@ body {
     <div class="col-2 paddedPageMenu">
       {%block menu %}
         <div class="paddedPageMenuHeader" align="left">
-          <a href = {{titleLink}} class="pageMenuLink {% if ctVal %}{%else%} active{%endif%}"> {{titleText}}</a><br>
+          {% if leftAction %}
+            <a class="leftAction" href="{{leftAction}}">&#60;</a>
+          {%endif%}
+            <a href = {{titleLink}} class="pageMenuLink {% if ctVal %}{%else%} active{%endif%}"> {{titleText}}</a>
+          {% if rightAction %}
+            <a class="rightAction" href="{{rightAction}}">&#62;</a>
+          {%endif%}
         </div>
         <div class="paddedPageMenuBody">
           {% for c in cts %}
@@ -37,6 +43,7 @@ body {
             <br>
           {% endfor %}
         </div>
+
       {%endblock%}
     </div>
     <div class="col-8 offset-3">
