@@ -115,7 +115,7 @@
     {% if user.is_authenticated %}
       <div class="row">
         <div class="col-10 offset-1">
-          <form id="commentForm" class="form-horizontal"
+          <form id="commentForm" class="form-horizontal"  enctype="multipart/form-data"
               action="/post/comment/"
               data-parent-type="submission"
               data-parent-id="{{ submission.id }}">
@@ -130,7 +130,7 @@
               </div>
               <div class="row">
                 <div class="addCommentImage"  target-id="mainImageField">Добавить картинку</div>
-                <input type="file" id="mainImageField" name="file" class="displayNone" >
+                <input type="file" id="mainImageField" name="file" class="displayNone imageFileInput" >
                 <div class="col-2 addSmilesHolder">
                   <div align="right" id="addSmiles">Смайлы</div>
                   {% include '__layout/smile_panel.html' with target_id='commentContent'  %}

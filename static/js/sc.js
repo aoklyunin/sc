@@ -98,6 +98,7 @@ function csrfSafeMethod(method) {
 
 
 var newCommentForm = '<form id="commentForm" class="form-horizontal"\
+                            enctype="multipart/form-data"\
                             action="/post/comment/"\
                             data-parent-type="comment">\
                             <fieldset>\

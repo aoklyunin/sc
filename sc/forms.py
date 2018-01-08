@@ -245,3 +245,8 @@ class SubmissionForm(forms.ModelForm):
         super(SubmissionForm, self).__init__(*args, **kwargs)
         # there's a `fields` property now
         self.fields['image'].required = False
+
+
+
+class ImageForm(forms.Form):
+    image = forms.ImageField()

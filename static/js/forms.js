@@ -50,8 +50,8 @@ function editPostEvent(event, form) {
 }
 
 function submitEvent(event, form) {
-    event.preventDefault();
-    if (form.find(".commentContent").html()!=''){
+  event.preventDefault();
+  if (form.find(".commentContent").html()!=''){
     var $form = form;
     var data = $form.data();
     url = $form.attr("action");
@@ -66,22 +66,41 @@ function submitEvent(event, form) {
         }
     });
 
-    var doPost = $.post(url, {
-        parentType: data.parentType,
-        parentId: data.parentId,
-        commentContent: commentContent
+    var fd = new FormData(data);
+    fd.append('commentContent', commentContent);
+    fd.append('image',$form.find(".imageFileInput").prop('files')[0]);
+    fd.append('parentType', data.parentType);
+    fd.append('parentId', data.parentId);
+
+    jQuery.ajax({
+        url:url,
+        data: fd,
+        cache: false,
+        contentType: false,
+        processData: false,
+        method: 'POST',
+        type: 'POST', // For jQuery < 1.9
+        success: function(data){
+            location.reload();
+        }
     });
+   // var doPost = $.post(url, {
+   //     parentType: data.parentType,
+   //     parentId: data.parentId,
+   //     commentContent: commentContent,
+   //     image: form.find(".imageFileInput").val(),
+   // });
 
 
-    doPost.done(function (response) {
+   // doPost.done(function (response) {
         //var errorLabel = $form.find("span#postResponse");
         //if (response.msg) {
         //    errorLabel.text(response.msg);
         //    errorLabel.removeAttr('style');
         //}
-        location.reload();
-    });
-    }
+   //     location.reload();
+   // });
+  }
 }
 
 

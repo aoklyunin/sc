@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect, get_object_or_404, render_to_resp
 from django.template import RequestContext
 from django.template.defaulttags import register
 
-from sc.forms import SubmissionForm
+from sc.forms import SubmissionForm, ImageForm
 from sc.models import Submission, Comment, Vote, CreativeType
 from sc.utils.helpers import post_only
 from sc_main.localCode import processUrl
@@ -258,6 +258,9 @@ def edit(request, thread_id=None):
 
 @post_only
 def post_comment(request):
+    print(request.POST)
+    print(request.FILES)
+
     if not request.user.is_authenticated():
         return JsonResponse({'msg': "You need to log in to post new comments."})
 
@@ -283,12 +286,22 @@ def post_comment(request):
     except (Comment.DoesNotExist, Submission.DoesNotExist):
         return HttpResponseBadRequest()
 
+
     p = processUrl(raw_comment)
+    iform = ImageForm(request.POST,request.FILES)
+    if iform.is_valid():
+        img = iform.cleaned_data["image"]
+    else:
+        img = None
+
+
     comment = Comment.create(author=author,
                              raw_comment=p['text'],
                              ltp = p['link_type'],
                              link = p['url'],
+                             image=img,
                              parent=parent_object)
+
     comment.save()
     return JsonResponse({'msg': "Your comment has been posted."})
 

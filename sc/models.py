@@ -132,7 +132,7 @@ class Comment(MttpContentTypeAware):
         order_insertion_by = ['-score']
 
     @classmethod
-    def create(cls, author, raw_comment, parent, ltp, link):
+    def create(cls, author, raw_comment, parent, ltp, link,image):
         """
         Create a new comment instance. If the parent is submisison
         update comment_count field and save it.
@@ -154,7 +154,8 @@ class Comment(MttpContentTypeAware):
                       raw_comment=raw_comment,
                       html_comment=html_comment,
                       ltp=ltp,
-                      url=link)
+                      url=link,
+                      image=image)
 
         if isinstance(parent, Submission):
             submission = parent
