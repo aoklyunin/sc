@@ -81,12 +81,12 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangostack',
-        'HOST': '/opt/bitnami/postgresql',
-        'PORT': '5432',
-        'USER': 'bitnami',
-        'PASSWORD': 'e63bcb8210'
+        'ENGINE': 'django.db.backends.mysql',
+        #'NAME': 'DB_NAME',
+        'USER': 'root',
+        'PASSWORD': 'Skhzs6PzRMwh',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
 # CACHING
