@@ -50,7 +50,7 @@ SESSION_COOKIE_HTTPONLY = True
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/1.6/ref/settings/#allowed-hosts
 # ALLOWED_HOSTS = env('DJANGO_ALLOWED_HOSTS', default='example.com')
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["34.230.43.152"]
 # END SITE CONFIGURATION
 
 INSTALLED_APPS += ("gunicorn",)
@@ -79,8 +79,16 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-DATABASES['default'] = env.db("DATABASE_URL",default="sqlite:///{}".format(ROOT_DIR + 'dev.db'))
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'djangostack',
+        'HOST': '/opt/bitnami/postgresql',
+        'PORT': '5432',
+        'USER': 'bitnami',
+        'PASSWORD': 'e63bcb8210'
+    }
+}
 # CACHING
 # ------------------------------------------------------------------------------
 # Heroku URL does not pass the DB number, so we parse it in
