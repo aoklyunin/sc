@@ -1,7 +1,7 @@
 #!/bin/bash
 
-python manage.py makemigrations users;
-python manage.py makemigrations sc;
-python manage.py makemigrations;
-python manage.py migrate;
-python manage.py pop;
+python3 manage.py makemigrations users;
+python3 manage.py makemigrations sc;
+python3 manage.py makemigrations;
+python3 manage.py migrate;
+python3 manage.py pop;
