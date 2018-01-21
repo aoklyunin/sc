@@ -95,7 +95,8 @@ DATABASES = {
     # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
     'default': env.db("DATABASE_URL", default="sqlite:///{}".format(ROOT_DIR + 'dev.db')),
 }
-DATABASES['default']['ATOMIC_REQUESTS'] = True
+
+#DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 DATE_INPUT_FORMATS = [
     '%d/%m/%Y'
