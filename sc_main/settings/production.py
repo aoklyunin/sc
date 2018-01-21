@@ -82,7 +82,7 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'DB_NAME',
+        'NAME': 'django',
         'USER': 'root',
         'PASSWORD': 'Skhzs6PzRMwh',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
