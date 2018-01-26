@@ -196,7 +196,7 @@ MEDIA_ROOT = str(ROOT_DIR('media'))
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = ROOT_DIR('static/media')
+MEDIA_ROOT = ROOT_DIR('media')
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
