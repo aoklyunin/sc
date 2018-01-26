@@ -13,9 +13,9 @@ from sc_main.settings.common import KARMA_RED_LIMIT, KARMA_RED_COLOR, KARMA_GREE
 
 class ScUser(models.Model):
     user = models.OneToOneField(User)
-    first_name = models.CharField(max_length=35, null=True, default=None,
+    first_name = models.TextField(max_length=35, null=True, default=None,
                                   blank=True)
-    last_name = models.CharField(max_length=35, null=True, default=None,
+    last_name = models.TextField(max_length=35, null=True, default=None,
                                  blank=True)
     date = models.DateField(null=True, default=None,
                             blank=True)
@@ -28,18 +28,19 @@ class ScUser(models.Model):
     avatar = models.ImageField(upload_to='avatars/', null=True)
 
     homepage = models.URLField(null=True, blank=True, default=None)
-    instagram = models.CharField(null=True, blank=True, max_length=100,
+
+    instagram = models.URLField(null=True, blank=True, max_length=100,
                                  default=None)
-    fb = models.CharField(null=True, blank=True, max_length=100,
+    fb = models.URLField(null=True, blank=True, max_length=100,
                           default=None)
-    vk = models.CharField(null=True, blank=True, max_length=100,
+    vk = models.URLField(null=True, blank=True, max_length=100,
                           default=None)
-    telegram = models.CharField(null=True, blank=True, max_length=100,
+    telegram = models.URLField(null=True, blank=True, max_length=100,
                                 default=None)
 
-    youtube = models.CharField(null=True, blank=True, max_length=100,
+    youtube = models.URLField(null=True, blank=True, max_length=100,
                                default=None)
-    tel = models.CharField(null=True, blank=True, max_length=100,
+    tel = models.URLField(null=True, blank=True, max_length=100,
                                default=None)
     creativeKarma = models.IntegerField(default=0)
     powerKarma = models.IntegerField(default=0)

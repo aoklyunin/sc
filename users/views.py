@@ -125,6 +125,7 @@ def edit_profile(request):
             user.vk = profile_form.cleaned_data["vk"]
             user.telegram = profile_form.cleaned_data["telegram"]
             user.youtube = profile_form.cleaned_data["youtube"]
+            user.save()
 
             av = profile_form.cleaned_data['avatar']
             if av is not None:
