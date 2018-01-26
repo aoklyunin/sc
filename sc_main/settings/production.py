@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'django',
         'USER': 'root',
         'PASSWORD': 'Skhzs6PzRMwh',
-        'HOST': '/opt/bitnami/mysql/tmp/mysql.sock',   # Or an IP Address that your DB is hosted on
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
