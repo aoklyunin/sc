@@ -130,11 +130,13 @@ def edit_profile(request):
             if av is not None:
                 user.avatar = av
             user.save()
-            Z
+
 
             #profile.update_profile_data()
             #profile.save()
             messages.success(request, "Настройки профиля сохранены")
+        else:
+            messages.error(request,"Форма некорректная")
     else:
         raise Http404
 
