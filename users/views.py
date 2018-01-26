@@ -111,26 +111,14 @@ def edit_profile(request):
         profile_form = ProfileForm(request.POST,request.FILES)
         #print(profile_form)
         if profile_form.is_valid():
-            #ScUser.objects.filter(pk=user.pk).update(**profile_form.cleaned_data)
+            ScUser.objects.filter(pk=user.pk).update(**profile_form.cleaned_data)
             #print(profile_form.cleaned_data['avatar'])
             user.homepage = profile_form.cleaned_data["homepage"]
             user.about_html = profile_form.cleaned_data["about_text"]
-            user.first_name = profile_form.cleaned_data["first_name"]
-            user.last_name = profile_form.cleaned_data["last_name"]
-            user.email = profile_form.cleaned_data["email"]
-            user.date = profile_form.cleaned_data["date"]
-            user.tel = profile_form.cleaned_data["tel"]
-            user.instagram = profile_form.cleaned_data["instagram"]
-            user.fb = profile_form.cleaned_data["fb"]
-            user.vk = profile_form.cleaned_data["vk"]
-            user.telegram = profile_form.cleaned_data["telegram"]
-            user.youtube = profile_form.cleaned_data["youtube"]
-
             av = profile_form.cleaned_data['avatar']
             if av is not None:
                 user.avatar = av
             user.save()
-            
 
             #profile.update_profile_data()
             #profile.save()
