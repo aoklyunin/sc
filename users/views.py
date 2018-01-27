@@ -98,7 +98,7 @@ def new_user_creative(request, username):
 @login_required
 def edit_profile(request):
     user = ScUser.objects.get(user=request.user)
-    
+
     if request.method == 'GET':
         if user.date is None:
             udate = ""
