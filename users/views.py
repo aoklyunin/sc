@@ -135,7 +135,7 @@ def edit_profile(request):
 
             #profile.update_profile_data()
             #profile.save()
-            messages.success(request, "Настройки профиля сохранены")
+            messages.success(request, "Настройки профиля сохранены2")
         else:
             messages.error(request,"Форма некорректная")
     else:
