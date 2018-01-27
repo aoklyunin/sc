@@ -40,7 +40,7 @@ class ScUser(models.Model):
 
     youtube = models.URLField(null=True, blank=True, max_length=100,
                                default=None)
-    tel = models.URLField(null=True, blank=True, max_length=100,
+    tel = models.TextField(null=True, blank=True, max_length=100,
                                default=None)
     creativeKarma = models.IntegerField(default=0)
     powerKarma = models.IntegerField(default=0)
