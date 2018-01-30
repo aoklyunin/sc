@@ -57,6 +57,7 @@ INSTALLED_APPS += ("gunicorn",)
 
 HTTP_ACCEPT = True
 
+
 # EMAIL
 # ------------------------------------------------------------------------------
 DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
